@@ -21,10 +21,22 @@ public class SingleMotor extends LinearOpMode{
 
         waitForStart();
         runtime.reset();
-
+        double motorModify = 0.0;
         while (opModeIsActive()){
-            double motorPower = gamepad1.b ? 0.5 : 0;
+            if (gamepad1.a == true)
+            {
+                motorModify -= 0.1;
+                sleep(100);
+            }
+            if (gamepad1.y == true)
+            {
+                motorModify += 0.1;
+                sleep(100);
+            }
+            double motorPower = gamepad1.b ? motorModify : 0;
             motor.setPower(motorPower);
+            telemetry.addData("Motor Power", motorModify);
+            telemetry.update();
         }
     }
 }
