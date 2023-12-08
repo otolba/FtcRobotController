@@ -79,6 +79,10 @@ public class TeleOp2 extends LinearOpMode {
             rightBackDrive.setPower((.77)*rightBackPower);
             liftPower += gamepad1.right_trigger*-1;
             liftPower += gamepad1.left_trigger;
+            if (gamepad1.y == true)
+            {
+                liftPower = 0.5;
+            }
             liftMotor.setPower(liftPower *.5);
 
 
