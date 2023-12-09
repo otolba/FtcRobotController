@@ -105,9 +105,9 @@ public class AutoBlueFarMiddle extends RobotLinearOpMode
                 encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 22, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
                 sleep(5000);
                 encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
@@ -136,9 +136,9 @@ public class AutoBlueFarMiddle extends RobotLinearOpMode
                 /* Your autonomous code */
                 encoderDrive(0.5, 24, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 20, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
                 sleep(5000);
                 encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
