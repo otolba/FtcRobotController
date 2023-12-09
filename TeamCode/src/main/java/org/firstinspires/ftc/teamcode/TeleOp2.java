@@ -58,6 +58,7 @@ public class TeleOp2 extends LinearOpMode {
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
             double liftPower = 0;
+            boolean savePower = false;
 
             // Send calculated power to wheels
             if (leftFrontPower <= -.05){
@@ -79,11 +80,16 @@ public class TeleOp2 extends LinearOpMode {
             rightBackDrive.setPower((.77)*rightBackPower);
             liftPower += gamepad1.right_trigger*-1;
             liftPower += gamepad1.left_trigger;
+
+            liftMotor.setPower(liftPower *.5);
+            if (gamepad1.b == true)
+            {
+                liftMotor.setPower(liftPower *.25);
+            }
             if (gamepad1.y == true)
             {
-                liftPower = 0.5;
+                liftMotor.setPower(0.7);
             }
-            liftMotor.setPower(liftPower *.5);
 
 
 

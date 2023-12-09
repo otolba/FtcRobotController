@@ -102,7 +102,7 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
         switch (snapshotAnalysis){
             case RIGHT:
             {
-                encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);

@@ -108,7 +108,7 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 20, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(100000);
@@ -129,9 +129,9 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
                 encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 7.25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 21, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
@@ -140,22 +140,22 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             case CENTER:
             {
                 /* Your autonomous code*/
-                encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 26.5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 24, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
             case RIGHT:
             {
-                encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 26.5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 24, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
