@@ -90,8 +90,8 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
 
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
@@ -102,9 +102,9 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
         switch (snapshotAnalysis){
             case RIGHT:
             {
-                encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 24, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 20, MOVEMENT_DIRECTION.REVERSE);
@@ -115,7 +115,7 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             }
         }
 
-        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
@@ -127,7 +127,7 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             {
                 /* Your autonomous code */
                 encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(0.5, 7.25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 21, MOVEMENT_DIRECTION.REVERSE);
