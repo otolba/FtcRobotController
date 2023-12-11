@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-@TeleOp(name="TeleOp", group="Linear OpMode")
-public class TeleOp2 extends LinearOpMode {
+@TeleOp(name="ReverseTeleOp", group="Linear OpMode")
+public class ReverseTeleOp extends LinearOpMode {
 
 
     // Declare OpMode members for each of the 4 motors.
@@ -29,10 +29,10 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
 
-        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
@@ -75,16 +75,16 @@ public class TeleOp2 extends LinearOpMode {
             }
 
             leftFrontDrive.setPower(leftFrontPower);
-            rightFrontDrive.setPower(0.75 *rightFrontPower);
-            leftBackDrive.setPower(0.75*leftBackPower);
-            rightBackDrive.setPower(0.75*rightBackPower);
+            rightFrontDrive.setPower((.8)*rightFrontPower);
+            leftBackDrive.setPower((.8)*leftBackPower);
+            rightBackDrive.setPower((.77)*rightBackPower);
             liftPower += gamepad1.right_trigger*-1;
             liftPower += gamepad1.left_trigger;
 
             liftMotor.setPower(liftPower *.5);
             if (gamepad1.right_bumper == true)
             {
-                liftMotor.setPower(liftPower *.3);
+                liftMotor.setPower(liftPower *.25);
             }
             if (gamepad1.y == true)
             {

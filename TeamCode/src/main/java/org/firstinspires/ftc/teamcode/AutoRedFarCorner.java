@@ -136,7 +136,7 @@ public class AutoRedFarCorner extends RobotLinearOpMode
                 encoderDrive(0.5, 7.25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 16, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 sleep(5000);
                 encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_RIGHT);
@@ -150,7 +150,7 @@ public class AutoRedFarCorner extends RobotLinearOpMode
                 encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 24, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 sleep(5000);
                 encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_RIGHT);
@@ -162,7 +162,7 @@ public class AutoRedFarCorner extends RobotLinearOpMode
                 encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 24, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 sleep(5000);
                 encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_RIGHT);

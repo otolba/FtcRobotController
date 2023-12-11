@@ -104,9 +104,9 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             {
                 encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 24, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 20, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
                 encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
@@ -127,8 +127,8 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             {
                 /* Your autonomous code */
                 encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 7.25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(0.5, 4, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(0.5, 21, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
