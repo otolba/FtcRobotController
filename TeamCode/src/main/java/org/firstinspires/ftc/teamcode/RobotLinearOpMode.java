@@ -532,13 +532,13 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftFrontDriveMotor = hardwareMap.get(DcMotor.class, "frontleft");
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
         leftBackDriveMotor = hardwareMap.get(DcMotor.class, "backleft");
-        placeYellowServoLeft = hardwareMap.get(Servo.class, "LeftYellowPixelServo");
-        placeYellowServoRight = hardwareMap.get(Servo.class, "RightYellowPixelServo");
-
-        placeYellowServoLeft.setPosition(0);
-        placeYellowServoLeft.setDirection(Servo.Direction.FORWARD);
-        placeYellowServoRight.setPosition(0);
-        placeYellowServoRight.setDirection(Servo.Direction.FORWARD);
+//        placeYellowServoLeft = hardwareMap.get(Servo.class, "LeftYellowPixelServo");
+//        placeYellowServoRight = hardwareMap.get(Servo.class, "RightYellowPixelServo");
+//
+//        placeYellowServoLeft.setPosition(0);
+//        placeYellowServoLeft.setDirection(Servo.Direction.FORWARD);
+//        placeYellowServoRight.setPosition(0);
+//        placeYellowServoRight.setDirection(Servo.Direction.FORWARD);
         leftFrontDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftBackDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightFrontDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
