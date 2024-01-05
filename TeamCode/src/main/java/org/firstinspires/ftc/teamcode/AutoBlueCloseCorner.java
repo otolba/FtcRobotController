@@ -96,7 +96,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
         telemetry.update();
 
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
         sleep(2000);
 
@@ -114,7 +114,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             }
         }
 
-        encoderDrive(0.3, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
