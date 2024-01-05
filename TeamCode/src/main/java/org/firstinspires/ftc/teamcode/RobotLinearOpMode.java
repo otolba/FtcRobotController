@@ -345,55 +345,55 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
     public void blueCloseRedFarAutoRight(){
         encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 9, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
     }
 
     public void blueCloseRedFarAutoCenter(){
-        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 32.5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 24, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
     }
 
     public void blueCloseRedFarAutoLeft(){
-        encoderDrive(0.5, 24, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
     }
 
     public void blueFarRedCloseAutoRight(){
         encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 9, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 16, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 30,MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
     }
 
     public void blueFarRedCloseAutoCenter(){
-        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 32.5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 24, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
     }
 
     public void blueFarRedCloseAutoLeft(){
-        encoderDrive(0.5, 24, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 35, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
     }
 
@@ -532,13 +532,13 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftFrontDriveMotor = hardwareMap.get(DcMotor.class, "frontleft");
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
         leftBackDriveMotor = hardwareMap.get(DcMotor.class, "backleft");
-        placeYellowServoLeft = hardwareMap.get(Servo.class, "LeftYellowPixelServo");
-        placeYellowServoRight = hardwareMap.get(Servo.class, "RightYellowPixelServo");
-
-        placeYellowServoLeft.setPosition(0);
-        placeYellowServoLeft.setDirection(Servo.Direction.FORWARD);
-        placeYellowServoRight.setPosition(0);
-        placeYellowServoRight.setDirection(Servo.Direction.FORWARD);
+//        placeYellowServoLeft = hardwareMap.get(Servo.class, "LeftYellowPixelServo");
+//        placeYellowServoRight = hardwareMap.get(Servo.class, "RightYellowPixelServo");
+//
+//        placeYellowServoLeft.setPosition(0);
+//        placeYellowServoLeft.setDirection(Servo.Direction.FORWARD);
+//        placeYellowServoRight.setPosition(0);
+//        placeYellowServoRight.setDirection(Servo.Direction.FORWARD);
         leftFrontDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftBackDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightFrontDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
