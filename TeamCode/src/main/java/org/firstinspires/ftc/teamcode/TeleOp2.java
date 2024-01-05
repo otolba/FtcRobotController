@@ -17,7 +17,10 @@ public class TeleOp2 extends LinearOpMode {
     private DcMotor rightFrontDrive = null;
     private DcMotor rightBackDrive = null;
     private DcMotor liftMotor = null;
+    private DcMotor intakeMotor = null;
+
     private int liftState = 0;
+    boolean intakePower = false;
     @Override
     public void runOpMode() {
 
@@ -28,12 +31,13 @@ public class TeleOp2 extends LinearOpMode {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontright");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
-
+        intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
+        intakeMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
@@ -58,7 +62,7 @@ public class TeleOp2 extends LinearOpMode {
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
             double liftPower = 0;
-            boolean savePower = false;
+
 
             // Send calculated power to wheels
             if (leftFrontPower <= -.05){
@@ -73,34 +77,35 @@ public class TeleOp2 extends LinearOpMode {
             if (rightBackPower >= .05){
                 rightBackPower += .12;
             }
-
+            if (gamepad1.a == true)
+            {
+                if (!intakePower)
+                {
+                    intakePower = true;
+                }
+                else
+                {
+                    intakePower = false;
+                }
+            }
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
             rightBackDrive.setPower(rightBackPower);
             liftPower += gamepad1.right_trigger*-1;
             liftPower += gamepad1.left_trigger;
+            liftMotor.setPower(liftPower);
+            if (intakePower == true)
+            {
+                intakeMotor.setPower(1.0);
+            }
+            else
+            {
+                intakeMotor.setPower(0.0);
+            }
 
 
-            if (gamepad1.right_bumper == true)
-            {
-                liftMotor.setPower(liftPower *.3);
-            }
-            if (gamepad1.y == true)
-            {
-                if (liftState == 0 && !(gamepad1.right_trigger >= 0.05) && !(gamepad1.left_trigger >= 0.05))
-                {
-<<<<<<< HEAD
-                    liftMotor.setPower(0.25);
-                    liftState =1;
-=======
-                    liftMotor.setPower(liftPower);
->>>>>>> c52082c74989cc4511dfd9678ce53b99e8d0a9f6
-                }
-                liftMotor.setPower(-0.75);
-            }
-            if liftState 
-            liftMotor.setPower(liftPower *.5);
+
 
 
 
