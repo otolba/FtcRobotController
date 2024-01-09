@@ -22,6 +22,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -41,6 +42,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
     BluePropDetector.SkystoneDeterminationPipeline pipeline;
     BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition snapshotAnalysis = BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition.LEFT; // default
 
+
     @Override
     public void runOpMode()
     {
@@ -50,7 +52,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
          * you should take a look at {@link InternalCamera1Example} or its
          * webcam counterpart, {@link WebcamExample} first.
          */
-
+        declareHardwareProperties();
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new BluePropDetector.SkystoneDeterminationPipeline();
@@ -69,10 +71,10 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             public void onError(int errorCode) {}
         });
 
-        /*
-         * The INIT-loop:
-         * This REPLACES waitForStart!
-         */
+
+        //* The INIT-loop:
+        //* This REPLACES waitForStart!
+
         while (!isStarted() && !isStopRequested())
         {
             telemetry.addData("Realtime analysis", pipeline.getAnalysis());
@@ -82,16 +84,70 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             sleep(50);
         }
 
-        /*
-         * The START command just came in: snapshot the current analysis now
-         * for later use. We must do this because the analysis will continue
-         * to change as the camera view changes once the robot starts moving!
-         */
+
+        // The START command just came in: snapshot the current analysis now
+        // for later use. We must do this because the analysis will continue
+        // to change as the camera view changes once the robot starts moving!
+
         sleep(2000);
 
-        /*
-         * Show that snapshot on the telemetry
-         */
+
+        //* Show that snapshot on the telemetry
+
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        sleep(25000);
+        while (opModeIsActive())
+        {
+            // Don't burn CPU cycles busy-looping in this sample
+            sleep(50);
+        }
+
+        /**
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        pipeline = new BluePropDetector.SkystoneDeterminationPipeline();
+        webcam.setPipeline(pipeline);
+        declareHardwareProperties();
+
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        {
+            @Override
+            public void onOpened()
+            {
+                webcam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode) {}
+        });
+
+
+         //* The INIT-loop:
+         //* This REPLACES waitForStart!
+
+        while (!isStarted() && !isStopRequested())
+        {
+            telemetry.addData("Realtime analysis", pipeline.getAnalysis());
+            telemetry.update();
+
+            // Don't burn CPU cycles busy-looping in this sample
+            sleep(50);
+        }
+
+
+         // The START command just came in: snapshot the current analysis now
+         // for later use. We must do this because the analysis will continue
+         // to change as the camera view changes once the robot starts moving!
+
+        sleep(2000);
+
+
+         //* Show that snapshot on the telemetry
+
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
@@ -124,7 +180,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
         {
             case LEFT:
             {
-                /* Your autonomous code */
+                // Your autonomous code
                 blueCloseRedFarAutoLeft();
                 encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
@@ -133,7 +189,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
 
             case CENTER:
             {
-                /* Your autonomous code*/
+                // Your autonomous code
                 blueCloseRedFarAutoCenter();
                 encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
@@ -149,11 +205,12 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             }
         }
 
-        /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
+        // You wouldn't have this in your autonomous, this is just to prevent the sample from ending
         while (opModeIsActive())
         {
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
         }
+        */
     }
 }

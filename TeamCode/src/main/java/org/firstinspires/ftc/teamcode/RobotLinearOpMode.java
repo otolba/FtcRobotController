@@ -70,6 +70,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftBackDriveMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBackDriveMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+
         //Sets the target # of ticks by intaking the number of desired inches of movement and converting to ticks
         leftFrontTarget = leftFrontDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
         rightFrontTarget = rightFrontDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
@@ -561,6 +562,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftFrontDriveMotor = hardwareMap.get(DcMotor.class, "frontleft");
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
         leftBackDriveMotor = hardwareMap.get(DcMotor.class, "backleft");
+
         placePurplePixel = hardwareMap.get(Servo.class, "purplePixel");
 //        placeYellowServoLeft = hardwareMap.get(Servo.class, "LeftYellowPixelServo");
 //        placeYellowServoRight = hardwareMap.get(Servo.class, "RightYellowPixelServo");
@@ -574,6 +576,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftBackDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightFrontDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
         rightBackDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
+
     }
 
     enum MOVEMENT_DIRECTION {
