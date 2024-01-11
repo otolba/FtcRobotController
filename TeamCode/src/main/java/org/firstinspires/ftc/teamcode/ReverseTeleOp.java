@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-@TeleOp(name="TeleOp", group="Linear OpMode")
-public class TeleOp2 extends LinearOpMode {
+@TeleOp(name="ReverseTeleOp", group="Linear OpMode")
+public class ReverseTeleOp extends LinearOpMode {
 
 
     // Declare OpMode members for each of the 4 motors.
@@ -17,10 +17,7 @@ public class TeleOp2 extends LinearOpMode {
     private DcMotor rightFrontDrive = null;
     private DcMotor rightBackDrive = null;
     private DcMotor liftMotor = null;
-    private DcMotor intakeMotor = null;
-
     private int liftState = 0;
-    boolean intakePower = false;
     @Override
     public void runOpMode() {
 
@@ -31,13 +28,12 @@ public class TeleOp2 extends LinearOpMode {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontright");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
-        intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
-        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+
+        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
-        intakeMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
@@ -62,7 +58,7 @@ public class TeleOp2 extends LinearOpMode {
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
             double liftPower = 0;
-
+            boolean savePower = false;
 
             // Send calculated power to wheels
             if (leftFrontPower <= -.05){
@@ -77,35 +73,23 @@ public class TeleOp2 extends LinearOpMode {
             if (rightBackPower >= .05){
                 rightBackPower += .12;
             }
-            if (gamepad1.a == true)
-            {
-                if (!intakePower)
-                {
-                    intakePower = true;
-                }
-                else
-                {
-                    intakePower = false;
-                }
-            }
+
             leftFrontDrive.setPower(leftFrontPower);
-            rightFrontDrive.setPower(rightFrontPower);
-            leftBackDrive.setPower(leftBackPower);
-            rightBackDrive.setPower(rightBackPower);
+            rightFrontDrive.setPower((.8)*rightFrontPower);
+            leftBackDrive.setPower((.8)*leftBackPower);
+            rightBackDrive.setPower((.77)*rightBackPower);
             liftPower += gamepad1.right_trigger*-1;
             liftPower += gamepad1.left_trigger;
-            liftMotor.setPower(liftPower);
-            if (intakePower == true)
+
+            liftMotor.setPower(liftPower *.5);
+            if (gamepad1.right_bumper == true)
             {
-                intakeMotor.setPower(1.0);
+                liftMotor.setPower(liftPower *.25);
             }
-            else
+            if (gamepad1.y == true)
             {
-                intakeMotor.setPower(0.0);
+                liftMotor.setPower(-0.75);
             }
-
-
-
 
 
 
