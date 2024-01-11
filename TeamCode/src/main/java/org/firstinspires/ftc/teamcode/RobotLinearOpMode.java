@@ -42,8 +42,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     NormalizedColorSensor colorSensor1;
     NormalizedColorSensor colorSensor2;
     Servo placePurplePixel;
-    Servo placeYellowServoLeft;
-    Servo placeYellowServoRight;
+    Servo placeYellowServo;
     boolean placingPixel = false;
     boolean searching;
 
@@ -428,13 +427,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
     }
 
-    public void placePixelServoLeft(){
-        placeYellowServoLeft.setPosition(0.6);
-    }
-
-    public void placePixelServoRight(){
-        placeYellowServoRight.setPosition(0.6);
-    }
 
     public void placePixel(){
         //multiply sensor value by gain
@@ -562,13 +554,9 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
         leftBackDriveMotor = hardwareMap.get(DcMotor.class, "backleft");
         placePurplePixel = hardwareMap.get(Servo.class, "purplePixel");
-//        placeYellowServoLeft = hardwareMap.get(Servo.class, "LeftYellowPixelServo");
-//        placeYellowServoRight = hardwareMap.get(Servo.class, "RightYellowPixelServo");
-//
-//        placeYellowServoLeft.setPosition(0);
-//        placeYellowServoLeft.setDirection(Servo.Direction.FORWARD);
-//        placeYellowServoRight.setPosition(0);
-//        placeYellowServoRight.setDirection(Servo.Direction.FORWARD);
+        placeYellowServo = hardwareMap.get(Servo.class, "placeYellowServo");
+
+        placeYellowServo.setDirection(Servo.Direction.FORWARD);
         placePurplePixel.setDirection(Servo.Direction.FORWARD);
         leftFrontDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftBackDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
