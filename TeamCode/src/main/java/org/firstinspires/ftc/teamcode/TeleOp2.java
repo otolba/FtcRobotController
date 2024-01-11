@@ -19,7 +19,7 @@ public class TeleOp2 extends LinearOpMode {
     private DcMotor rightBackDrive = null;
     private DcMotor liftMotor = null;
     private DcMotor intakeMotor = null;
-    private Servo placePurplePixel;
+    //private Servo placePurplePixel;
 
     private int liftState = 0;
     private double servoState = 0;
@@ -36,14 +36,14 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
-        placePurplePixel = hardwareMap.get(Servo.class, "purplePixel");
+        //placePurplePixel = hardwareMap.get(Servo.class, "purplePixel");
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.REVERSE);
-        placePurplePixel.setDirection(Servo.Direction.REVERSE);
+        //placePurplePixel.setDirection(Servo.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
@@ -83,14 +83,15 @@ public class TeleOp2 extends LinearOpMode {
             if (rightBackPower >= .05){
                 rightBackPower += .12;
             }
-            if (gamepad1.a == true)
+
+            /*if (gamepad1.a == true)
             {
                 servoState += 0.01;
             }
             if (gamepad1.b == true)
             {
                 servoState -= 0.01;
-            }
+            }*/
 
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
@@ -111,7 +112,7 @@ public class TeleOp2 extends LinearOpMode {
             {
                 intakeMotor.setPower(0);
             }
-            placePurplePixel.setPosition(servoState);
+            //placePurplePixel.setPosition(servoState);
 
 
 
