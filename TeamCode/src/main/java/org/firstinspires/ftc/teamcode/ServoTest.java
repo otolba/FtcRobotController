@@ -16,12 +16,11 @@ public class ServoTest extends RobotLinearOpMode{
 
         telemetry.addData("Status", "running");
         telemetry.update();
-        sleep(5000);
         placeYellowServo.setPosition(0);
-        sleep(400);
+        sleep(800);
         telemetry.addData("Status", "part 1 done");
         placeYellowServo.setPosition(1.0);
-        sleep(400);
+        sleep(800);
         stop();
 
     }
