@@ -11,12 +11,17 @@ public class ServoTest extends RobotLinearOpMode{
     public void runOpMode(){
         placeYellowServo = hardwareMap.get(Servo.class, "placeYellowServo");
         placeYellowServo.setDirection(Servo.Direction.FORWARD);
+        waitForStart();
 
-        while (opModeIsActive()) {
-            placeYellowServo.setPosition(0);
-            sleep(10000);
-            placeYellowServo.setPosition(1.0);
-            sleep(200000);
-        }
+
+        telemetry.addData("Status", "running");
+        telemetry.update();
+        placeYellowServo.setPosition(0);
+        sleep(800);
+        telemetry.addData("Status", "part 1 done");
+        placeYellowServo.setPosition(1.0);
+        sleep(800);
+        stop();
+
     }
 }
