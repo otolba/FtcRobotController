@@ -507,6 +507,53 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
     }
 
+    public void redFarAutoRight(){
+        encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
+    public void redFarAutoCenter(){
+        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
+    public void redFarAutoLeft(){
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
     public void placePixel(){
         //multiply sensor value by gain
         float gain = 10;

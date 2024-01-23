@@ -102,11 +102,11 @@ public class AutoBlueCloseMiddle extends RobotLinearOpMode
         switch (snapshotAnalysis){
             case RIGHT:
             {
-                blueCloseRedFarAutoRight();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                blueCloseAutoRight();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
         }
@@ -127,31 +127,31 @@ public class AutoBlueCloseMiddle extends RobotLinearOpMode
             case LEFT:
             {
                 /* Your autonomous code */
-                blueCloseRedFarAutoLeft();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                blueCloseAutoLeft();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
 
             case CENTER:
             {
                 /* Your autonomous code*/
-                blueCloseRedFarAutoCenter();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                blueCloseAutoCenter();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
             case RIGHT:
             {
-                blueCloseRedFarAutoCenter();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                blueCloseAutoCenter();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 40, MOVEMENT_DIRECTION.FORWARD);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
         }
