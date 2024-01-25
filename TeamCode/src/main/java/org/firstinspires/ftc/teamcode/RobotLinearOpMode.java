@@ -383,7 +383,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueCloseAutoCenter(){
-        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
         placePurplePixel.setPosition(1.0);
         sleep(1000);
@@ -392,7 +392,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         placePurplePixel.setPosition(0.5);
         sleep(200);
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderTurn(0.5, 19, TURN_DIRECTION.TURN_LEFT);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
     }
