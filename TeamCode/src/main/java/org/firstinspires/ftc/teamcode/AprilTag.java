@@ -94,6 +94,18 @@ public class AprilTag extends RobotLinearOpMode {
         // Step through the list of detections and display info for each one.
         for (AprilTagDetection detection : currentDetections) {
             if (detection.metadata != null) {
+                if (detection.id == 1)
+                {
+                    telemetry.addLine(String.format("found 1"));
+                }
+                if (detection.id == 2)
+                {
+                    telemetry.addLine(String.format("found 2"));
+                }
+                if (detection.id == 3)
+                {
+                    telemetry.addLine(String.format("found 3"));
+                }
                 telemetry.addLine(String.format("\n==== (ID %d) %s", detection.id, detection.metadata.name));
                 telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
                 telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
@@ -105,6 +117,10 @@ public class AprilTag extends RobotLinearOpMode {
         }   // end for() loop
 
         // Add "key" information to telemetry
+
+        {
+
+        }
         telemetry.addLine("\nkey:\nXYZ = X (Right), Y (Forward), Z (Up) dist.");
         telemetry.addLine("PRY = Pitch, Roll & Yaw (XYZ Rotation)");
         telemetry.addLine("RBE = Range, Bearing & Elevation");
