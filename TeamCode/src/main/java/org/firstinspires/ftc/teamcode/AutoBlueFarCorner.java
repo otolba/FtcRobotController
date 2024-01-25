@@ -102,10 +102,10 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
         switch (snapshotAnalysis){
             case RIGHT:
             {
-                blueFarRedCloseAutoRight();
+                blueFarAutoRight();
                 sleep(5000);
-                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
         }
@@ -121,28 +121,28 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             case LEFT:
             {
                 /* Your autonomous code */
-                blueFarRedCloseAutoLeft();
+                blueFarAutoLeft();
                 sleep(5000);
-                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
 
             case CENTER:
             {
                 /* Your autonomous code*/
-                blueFarRedCloseAutoCenter();
+                blueFarAutoCenter();
                 sleep(5000);
-                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
             case RIGHT:
             {
-                blueFarRedCloseAutoCenter();
+                blueFarAutoCenter();
                 sleep(5000);
-                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
         }

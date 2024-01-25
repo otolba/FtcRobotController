@@ -102,9 +102,9 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
         switch (snapshotAnalysis){
             case RIGHT:
             {
-                blueFarRedCloseAutoRight();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redCloseAutoRight();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(100000);
             }
         }
@@ -120,25 +120,25 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             case LEFT:
             {
                 /* Your autonomous code */
-                blueFarRedCloseAutoLeft();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redCloseAutoLeft();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
 
             case CENTER:
             {
                 /* Your autonomous code*/
-                blueFarRedCloseAutoCenter();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redCloseAutoCenter();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
             case RIGHT:
             {
-                blueFarRedCloseAutoCenter();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redCloseAutoCenter();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 sleep(25000);
             }
         }

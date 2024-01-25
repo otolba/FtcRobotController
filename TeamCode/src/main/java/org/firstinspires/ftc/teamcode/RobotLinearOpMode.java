@@ -252,29 +252,16 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         }
     }*/
 
-    /*public void encoderTurn(double power, double degrees, TURN_DIRECTION turn_direction) {
+    public void encoderTurn(double power, double inches, TURN_DIRECTION turn_direction) {
 
 
-
-
-
-        //Declaration of important variables
+        //Specifications of hardware
         final double WHEEL_DIAMETER_INCHES = 3.77953;
         final double WHEEL_CIRCUMFERENCE_INCHES = (WHEEL_DIAMETER_INCHES * 3.141592653589793);
-        final double DRIVE_GEAR_REDUCTION = 1.0;
-        final double TICKS_PER_ROTATION = 150;
-        final double TICKS_PER_INCH = (TICKS_PER_ROTATION / WHEEL_CIRCUMFERENCE_INCHES);
-        //Measure in inches
-        final double ROBOT_LENGTH = 14;
-        final double ROBOT_WIDTH = 12;
-        //Uses pythagorean theorem to find the radius from the center of the robot to a point on its turning circle and subsequently the circumference of said circle
-        final double ROBOT_DIAMETER = (Math.sqrt(Math.pow(ROBOT_LENGTH, 2) + Math.pow(ROBOT_WIDTH, 2)));
-        final double ROBOT_CIRCUMFERENCE = (ROBOT_DIAMETER * 3.141592653589793);
-        //Finds the number of degrees each tick covers
-        final double INCHES_PER_DEGREE = (ROBOT_CIRCUMFERENCE/360);
-        final double TICKS_PER_DEGREE = (TICKS_PER_INCH * INCHES_PER_DEGREE);
-
-        declareHardwareProperties();
+        final double GEAR_RATIO = 19.2;
+        final double COUNTS_PER_ROTATION_AT_MOTOR = 28;
+        final double TICKS_PER_ROTATION = (GEAR_RATIO * COUNTS_PER_ROTATION_AT_MOTOR);
+        final double TICKS_PER_INCH = (TICKS_PER_ROTATION) / (WHEEL_CIRCUMFERENCE_INCHES);
 
         //Target # of ticks for each motor
         int leftFrontTarget;
@@ -288,39 +275,18 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftBackDriveMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBackDriveMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        //Sets the taret # of ticks by intaking the number of desired inches of movement and converting to ticks
-        leftFrontTarget = leftFrontDriveMotor.getCurrentPosition() + (int) (TICKS_PER_DEGREE);
-        rightFrontTarget = rightFrontDriveMotor.getCurrentPosition() + (int) (TICKS_PER_DEGREE);
-        leftBackTarget = leftBackDriveMotor.getCurrentPosition() + (int) (TICKS_PER_DEGREE);
-        rightBackTarget = rightBackDriveMotor.getCurrentPosition() + (int) (TICKS_PER_DEGREE);
+        //Sets the target # of ticks by intaking the number of desired inches of movement and converting to ticks
+        leftFrontTarget = leftFrontDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
+        rightFrontTarget = rightFrontDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
+        leftBackTarget = leftBackDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
+        rightBackTarget = rightBackDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
 
-        if(turn_direction == TURN_DIRECTION.TURN_RIGHT) {
-
-            //Sets the target # of ticks to the target position of the motors
-            leftFrontDriveMotor.setTargetPosition(leftFrontTarget);
-            rightFrontDriveMotor.setTargetPosition(-rightFrontTarget);
-            leftBackDriveMotor.setTargetPosition(leftBackTarget);
-            rightBackDriveMotor.setTargetPosition(-rightBackTarget);
-
-            //Tells the motors to drive until they reach the target position
-            leftFrontDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightFrontDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            leftBackDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightBackDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            //Sets the motor powers to the power entered on use
-            leftFrontDriveMotor.setPower(power);
-            rightFrontDriveMotor.setPower(power);
-            leftBackDriveMotor.setPower(power);
-            rightBackDriveMotor.setPower(power);
-        }
-
-        if(turn_direction == TURN_DIRECTION.TURN_LEFT) {
+        if (turn_direction == TURN_DIRECTION.TURN_RIGHT) {
 
             //Sets the target # of ticks to the target position of the motors
-            leftFrontDriveMotor.setTargetPosition(-leftFrontTarget);
+            leftFrontDriveMotor.setTargetPosition(-(leftFrontTarget));
             rightFrontDriveMotor.setTargetPosition(rightFrontTarget);
-            leftBackDriveMotor.setTargetPosition(-leftBackTarget);
+            leftBackDriveMotor.setTargetPosition(-(leftBackTarget));
             rightBackDriveMotor.setTargetPosition(rightBackTarget);
 
             //Tells the motors to drive until they reach the target position
@@ -334,99 +300,259 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             rightFrontDriveMotor.setPower(power);
             leftBackDriveMotor.setPower(power);
             rightBackDriveMotor.setPower(power);
+
+            while (leftFrontDriveMotor.isBusy() && opModeIsActive()) {
+
+            }
+
+            //Kills the motors to prepare for next call of method
+            leftFrontDriveMotor.setPower(0);
+            rightFrontDriveMotor.setPower(0);
+            leftBackDriveMotor.setPower(0);
+            rightBackDriveMotor.setPower(0);
+
+
         }
+
+        if (turn_direction == TURN_DIRECTION.TURN_LEFT) {
+
+            //Sets the target # of ticks to the target position of the motors
+            leftFrontDriveMotor.setTargetPosition(leftFrontTarget);
+            rightFrontDriveMotor.setTargetPosition(-(rightFrontTarget));
+            leftBackDriveMotor.setTargetPosition(leftBackTarget);
+            rightBackDriveMotor.setTargetPosition(-(rightBackTarget));
+
+            //Tells the motors to drive until they reach the target position
+            leftFrontDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightFrontDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftBackDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightBackDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            //Sets the motor powers to the power entered on use
+            leftFrontDriveMotor.setPower(power);
+            rightFrontDriveMotor.setPower(power);
+            leftBackDriveMotor.setPower(power);
+            rightBackDriveMotor.setPower(power);
+
+            while (leftFrontDriveMotor.isBusy() && opModeIsActive()) {
+
+            }
+            //Kills the motors to prepare for next call of method
+            leftFrontDriveMotor.setPower(0);
+            rightFrontDriveMotor.setPower(0);
+            leftBackDriveMotor.setPower(0);
+            rightBackDriveMotor.setPower(0);
+        }
+        while (leftFrontDriveMotor.isBusy() && opModeIsActive()) {
+
+        }
+
+        //Kills the motors to prepare for next call of method
+        leftFrontDriveMotor.setPower(0);
+        rightFrontDriveMotor.setPower(0);
+        leftBackDriveMotor.setPower(0);
+        rightBackDriveMotor.setPower(0);
 
         leftFrontDriveMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFrontDriveMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBackDriveMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackDriveMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-*/
 
-    public void blueCloseRedFarAutoRight(){
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
+        //Kills the motors to prepare for next call of method
+        leftFrontDriveMotor.setPower(0);
+        rightFrontDriveMotor.setPower(0);
+        leftBackDriveMotor.setPower(0);
+        rightBackDriveMotor.setPower(0);
+    }
+
+    public void blueCloseAutoRight(){
         encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
-        placePurplePixel.setPosition(-1.0);
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
-        sleep(5000);
-        placePurplePixel.setPosition(0.5);
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
-        sleep(5000);
-        encoderDrive(0.5, 9, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
-    }
-
-    public void blueCloseRedFarAutoCenter(){
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
-        encoderDrive(0.5, 28.5, MOVEMENT_DIRECTION.FORWARD);
-        placePurplePixel.setPosition(-1.0);
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
-        sleep(5000);
-        placePurplePixel.setPosition(0.5);
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
-        sleep(5000);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
-    }
-
-    public void blueCloseRedFarAutoLeft(){
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
-        encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        placePurplePixel.setPosition(-1.0);
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
-        sleep(5000);
-        placePurplePixel.setPosition(.5);
-        telemetry.addData("Servo position", placePurplePixel.getPosition());
-        telemetry.update();
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(1.0);
         sleep(1000);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
-    }
-
-    public void blueFarRedCloseAutoRight(){
-        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 9, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 30,MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
     }
 
-    public void blueFarRedCloseAutoCenter(){
-        encoderDrive(0.5, 32.5, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
-    }
-
-    public void blueFarRedCloseAutoLeft(){
-        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
+    public void blueCloseAutoCenter(){
+        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 35, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.FORWARD);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
     }
 
+    public void blueCloseAutoLeft(){
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+    }
+
+    public void blueFarAutoRight(){
+        encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 15,MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+    }
+
+    public void blueFarAutoCenter(){
+        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+    }
+
+    public void blueFarAutoLeft(){
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+    }
+
+    public void redCloseAutoRight(){
+        encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 15,MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
+    public void redCloseAutoCenter(){
+        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
+    public void redCloseAutoLeft(){
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
+    public void redFarAutoRight(){
+        encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
+    public void redFarAutoCenter(){
+        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
+
+    public void redFarAutoLeft(){
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placePurplePixel.setPosition(1.0);
+        sleep(1000);
+        placePurplePixel.setPosition(0);
+        sleep(1000);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    }
 
     public void placePixel(){
         //multiply sensor value by gain
@@ -554,9 +680,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
         leftBackDriveMotor = hardwareMap.get(DcMotor.class, "backleft");
         placePurplePixel = hardwareMap.get(Servo.class, "purplePixel");
-        placeYellowServo = hardwareMap.get(Servo.class, "placeYellowServo");
 
-        placeYellowServo.setDirection(Servo.Direction.FORWARD);
         placePurplePixel.setDirection(Servo.Direction.FORWARD);
         leftFrontDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftBackDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);

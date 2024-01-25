@@ -62,7 +62,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             @Override
             public void onOpened()
             {
-                webcam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
+                webcam.startStreaming(320,240, OpenCvCameraRotation.UPSIDE_DOWN);
             }
 
             @Override
@@ -107,9 +107,9 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
         switch (snapshotAnalysis){
             case RIGHT:
             {
-                blueCloseRedFarAutoRight();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                blueCloseAutoRight();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(100000);
             }
         }
@@ -125,26 +125,26 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             case LEFT:
             {
                 /* Your autonomous code */
-                blueCloseRedFarAutoLeft();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                blueCloseAutoLeft();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
 
             case CENTER:
             {
                 /* Your autonomous code*/
-                blueCloseRedFarAutoCenter();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                blueCloseAutoCenter();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
 
             case RIGHT:
             {
-                blueCloseRedFarAutoCenter();
-                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                blueCloseAutoCenter();
+//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
         }
