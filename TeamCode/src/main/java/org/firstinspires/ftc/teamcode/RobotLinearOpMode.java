@@ -412,22 +412,19 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
         encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5,1, MOVEMENT_DIRECTION.FORWARD);
     }
 
     public void blueCloseAutoCenterPlacePixel(){
         initAprilTag();
         runtime.reset();
 
-        while((runtime.seconds()<2 && getAprilTags()[2] == false) && opModeIsActive()){
+        while((runtime.seconds()<3 && getAprilTags()[2] == false) && opModeIsActive()){
             leftFrontDriveMotor.setPower(0.2);
             rightFrontDriveMotor.setPower(-0.2);
             leftBackDriveMotor.setPower(-0.2);
             rightBackDriveMotor.setPower(0.2);
         }
-        leftFrontDriveMotor.setPower(.5);
-        rightFrontDriveMotor.setPower(.5);
-        leftBackDriveMotor.setPower(.5);
-        rightBackDriveMotor.setPower(.5);
         sleep(1000);
         leftFrontDriveMotor.setPower(0);
         rightFrontDriveMotor.setPower(0);
@@ -435,6 +432,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor.setPower(0);
         if (getAprilTags()[2] == true){
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
+            encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
             placeYellowServo.setPosition(1.0);
             sleep(1000);
@@ -443,13 +442,14 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             placeYellowServo.setPosition(0.5);
             sleep(200);
             encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
             encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
             placeYellowServo.setPosition(0);
             sleep(1000);
         }
         else{
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+            encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
             placeYellowServo.setPosition(1.0);
             sleep(1000);
