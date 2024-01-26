@@ -410,22 +410,26 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 36, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+    }
+
+    public void blueCloseAutoCenterPlacePixel(){
         initAprilTag();
         runtime.reset();
 
-        while(runtime.seconds()<6 || getAprilTags()[2] == true){
-            leftFrontDriveMotor.setPower(-0.3);
-            rightFrontDriveMotor.setPower(0.3);
-            leftBackDriveMotor.setPower(0.3);
-            rightBackDriveMotor.setPower(-0.3);
+        while(runtime.seconds()<4 || getAprilTags()[2] == true && opModeIsActive()){
+            leftFrontDriveMotor.setPower(0.2);
+            rightFrontDriveMotor.setPower(-0.2);
+            leftBackDriveMotor.setPower(-0.2);
+            rightBackDriveMotor.setPower(0.2);
         }
         leftFrontDriveMotor.setPower(0);
         rightFrontDriveMotor.setPower(0);
         leftBackDriveMotor.setPower(0);
         rightBackDriveMotor.setPower(0);
-        if (getAprilTags()[1] == true){
+        if (getAprilTags()[2] == true){
+            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
             placeYellowServo.setPosition(1.0);
             sleep(1000);
@@ -454,8 +458,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             placeYellowServo.setPosition(0);
             sleep(1000);
         }
-
-
     }
 
     public void blueCloseAutoLeft(){
