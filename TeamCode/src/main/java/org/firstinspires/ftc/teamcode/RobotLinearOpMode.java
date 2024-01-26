@@ -792,13 +792,13 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     {
         List<AprilTagDetection> currentDetections = aprilTag.getDetections();
         telemetry.addData("# AprilTags Detected", currentDetections.size());
-        boolean[] aprilTags = new boolean[6];
+        boolean[] aprilTags = new boolean[7];
         // Step through the list of detections and display info for each one.
         for (AprilTagDetection detection : currentDetections)
         {
             if (detection.metadata != null)
             {
-                aprilTags[detection.id-1] = true;
+                aprilTags[detection.id] = true;
                 telemetry.addLine(String.format("\n==== (ID %d) %s", detection.id, detection.metadata.name));
                 telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
                 telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
