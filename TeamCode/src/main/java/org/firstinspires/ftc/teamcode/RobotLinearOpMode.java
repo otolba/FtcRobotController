@@ -418,7 +418,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         initAprilTag();
         runtime.reset();
 
-        while(runtime.seconds()<4 || getAprilTags()[2] == true && opModeIsActive()){
+        while((runtime.seconds()<4 && getAprilTags()[2] == false) && opModeIsActive()){
             leftFrontDriveMotor.setPower(0.2);
             rightFrontDriveMotor.setPower(-0.2);
             leftBackDriveMotor.setPower(-0.2);
@@ -428,6 +428,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightFrontDriveMotor.setPower(0);
         leftBackDriveMotor.setPower(0);
         rightBackDriveMotor.setPower(0);
+        sleep(2000);
         if (getAprilTags()[2] == true){
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
@@ -770,8 +771,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
         // Create the vision portal the easy way.
         if (USE_WEBCAM) {
-            visionPortal = VisionPortal.easyCreateWithDefaults(
-                    hardwareMap.get(WebcamName.class, "Webcam 1"), aprilTag);
+            visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), aprilTag);
         } else {
             visionPortal = VisionPortal.easyCreateWithDefaults(
                     BuiltinCameraDirection.BACK, aprilTag);
