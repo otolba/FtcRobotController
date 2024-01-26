@@ -139,6 +139,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
                 /* Your autonomous code*/
                 blueCloseAutoCenter();
                 webcam.stopStreaming();
+                pipeline = null;
                 webcam = null;
                 blueCloseAutoCenterPlacePixel();
 //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);

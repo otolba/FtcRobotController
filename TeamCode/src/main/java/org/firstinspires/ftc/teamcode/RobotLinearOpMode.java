@@ -418,17 +418,21 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         initAprilTag();
         runtime.reset();
 
-        while((runtime.seconds()<4 && getAprilTags()[2] == false) && opModeIsActive()){
+        while((runtime.seconds()<2 && getAprilTags()[2] == false) && opModeIsActive()){
             leftFrontDriveMotor.setPower(0.2);
             rightFrontDriveMotor.setPower(-0.2);
             leftBackDriveMotor.setPower(-0.2);
             rightBackDriveMotor.setPower(0.2);
         }
+        leftFrontDriveMotor.setPower(.5);
+        rightFrontDriveMotor.setPower(.5);
+        leftBackDriveMotor.setPower(.5);
+        rightBackDriveMotor.setPower(.5);
+        sleep(1000);
         leftFrontDriveMotor.setPower(0);
         rightFrontDriveMotor.setPower(0);
         leftBackDriveMotor.setPower(0);
         rightBackDriveMotor.setPower(0);
-        sleep(2000);
         if (getAprilTags()[2] == true){
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
