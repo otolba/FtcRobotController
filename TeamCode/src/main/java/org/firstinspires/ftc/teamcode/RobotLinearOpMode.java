@@ -358,16 +358,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             leftBackDriveMotor.setPower(0);
             rightBackDriveMotor.setPower(0);
         }
-        while (leftFrontDriveMotor.isBusy() && opModeIsActive()) {
-
-        }
-
-        //Kills the motors to prepare for next call of method
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-
         leftFrontDriveMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFrontDriveMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBackDriveMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -409,7 +399,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueCloseAutoCenter(){
-        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 29.5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 6, MOVEMENT_DIRECTION.REVERSE);
         placePurplePixel.setPosition(1.0);
         sleep(1000);
@@ -419,10 +409,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         sleep(200);
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderTurn(0.5, 15, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
-        encoderTurn(0.5, 5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 36, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
         initAprilTag();
         runtime.reset();
