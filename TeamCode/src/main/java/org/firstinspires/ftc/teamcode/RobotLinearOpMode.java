@@ -368,48 +368,75 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     public void blueCloseAutoRight(){
         encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 9.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         placePurplePixel.setPosition(1.0);
         sleep(1000);
         placePurplePixel.setPosition(0);
-        sleep(1000);
+        sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
+        encoderTurn(0.5, 15, TURN_DIRECTION.TURN_LEFT);
         encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderTurn(0.5, 5, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
+        //encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placeYellowServo.setPosition(1.0);
+        sleep(1000);
+        placeYellowServo.setPosition(0);
+        sleep(1200);
+        placeYellowServo.setPosition(0.5);
+        sleep(200);
     }
 
     public void blueCloseAutoCenter(){
-        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 30, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.REVERSE);
         placePurplePixel.setPosition(1.0);
         sleep(1000);
         placePurplePixel.setPosition(0);
-        sleep(1000);
+        sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderTurn(0.5, 15, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
+        encoderTurn(0.5, 5, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        sleep(1000);
+        //encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placeYellowServo.setPosition(1.0);
+        sleep(1000);
+        placeYellowServo.setPosition(0);
+        sleep(1000);
+        placeYellowServo.setPosition(0.5);
+        sleep(200);
     }
 
     public void blueCloseAutoLeft(){
         encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
         placePurplePixel.setPosition(1.0);
         sleep(1000);
         placePurplePixel.setPosition(0);
-        sleep(1000);
+        sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
         encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderTurn(0.5, 14.5, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
+        encoderTurn(0.5, 6, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
+        sleep(1000);
+        //encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placeYellowServo.setPosition(1.0);
+        sleep(1000);
+        placeYellowServo.setPosition(0);
+        sleep(1000);
+        placeYellowServo.setPosition(0.5);
+        sleep(200);
     }
 
     public void blueFarAutoRight(){
@@ -425,7 +452,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 15,MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 9,MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
     }
 
@@ -440,7 +467,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         sleep(200);
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 12, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
     }
 
@@ -680,6 +707,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
         leftBackDriveMotor = hardwareMap.get(DcMotor.class, "backleft");
         placePurplePixel = hardwareMap.get(Servo.class, "purplePixel");
+        placeYellowServo = hardwareMap.get(Servo.class, "placeYellowPixel");
 
         placePurplePixel.setDirection(Servo.Direction.FORWARD);
         leftFrontDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
