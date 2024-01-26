@@ -59,6 +59,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     boolean USE_WEBCAM = false;  // true for webcam, false for phone camera
     boolean placingPixel = false;
     boolean searching;
+    boolean aTagSeen = false;
     private ElapsedTime runtime = new ElapsedTime();
 
     public void encoderDrive(double power, double inches, MOVEMENT_DIRECTION movement_direction) {
@@ -400,7 +401,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
     public void blueCloseAutoCenter(){
         encoderDrive(0.5, 29.5, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
         placePurplePixel.setPosition(1.0);
         sleep(1000);
         placePurplePixel.setPosition(0);
@@ -410,29 +411,31 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5,1, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
     }
 
     public void blueCloseAutoCenterPlacePixel(){
         initAprilTag();
         runtime.reset();
 
-        while((runtime.seconds()<3 && getAprilTags()[2] == false) && opModeIsActive()){
+        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
             leftFrontDriveMotor.setPower(0.2);
             rightFrontDriveMotor.setPower(-0.2);
             leftBackDriveMotor.setPower(-0.2);
             rightBackDriveMotor.setPower(0.2);
+            if (getAprilTags()[2] == true) {
+                aTagSeen = true;
+            }
         }
         sleep(1000);
         leftFrontDriveMotor.setPower(0);
         rightFrontDriveMotor.setPower(0);
         leftBackDriveMotor.setPower(0);
         rightBackDriveMotor.setPower(0);
-        if (getAprilTags()[2] == true){
+        if (aTagSeen)
+        {
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+            encoderDrive(0.5, 6 , MOVEMENT_DIRECTION.STRAFE_LEFT);
             encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
             placeYellowServo.setPosition(1.0);
@@ -443,12 +446,9 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             sleep(200);
             encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
             encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-            placeYellowServo.setPosition(0);
-            sleep(1000);
         }
         else{
-            encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
             placeYellowServo.setPosition(1.0);
@@ -458,11 +458,11 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             placeYellowServo.setPosition(0.5);
             sleep(200);
             encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-            placeYellowServo.setPosition(0);
-            sleep(1000);
+            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
         }
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
+        placeYellowServo.setPosition(0);
+        sleep(1000);
     }
 
     public void blueCloseAutoLeft(){
