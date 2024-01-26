@@ -45,8 +45,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
     BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition snapshotAnalysis = BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition.LEFT; // default
 
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() {
         /**
          * NOTE: Many comments have been omitted from this sample for the
          * sake of conciseness. If you're just starting out with EasyOpenCv,
@@ -60,24 +59,22 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
         webcam.setPipeline(pipeline);
         declareHardwareProperties();
 
-        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
-                webcam.startStreaming(320,240, OpenCvCameraRotation.UPSIDE_DOWN);
+            public void onOpened() {
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
             }
 
             @Override
-            public void onError(int errorCode) {}
+            public void onError(int errorCode) {
+            }
         });
 
         /*
          * The INIT-loop:
          * This REPLACES waitForStart!
          */
-        while (!isStarted() && !isStopRequested())
-        {
+        while (!isStarted() && !isStopRequested()) {
             telemetry.addData("Realtime analysis", pipeline.getAnalysis());
             telemetry.update();
 
@@ -95,70 +92,72 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
         /*
          * Show that snapshot on the telemetry
          */
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
+        while(opModeIsActive()){
+            telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+            telemetry.update();
 
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+            encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
+            encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
-        sleep(2000);
+            sleep(2000);
 
-        snapshotAnalysis = pipeline.getAnalysis();
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
+            snapshotAnalysis = pipeline.getAnalysis();
+            telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+            telemetry.update();
 
-        switch (snapshotAnalysis){
-            case RIGHT:
-            {
-                blueCloseAutoRight();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                sleep(100000);
-            }
-        }
-
-        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        sleep(2000);
-        snapshotAnalysis = pipeline.getAnalysis();
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
-
-        switch (snapshotAnalysis)
-        {
-            case LEFT:
-            {
-                /* Your autonomous code */
-                blueCloseAutoLeft();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                sleep(25000);
+            switch (snapshotAnalysis) {
+                case RIGHT: {
+                    blueCloseAutoRight();
+                    webcam.closeCameraDevice();
+                    blueCloseAutoRightPlacePixel();
+                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    sleep(10000);
+                }
             }
 
-            case CENTER:
-            {
-                /* Your autonomous code*/
-                blueCloseAutoCenter();
-                webcam.closeCameraDevice();
-                blueCloseAutoCenterPlacePixel();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                sleep(25000);
+            encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
+            sleep(2000);
+            snapshotAnalysis = pipeline.getAnalysis();
+            telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+            telemetry.update();
+
+            switch (snapshotAnalysis) {
+                case LEFT: {
+                    /* Your autonomous code */
+                    blueCloseAutoLeft();
+                    webcam.closeCameraDevice();
+                    blueCloseAutoLeftPlacePixel();
+                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    sleep(25000);
+                }
+
+                case CENTER: {
+                    /* Your autonomous code*/
+                    blueCloseAutoCenter();
+                    webcam.closeCameraDevice();
+                    blueCloseAutoCenterPlacePixel();
+                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    sleep(25000);
+                }
+
+                case RIGHT: {
+                    blueCloseAutoCenter();
+                    webcam.closeCameraDevice();
+                    blueCloseAutoCenterPlacePixel();
+                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    sleep(25000);
+                }
             }
 
-            case RIGHT:
-            {
-                blueCloseAutoCenter();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                sleep(25000);
+            /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
+            while (opModeIsActive()) {
+                // Don't burn CPU cycles busy-looping in this sample
+                sleep(50);
             }
-        }
-
-        /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
-        while (opModeIsActive())
-        {
-            // Don't burn CPU cycles busy-looping in this sample
-            sleep(50);
         }
     }
 }
