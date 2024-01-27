@@ -370,7 +370,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftBackDriveMotor.setPower(0);
         rightBackDriveMotor.setPower(0);
     }
-
     public void blueCloseAutoRight(){
         encoderDrive(0.3, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
@@ -434,7 +433,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void blueCloseAutoCenter(){
@@ -499,7 +499,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_LEFT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void blueCloseAutoLeft(){
@@ -564,7 +565,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void blueFarAutoRight(){
@@ -631,7 +633,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void blueFarAutoCenter(){
@@ -697,7 +700,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_LEFT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
     public void blueFarAutoLeft(){
         encoderDrive(0.5, 22, MOVEMENT_DIRECTION.FORWARD);
@@ -762,7 +766,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void redCloseAutoRight(){
@@ -829,7 +834,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
 
@@ -895,7 +901,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
 
@@ -961,7 +968,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void redFarAutoRight(){
@@ -1029,7 +1037,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
 
@@ -1096,7 +1105,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void redFarAutoLeft(){
@@ -1162,7 +1172,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         }
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        stop();
+        int error = (10/0 + 20/0);
+        System.out.println(error);
     }
 
     public void placePixel(){
