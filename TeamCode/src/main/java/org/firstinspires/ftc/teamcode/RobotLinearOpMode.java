@@ -768,7 +768,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     public void redCloseAutoRight(){
         encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         placePurplePixel.setPosition(1.0);
         sleep(1000);
         placePurplePixel.setPosition(0);
@@ -779,7 +779,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
         encoderDrive(0.5, 13,MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
     }
     public void redCloseAutoRightPlacePixel(){
@@ -846,7 +846,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
         encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT;
     }
     public void redCloseAutoCenterPlacePixel(){
         initAprilTag();
@@ -934,8 +934,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor.setPower(0);
         if (aTagSeen)
         {
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 9, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+            encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
+            encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
             encoderDrive(0.2, 4, MOVEMENT_DIRECTION.FORWARD);
             sleep(1000);
             placeYellowServo.setPosition(1.0);

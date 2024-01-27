@@ -108,7 +108,7 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             }
         }
 
-        encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
@@ -125,6 +125,13 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
 
             case CENTER: {
                 /* Your autonomous code*/
+                redCloseAutoCenter();
+                webcam.closeCameraDevice();
+                redCloseAutoCenterPlacePixel();
+                sleep(25000);
+            }
+
+            case LEFT: {
                 redCloseAutoCenter();
                 webcam.closeCameraDevice();
                 redCloseAutoCenterPlacePixel();
