@@ -94,55 +94,64 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
 
         sleep(2000);
-        snapshotAnalysis = pipeline.getAnalysis();
 
+        snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
-        switch (snapshotAnalysis){
-            case RIGHT:
-            {
+        switch (snapshotAnalysis) {
+            case RIGHT: {
                 redCloseAutoRight();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                sleep(100000);
+                webcam.closeCameraDevice();
+                redCloseAutoRightPlacePixel();
+                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                sleep(10000);
             }
         }
 
-        encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
-        switch (snapshotAnalysis)
-        {
-            case LEFT:
-            {
+        switch (snapshotAnalysis) {
+            case LEFT: {
                 /* Your autonomous code */
                 redCloseAutoLeft();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                webcam.closeCameraDevice();
+                redCloseAutoLeftPlacePixel();
+                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
 
-            case CENTER:
-            {
+            case CENTER: {
                 /* Your autonomous code*/
                 redCloseAutoCenter();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                webcam.closeCameraDevice();
+                redCloseAutoCenterPlacePixel();
+                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
-            case RIGHT:
-            {
+
+            case RIGHT: {
                 redCloseAutoCenter();
-//                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                webcam.closeCameraDevice();
+                redCloseAutoCenterPlacePixel();
+                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
         }
 
+        /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
+        while (opModeIsActive()) {
+            // Don't burn CPU cycles busy-looping in this sample
+            sleep(50);
+        }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
         while (opModeIsActive())

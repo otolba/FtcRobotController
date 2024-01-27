@@ -118,6 +118,23 @@ public class AutoRedFarCorner extends RobotLinearOpMode
         encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
+
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+
+        switch (snapshotAnalysis){
+            case RIGHT:
+            {
+                redFarAutoRight();
+                webcam.closeCameraDevice();
+                redFarAutoRightPlacePixel();
+                sleep(25000);
+            }
+        }
+
+        //encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        sleep(2000);
+        snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
@@ -126,28 +143,25 @@ public class AutoRedFarCorner extends RobotLinearOpMode
             case LEFT:
             {
                 /* Your autonomous code */
-                blueCloseAutoLeft();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redFarAutoLeft();
+                webcam.closeCameraDevice();
+                redFarAutoLeftPlacePixel();
                 sleep(25000);
             }
 
             case CENTER:
             {
                 /* Your autonomous code*/
-                blueCloseAutoCenter();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redFarAutoCenter();
+                webcam.closeCameraDevice();
+                redFarAutoCenterPlacePixel();
                 sleep(25000);
             }
             case RIGHT:
             {
-                blueCloseAutoCenter();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redFarAutoCenter();
+                webcam.closeCameraDevice();
+                redFarAutoCenterPlacePixel();
                 sleep(25000);
             }
         }
