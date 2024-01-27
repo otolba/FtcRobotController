@@ -92,11 +92,11 @@ public class TeleOp2 extends LinearOpMode {
 //            liftMotor.setPower(liftPower);
            if (gamepad1.right_bumper == true)
            {
-               intakeMotor.setPower(0.75);
+               intakeMotor.setPower(1.0);
            }
            else if (gamepad1.left_bumper == true)
            {
-               intakeMotor.setPower(-0.75);
+               intakeMotor.setPower(1.0);
            }
            else
            {
