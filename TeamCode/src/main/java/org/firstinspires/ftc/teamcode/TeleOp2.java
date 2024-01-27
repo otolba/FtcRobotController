@@ -96,7 +96,7 @@ public class TeleOp2 extends LinearOpMode {
            }
            else if (gamepad1.left_bumper == true)
            {
-               intakeMotor.setPower(1.0);
+               intakeMotor.setPower(-1.0);
            }
            else
            {
