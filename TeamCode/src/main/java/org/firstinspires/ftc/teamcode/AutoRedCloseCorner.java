@@ -82,8 +82,6 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             sleep(50);
         }
 
-        sleep(2000);
-
         /*
          * Show that snapshot on the telemetry
          */

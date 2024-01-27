@@ -82,8 +82,6 @@ public class AutoRedFarCorner extends RobotLinearOpMode
             sleep(50);
         }
 
-        sleep(2000);
-
         /*
          * Show that snapshot on the telemetry
          */
@@ -91,33 +89,11 @@ public class AutoRedFarCorner extends RobotLinearOpMode
         telemetry.update();
 
         encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 3.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
         sleep(2000);
+
         snapshotAnalysis = pipeline.getAnalysis();
-
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
-
-        switch (snapshotAnalysis){
-            case RIGHT:
-            {
-                blueCloseAutoRight();
-                redCloseAutoRightPlacePixel();
-
-                sleep(25000);
-            }
-        }
-
-        /*
-         * The START command just came in: snapshot the current analysis now
-         * for later use. We must do this because the analysis will continue
-         * to change as the camera view changes once the robot starts moving!
-         */
-        encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        sleep(2000);
-        snapshotAnalysis = pipeline.getAnalysis();
-
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
@@ -130,6 +106,18 @@ public class AutoRedFarCorner extends RobotLinearOpMode
                 sleep(25000);
             }
         }
+
+        /*
+         * The START command just came in: snapshot the current analysis now
+         * for later use. We must do this because the analysis will continue
+         * to change as the camera view changes once the robot starts moving!
+         */
+        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        sleep(2000);
+        snapshotAnalysis = pipeline.getAnalysis();
+
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
 
         //encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
         sleep(2000);

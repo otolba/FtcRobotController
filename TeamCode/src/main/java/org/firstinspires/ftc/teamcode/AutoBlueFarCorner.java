@@ -91,7 +91,7 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
         telemetry.update();
 
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 1.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
@@ -109,7 +109,7 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             }
         }
 
-        encoderDrive(0.3, 4.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);

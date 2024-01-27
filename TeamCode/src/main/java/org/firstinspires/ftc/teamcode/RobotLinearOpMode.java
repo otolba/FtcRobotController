@@ -778,7 +778,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 13,MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 18,MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
     }
@@ -845,8 +845,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         sleep(200);
         encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT;
+        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
     }
     public void redCloseAutoCenterPlacePixel(){
         initAprilTag();
@@ -911,7 +911,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
     }
     public void redCloseAutoLeftPlacePixel(){
@@ -977,7 +977,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 45, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
         encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
     }
@@ -1045,7 +1045,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5,8, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 53, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
         encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
     }
 
@@ -1111,7 +1111,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 45, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
         encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_RIGHT);
     }
 
