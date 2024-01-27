@@ -90,8 +90,8 @@ public class AutoRedFarCorner extends RobotLinearOpMode
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
-        encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
@@ -103,9 +103,8 @@ public class AutoRedFarCorner extends RobotLinearOpMode
             case RIGHT:
             {
                 blueCloseAutoRight();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                redCloseAutoRightPlacePixel();
+
                 sleep(25000);
             }
         }

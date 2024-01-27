@@ -100,16 +100,16 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
         telemetry.update();
 
         switch (snapshotAnalysis){
-            case RIGHT:
+            case LEFT:
             {
-                blueFarAutoRight();
+                blueFarAutoLeft();
                 webcam.closeCameraDevice();
-                blueFarAutoRightPlacePixel();
+                blueFarAutoLeftPlacePixel();
                 sleep(25000);
             }
         }
 
-        //encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 4.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
@@ -117,15 +117,6 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
 
         switch (snapshotAnalysis)
         {
-            case LEFT:
-            {
-                /* Your autonomous code */
-                blueFarAutoLeft();
-                webcam.closeCameraDevice();
-                blueFarAutoLeftPlacePixel();
-                sleep(25000);
-            }
-
             case CENTER:
             {
                 /* Your autonomous code*/
@@ -136,9 +127,9 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             }
             case RIGHT:
             {
-                blueFarAutoCenter();
+                blueFarAutoRight();
                 webcam.closeCameraDevice();
-                blueFarAutoCenterPlacePixel();
+                blueFarAutoRightPlacePixel();
                 sleep(25000);
             }
         }

@@ -90,40 +90,36 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
-        encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
         sleep(2000);
 
-        snapshotAnalysis = pipeline.getAnalysis();
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
-
-        switch (snapshotAnalysis) {
-            case RIGHT: {
-                redCloseAutoRight();
-                webcam.closeCameraDevice();
-                redCloseAutoRightPlacePixel();
-                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                sleep(10000);
-            }
-        }
-
-        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
         switch (snapshotAnalysis) {
             case LEFT: {
-                /* Your autonomous code */
                 redCloseAutoLeft();
                 webcam.closeCameraDevice();
                 redCloseAutoLeftPlacePixel();
-                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                sleep(10000);
+            }
+        }
+
+        encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        sleep(2000);
+        snapshotAnalysis = pipeline.getAnalysis();
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+
+        switch (snapshotAnalysis) {
+            case RIGHT: {
+                /* Your autonomous code */
+                redCloseAutoRight();
+                webcam.closeCameraDevice();
+                redCloseAutoRightPlacePixel();
                 sleep(25000);
             }
 
@@ -132,17 +128,6 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
                 redCloseAutoCenter();
                 webcam.closeCameraDevice();
                 redCloseAutoCenterPlacePixel();
-                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                sleep(25000);
-            }
-
-            case RIGHT: {
-                redCloseAutoCenter();
-                webcam.closeCameraDevice();
-                redCloseAutoCenterPlacePixel();
-                //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 sleep(25000);
             }
         }
