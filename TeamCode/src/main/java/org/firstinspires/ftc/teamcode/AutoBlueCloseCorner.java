@@ -87,7 +87,6 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
          * for later use. We must do this because the analysis will continue
          * to change as the camera view changes once the robot starts moving!
          */
-        sleep(2000);
 
         /*
          * Show that snapshot on the telemetry
@@ -97,7 +96,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             telemetry.update();
 
             encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+            encoderDrive(0.3, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
             sleep(2000);
 

@@ -62,7 +62,7 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             @Override
             public void onOpened()
             {
-                webcam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
+                webcam.startStreaming(320,240, OpenCvCameraRotation.UPSIDE_DOWN);
             }
 
             @Override
@@ -91,7 +91,7 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
         telemetry.update();
 
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
@@ -103,14 +103,13 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             case RIGHT:
             {
                 blueFarAutoRight();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                webcam.closeCameraDevice();
+                blueFarAutoRightPlacePixel();
                 sleep(25000);
             }
         }
 
-        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        //encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
@@ -122,9 +121,8 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             {
                 /* Your autonomous code */
                 blueFarAutoLeft();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                webcam.closeCameraDevice();
+                blueFarAutoLeftPlacePixel();
                 sleep(25000);
             }
 
@@ -132,17 +130,15 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             {
                 /* Your autonomous code*/
                 blueFarAutoCenter();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                webcam.closeCameraDevice();
+                blueFarAutoCenterPlacePixel();
                 sleep(25000);
             }
             case RIGHT:
             {
                 blueFarAutoCenter();
-                sleep(5000);
-//                encoderDrive(0.5, 65, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                webcam.closeCameraDevice();
+                blueFarAutoCenterPlacePixel();
                 sleep(25000);
             }
         }
