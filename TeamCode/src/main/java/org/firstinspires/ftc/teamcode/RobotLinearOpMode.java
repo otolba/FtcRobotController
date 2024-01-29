@@ -371,85 +371,107 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor.setPower(0);
     }
     public void blueCloseAutoRight(){
-        encoderDrive(0.3, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 8.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         placePurplePixel.setPosition(1.0);
-        sleep(1000);
+        sleep(200);
         placePurplePixel.setPosition(0);
         sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(1.0, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1.0, 5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
-    }
-
-    public void blueCloseAutoRightPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(0.2);
-            rightFrontDriveMotor.setPower(-0.2);
-            leftBackDriveMotor.setPower(-0.2);
-            rightBackDriveMotor.setPower(0.2);
-            if (getAprilTags()[3] == true) {
-                aTagSeen = true;
-            }
-        }
+        encoderDrive(1.0, 31, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.FORWARD);
+        sleep(500);
+        placeYellowServo.setPosition(1.0);
         sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 13.5, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 5.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-            placeYellowServo.setPosition(1.0);
-            sleep(1000);
-            placeYellowServo.setPosition(0);
-            sleep(1000);
-            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        else{
-            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-            placeYellowServo.setPosition(1.0);
-            sleep(1000);
-            placeYellowServo.setPosition(0);
-            sleep(1000);
-            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
+        placeYellowServo.setPosition(0);
+        sleep(1000);
+        placeYellowServo.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
     }
+
+//    public void blueCloseAutoRightPlacePixel(){
+//        initAprilTag();
+//        runtime.reset();
+//
+//        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
+//            leftFrontDriveMotor.setPower(0.2);
+//            rightFrontDriveMotor.setPower(-0.2);
+//            leftBackDriveMotor.setPower(-0.2);
+//            rightBackDriveMotor.setPower(0.2);
+//            if (getAprilTags()[3] == true) {
+//                aTagSeen = true;
+//            }
+//        }
+//        sleep(1000);
+//        leftFrontDriveMotor.setPower(0);
+//        rightFrontDriveMotor.setPower(0);
+//        leftBackDriveMotor.setPower(0);
+//        rightBackDriveMotor.setPower(0);
+//        if (aTagSeen)
+//        {
+//            encoderDrive(0.5, 13.5, MOVEMENT_DIRECTION.FORWARD);
+//            encoderDrive(0.5, 5.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
+//            sleep(1000);
+//            placeYellowServo.setPosition(1.0);
+//            sleep(1000);
+//            placeYellowServo.setPosition(0);
+//            sleep(1000);
+//            placeYellowServo.setPosition(0.5);
+//            sleep(200);
+//            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
+//            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//        }
+//        else{
+//            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//            encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
+//            sleep(1000);
+//            placeYellowServo.setPosition(1.0);
+//            sleep(1000);
+//            placeYellowServo.setPosition(0);
+//            sleep(1000);
+//            placeYellowServo.setPosition(0.5);
+//            sleep(200);
+//            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
+//            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//        }
+//        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
+//        int error = (10/0 + 20/0);
+//        System.out.println(error);
+//    }
 
     public void blueCloseAutoCenter(){
-        encoderDrive(0.5, 29.5, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.REVERSE);
         placePurplePixel.setPosition(1.0);
-        sleep(100);
+        sleep(200);
         placePurplePixel.setPosition(0);
         sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
-        encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1,5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 31, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.FORWARD);
+        sleep(500);
+        placeYellowServo.setPosition(1.0);
+        sleep(1000);
+        placeYellowServo.setPosition(0);
+        sleep(1000);
+        placeYellowServo.setPosition(0.5);
+        sleep(200);
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_LEFT);
+
     }
 
     public void blueCloseAutoCenterPlacePixel(){
@@ -975,7 +997,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
     public void redFarAutoRight(){
         encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         placePurplePixel.setPosition(1.0);
         sleep(1000);

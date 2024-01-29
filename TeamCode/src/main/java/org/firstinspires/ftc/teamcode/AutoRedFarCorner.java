@@ -89,7 +89,7 @@ public class AutoRedFarCorner extends RobotLinearOpMode
         telemetry.update();
 
         encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 2.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
         sleep(2000);
 
@@ -112,7 +112,7 @@ public class AutoRedFarCorner extends RobotLinearOpMode
          * for later use. We must do this because the analysis will continue
          * to change as the camera view changes once the robot starts moving!
          */
-        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
         sleep(2000);
         snapshotAnalysis = pipeline.getAnalysis();
 
