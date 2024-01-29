@@ -41,6 +41,9 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
 public class AutoBlueCloseCorner extends RobotLinearOpMode
 {
     OpenCvWebcam webcam;
+    boolean aWasPressed = false;
+    boolean bWasPressed = false;
+    long waitTime = 0;
     BluePropDetector.SkystoneDeterminationPipeline pipeline;
     BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition snapshotAnalysis = BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition.LEFT; // default
 
@@ -75,6 +78,19 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
          * This REPLACES waitForStart!
          */
         while (!isStarted() && !isStopRequested()) {
+            if(gamepad1.a&&!aWasPressed) {
+                waitTime+=500;
+                aWasPressed=true;
+            } else if(!gamepad1.a&&aWasPressed) {
+                aWasPressed=false;
+            }
+            if(gamepad1.b&&!bWasPressed&&waitTime>=500) {
+                waitTime-=500;
+                bWasPressed=true;
+            } else if(!gamepad1.a&&aWasPressed) {
+                bWasPressed=false;
+            }
+            telemetry.addData("Wait Duration",waitTime);
             telemetry.addData("Realtime analysis", pipeline.getAnalysis());
             telemetry.update();
 
@@ -94,21 +110,22 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
         while(opModeIsActive()){
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
             telemetry.update();
+            sleep(waitTime);
 
-            encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+            encoderDrive(1.0, 1.5, MOVEMENT_DIRECTION.FORWARD);
+            encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
-            sleep(2000);
-
+            sleep(500);
             snapshotAnalysis = pipeline.getAnalysis();
+            sleep(500);
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
             telemetry.update();
 
             switch (snapshotAnalysis) {
                 case RIGHT: {
                     blueCloseAutoRight();
-                    webcam.closeCameraDevice();
-                    blueCloseAutoRightPlacePixel();
+//                    webcam.closeCameraDevice();
+//                    blueCloseAutoRightPlacePixel();
                     //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     sleep(10000);
@@ -116,8 +133,9 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
             }
 
             encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            sleep(2000);
+            sleep(500);
             snapshotAnalysis = pipeline.getAnalysis();
+            sleep(500);
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
             telemetry.update();
 
@@ -135,8 +153,8 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
                 case CENTER: {
                     /* Your autonomous code*/
                     blueCloseAutoCenter();
-                    webcam.closeCameraDevice();
-                    blueCloseAutoCenterPlacePixel();
+//                    webcam.closeCameraDevice();
+//                    blueCloseAutoCenterPlacePixel();
                     //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     sleep(25000);
@@ -144,8 +162,8 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
 
                 case RIGHT: {
                     blueCloseAutoCenter();
-                    webcam.closeCameraDevice();
-                    blueCloseAutoCenterPlacePixel();
+//                    webcam.closeCameraDevice();
+//                    blueCloseAutoCenterPlacePixel();
                     //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     sleep(25000);

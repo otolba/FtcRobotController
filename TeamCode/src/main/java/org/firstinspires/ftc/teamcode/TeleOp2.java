@@ -19,6 +19,7 @@ public class TeleOp2 extends LinearOpMode {
     private DcMotor rightBackDrive = null;
     private DcMotor liftMotor = null;
     private DcMotor intakeMotor = null;
+    private Servo yellowPlacer = null;
     //private Servo droneLauncher = null;
 
     private int liftState = 0;
@@ -35,7 +36,7 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
-        //droneLauncher = hardwareMap.get(Servo.class, "droneLauncher");
+        yellowPlacer = hardwareMap.get(Servo.class, "placeYellowPixel");
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -47,7 +48,10 @@ public class TeleOp2 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-
+//        yellowPlacer.setPosition(1.0);
+//        sleep(1000);
+//        yellowPlacer.setPosition(0);
+//        sleep(500);
         waitForStart();
         runtime.reset();
 
