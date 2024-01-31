@@ -108,30 +108,7 @@ public class AutoBlueCloseCorner extends RobotLinearOpMode
          * Show that snapshot on the telemetry
          */
         while(opModeIsActive()){
-            telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-            telemetry.update();
-            sleep(waitTime);
-
-            encoderDrive(1.0, 1.5, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-
-            sleep(500);
-            snapshotAnalysis = pipeline.getAnalysis();
-            sleep(500);
-            telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-            telemetry.update();
-
-            switch (snapshotAnalysis) {
-                case RIGHT: {
-                    blueCloseAutoRight();
-//                    webcam.closeCameraDevice();
-//                    blueCloseAutoRightPlacePixel();
-                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    sleep(10000);
-                }
-            }
-
+            blueCloseAuto(parkCorner, parkMiddle);
             encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
             sleep(500);
             snapshotAnalysis = pipeline.getAnalysis();

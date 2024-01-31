@@ -40,9 +40,6 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
 @Autonomous(name = "blueAuto", group = "linear autoMode")
 public class blueAuto extends RobotLinearOpMode
 {
-    OpenCvWebcam webcam;
-    BluePropDetector.SkystoneDeterminationPipeline pipeline;
-    BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition snapshotAnalysis = BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition.LEFT; // default
     @Override
     public void runOpMode() {
         /**
@@ -52,32 +49,19 @@ public class blueAuto extends RobotLinearOpMode
          * webcam counterpart, {@link WebcamExample} first.
          */
 
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new BluePropDetector.SkystoneDeterminationPipeline();
-        webcam.setPipeline(pipeline);
+        declareCameraPropertiesBlue();
         declareHardwareProperties();
-
-        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-            @Override
-            public void onOpened() {
-                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
-            }
-
-            @Override
-            public void onError(int errorCode) {
-            }
-        });
 
         /*
          * The INIT-loop:
          * This REPLACES waitForStart!
          */
         while (!isStarted() && !isStopRequested()) {
-            telemetry.addData("Realtime analysis", pipeline.getAnalysis());
+
+            declareAutoVariables();
+
+            telemetry.addData("Realtime analysis", pipelineBlue.getAnalysis());
             telemetry.update();
-
-
 
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
@@ -93,6 +77,7 @@ public class blueAuto extends RobotLinearOpMode
          * Show that snapshot on the telemetry
          */
         while(opModeIsActive()){
+            sleep(waitTime);
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
             telemetry.update();
 
@@ -101,15 +86,15 @@ public class blueAuto extends RobotLinearOpMode
 
             sleep(2000);
 
-            snapshotAnalysis = pipeline.getAnalysis();
+            snapshotAnalysis = pipelineBlue.getAnalysis();
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
             telemetry.update();
 
             switch (snapshotAnalysis) {
                 case RIGHT: {
                     blueCloseAutoRight();
-                    webcam.closeCameraDevice();
-                    blueCloseAutoRightPlacePixel();
+//                    webcam.closeCameraDevice();
+                    //blueCloseAutoRightPlacePixel();
                     //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     sleep(10000);
@@ -118,7 +103,7 @@ public class blueAuto extends RobotLinearOpMode
 
             encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
             sleep(2000);
-            snapshotAnalysis = pipeline.getAnalysis();
+            snapshotAnalysis = pipelineBlue.getAnalysis();
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
             telemetry.update();
 

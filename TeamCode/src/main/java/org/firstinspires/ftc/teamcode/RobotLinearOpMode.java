@@ -25,10 +25,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.openftc.easyopencv.OpenCvCameraFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvWebcam;
 
 
 /**
@@ -44,6 +48,12 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     public RobotLinearOpMode() {
 
     }
+
+    int cameraMonitorViewId;
+    OpenCvWebcam webcam;
+    BluePropDetector.SkystoneDeterminationPipeline pipelineBlue;
+    RedPropDetector.SkystoneDeterminationPipeline pipelineRed;
+    BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition snapshotAnalysis = BluePropDetector.SkystoneDeterminationPipeline.SkystonePosition.LEFT; // default
 
     //Declaration of drive motors
     DcMotor rightFrontDriveMotor;
@@ -61,6 +71,18 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     boolean searching;
     boolean aTagSeen = false;
     private ElapsedTime runtime = new ElapsedTime();
+
+    boolean aWasPressed = false;
+    boolean bWasPressed = false;
+    boolean xWasPressed = false;
+    boolean yWasPressed = false;
+    boolean rBumperWasPressed = false;
+    boolean lBumperWasPressed = false;
+    boolean close = false;
+    boolean far = false;
+    boolean parkCorner = false;
+    boolean parkMiddle = false;
+    long waitTime = 0;
 
     public void encoderDrive(double power, double inches, MOVEMENT_DIRECTION movement_direction) {
 
@@ -393,8 +415,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         sleep(1000);
         placeYellowServo.setPosition(0.5);
         sleep(200);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
     }
 
 //    public void blueCloseAutoRightPlacePixel(){
@@ -447,6 +467,38 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 //        int error = (10/0 + 20/0);
 //        System.out.println(error);
 //    }
+
+    public void blueCloseAuto(boolean parkCorner, boolean parkMiddle){
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+        sleep(waitTime);
+
+        encoderDrive(1.0, 1.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+
+        sleep(500);
+        snapshotAnalysis = pipelineBlue.getAnalysis();
+        sleep(500);
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+
+        switch (snapshotAnalysis) {
+            case RIGHT: {
+                blueCloseAutoRight();
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+        }
+    }
 
     public void blueCloseAutoCenter(){
         encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
@@ -1319,7 +1371,44 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         }
     }
 
+    public void declareCameraPropertiesBlue(){
+        cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        pipelineBlue = new BluePropDetector.SkystoneDeterminationPipeline();
+        webcam.setPipeline(pipelineBlue);
+
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override
+            public void onOpened() {
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+            }
+        });
+    }
+
+    public void declareCameraPropertiesRed(){
+        cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        pipelineRed = new RedPropDetector.SkystoneDeterminationPipeline();
+        webcam.setPipeline(pipelineRed);
+
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override
+            public void onOpened() {
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+            }
+        });
+    }
     public void declareHardwareProperties() {
+
+
         rightFrontDriveMotor = hardwareMap.get(DcMotor.class, "frontright");
         leftFrontDriveMotor = hardwareMap.get(DcMotor.class, "frontleft");
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
@@ -1399,6 +1488,60 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             return -500;
         }
 
+    }
+
+    public void declareAutoVariables(){
+        if(gamepad1.a&&!aWasPressed) {
+            waitTime+=500;
+            aWasPressed=true;
+        } else if(!gamepad1.a&&aWasPressed) {
+            aWasPressed=false;
+        }
+
+        if(gamepad1.b&&!bWasPressed&&waitTime>=500) {
+            waitTime-=500;
+            bWasPressed=true;
+        } else if(!gamepad1.b&&bWasPressed) {
+            bWasPressed=false;
+        }
+
+        if(gamepad1.x&&!xWasPressed) {
+            close = true;
+            far = false;
+            xWasPressed=true;
+        } else if(!gamepad1.x&&xWasPressed) {
+            xWasPressed=false;
+        }
+
+        if(gamepad1.y&&!yWasPressed) {
+            far = true;
+            close = false;
+            yWasPressed=true;
+        } else if(!gamepad1.y&&yWasPressed) {
+            yWasPressed=false;
+        }
+
+        if(gamepad1.right_bumper&&!rBumperWasPressed) {
+            parkCorner = true;
+            parkMiddle = false;
+            rBumperWasPressed=true;
+        } else if(!gamepad1.right_bumper&&rBumperWasPressed) {
+            rBumperWasPressed=false;
+        }
+
+        if(gamepad1.left_bumper&&!lBumperWasPressed) {
+            parkCorner = false;
+            parkMiddle = true;
+            lBumperWasPressed=true;
+        } else if(!gamepad1.left_bumper&&lBumperWasPressed) {
+            lBumperWasPressed=false;
+        }
+
+        telemetry.addData("Wait Duration",waitTime);
+        telemetry.addData("Position close", close);
+        telemetry.addData("Position far", far);
+        telemetry.addData("Park corner", parkCorner);
+        telemetry.addData("Park middle", parkMiddle);
     }
 
 
