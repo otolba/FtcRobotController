@@ -25,6 +25,7 @@ public class TeleOp2 extends LinearOpMode {
     private int liftState = 0;
     boolean intakePower = false;
     boolean servoActivated = false;
+    boolean lifting = false;
     @Override
     public void runOpMode() {
 
@@ -36,7 +37,7 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
-        yellowPlacer = hardwareMap.get(Servo.class, "placeYellowPixel");
+
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -71,6 +72,7 @@ public class TeleOp2 extends LinearOpMode {
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
             double liftPower = 0;
+            double intakePower = 0;
 
 
             // Send calculated power to wheels
@@ -86,26 +88,55 @@ public class TeleOp2 extends LinearOpMode {
             if (rightBackPower >= .05){
                 rightBackPower += .12;
             }
+            liftPower += gamepad1.right_trigger*-1;
+            liftPower += gamepad1.left_trigger;
+
+            if (gamepad1.right_bumper == true)
+            {
+                intakePower = 0.75;
+            }
+            else if (gamepad1.left_bumper == true)
+            {
+                intakePower = -1.0;
+            }
+            else
+            {
+                intakePower = 0;
+            }
+
+            if (gamepad1.a == true)
+            {
+                lifting = true;
+            }
+            if (gamepad1.b == true)
+            {
+                lifting = false;
+                liftPower = -0.5;
+                intakePower = -0.2;
+            }
+
+            if (lifting == true)
+            {
+                intakePower = 0.2;
+                liftPower = 0.75;
+            }
 
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
             rightBackDrive.setPower(rightBackPower);
-//            liftPower += gamepad1.right_trigger*-1;
-//            liftPower += gamepad1.left_trigger;
-//            liftMotor.setPower(liftPower);
-           if (gamepad1.right_bumper == true)
-           {
-               intakeMotor.setPower(0.75);
-           }
-           else if (gamepad1.left_bumper == true)
-           {
-               intakeMotor.setPower(-1.0);
-           }
-           else
-           {
-               intakeMotor.setPower(0);
-           }
+            intakeMotor.setPower(intakePower);
+
+            liftMotor.setPower(liftPower);
+
+
+
+
+
+
+            // Don't burn CPU cycles busy-looping in this sample
+            sleep(50);
+
 
            /*if (gamepad1.a == true)
            {
@@ -131,7 +162,9 @@ public class TeleOp2 extends LinearOpMode {
             telemetry.update();
         }
     }
+}
 
+/*
     public void encoderLift(double power, double inches, LIFT_DIRECTION lift_direction) {
 
         //Specifications of hardware
@@ -169,4 +202,4 @@ public class TeleOp2 extends LinearOpMode {
         DOWN,
         UP
     }
-}
+}*/
