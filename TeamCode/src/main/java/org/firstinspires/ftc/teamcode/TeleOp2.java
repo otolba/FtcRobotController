@@ -115,7 +115,14 @@ public class TeleOp2 extends LinearOpMode {
                 liftPower = -0.5;
                 intakePower = -0.2;
             }
-
+            if (gamepad1.x == true)
+            {
+                droneLauncher.setPosition(1.0);
+            }
+            if (gamepad1.y == true)
+            {
+                droneLauncher.setPosition(0.0);
+            }
 
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
@@ -134,14 +141,7 @@ public class TeleOp2 extends LinearOpMode {
             sleep(50);
 
 
-           if (gamepad1.x == true)
-           {
-               sleep(500);
-               droneLauncher.setPosition(1.0);
-               sleep(1000);
-               droneLauncher.setPosition(0);
-               sleep(500);
-           }
+
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
