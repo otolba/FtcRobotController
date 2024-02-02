@@ -19,8 +19,7 @@ public class TeleOp2 extends LinearOpMode {
     private DcMotor rightBackDrive = null;
     private DcMotor liftMotor = null;
     private DcMotor intakeMotor = null;
-    private Servo yellowPlacer = null;
-    //private Servo droneLauncher = null;
+    private Servo droneLauncher = null;
 
     private int liftState = 0;
     boolean intakePower = false;
@@ -37,6 +36,7 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
+        droneLauncher = hardwareMap.get(Servo.class, "droneLauncher");
 
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -106,7 +106,8 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.a == true)
             {
-                lifting = true;
+                encoderLift(0.2, 5, LIFT_DIRECTION.UP);
+                encoderLift(0.2, 5, LIFT_DIRECTION.DOWN);
             }
             if (gamepad1.b == true)
             {
@@ -115,11 +116,6 @@ public class TeleOp2 extends LinearOpMode {
                 intakePower = -0.2;
             }
 
-            if (lifting == true)
-            {
-                intakePower = 0.2;
-                liftPower = 0.75;
-            }
 
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
@@ -138,20 +134,14 @@ public class TeleOp2 extends LinearOpMode {
             sleep(50);
 
 
-           /*if (gamepad1.a == true)
+           if (gamepad1.x == true)
            {
+               sleep(500);
                droneLauncher.setPosition(1.0);
-               servoActivated = true;
+               sleep(1000);
+               droneLauncher.setPosition(0);
+               sleep(500);
            }
-           else if(servoActivated == true)
-           {
-               droneLauncher.setPosition(0.0);
-           }*/
-
-
-
-
-
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -162,22 +152,23 @@ public class TeleOp2 extends LinearOpMode {
             telemetry.update();
         }
     }
-}
 
-/*
+
     public void encoderLift(double power, double inches, LIFT_DIRECTION lift_direction) {
 
         //Specifications of hardware
-        final double wheelDiameter = 1.5;
-        final double wheelCircumference = (wheelDiameter * 3.141592653589793);
-        final double ticksPerRotation = 28;
-        final double ticksPerInch = (ticksPerRotation / wheelCircumference);
+        final double WHEEL_DIAMETER_INCHES = 3.77953;
+        final double WHEEL_CIRCUMFERENCE_INCHES = (WHEEL_DIAMETER_INCHES * 3.141592653589793);
+        final double GEAR_RATIO = 19.2;
+        final double COUNTS_PER_ROTATION_AT_MOTOR = 28;
+        final double TICKS_PER_ROTATION = (GEAR_RATIO * COUNTS_PER_ROTATION_AT_MOTOR);
+        final double TICKS_PER_INCH = (TICKS_PER_ROTATION) / (WHEEL_CIRCUMFERENCE_INCHES);
 
         int liftTarget;
 
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        liftTarget = liftMotor.getCurrentPosition() + (int) (inches * ticksPerInch);
+        liftTarget = liftMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
 
 
         if (lift_direction == LIFT_DIRECTION.UP) {
@@ -186,6 +177,7 @@ public class TeleOp2 extends LinearOpMode {
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             liftMotor.setPower(power);
+            intakeMotor.setPower(-0.2);
 
 
             while (liftMotor.isBusy() && opModeIsActive()) {
@@ -194,7 +186,25 @@ public class TeleOp2 extends LinearOpMode {
 
             //Kills the motors to prepare for next call of method
             liftMotor.setPower(0);
+            intakeMotor.setPower(0);
+        }
 
+        else{
+            liftMotor.setTargetPosition(-liftTarget);
+
+            liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            liftMotor.setPower(power);
+            intakeMotor.setPower(0.2);
+
+
+            while (liftMotor.isBusy() && opModeIsActive()) {
+
+            }
+
+            //Kills the motors to prepare for next call of method
+            liftMotor.setPower(0);
+            intakeMotor.setPower(0);
         }
     }
 
@@ -202,4 +212,4 @@ public class TeleOp2 extends LinearOpMode {
         DOWN,
         UP
     }
-}*/
+}
