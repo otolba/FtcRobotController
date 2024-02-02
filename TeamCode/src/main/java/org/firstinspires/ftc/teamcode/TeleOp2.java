@@ -23,7 +23,7 @@ public class TeleOp2 extends LinearOpMode {
 
     private int liftState = 0;
     boolean intakePower = false;
-    boolean servoActivated = false;
+    double servoPower = 0;
     boolean lifting = false;
     @Override
     public void runOpMode() {
@@ -106,8 +106,10 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.a == true)
             {
-                encoderLift(0.2, 5, LIFT_DIRECTION.UP);
-                encoderLift(0.2, 5, LIFT_DIRECTION.DOWN);
+                encoderLift(0.2, 3.5, LIFT_DIRECTION.UP);
+                sleep(200);
+                encoderLift(0.1, 1, LIFT_DIRECTION.DOWN);
+                liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (gamepad1.b == true)
             {
@@ -115,14 +117,16 @@ public class TeleOp2 extends LinearOpMode {
                 liftPower = -0.5;
                 intakePower = -0.2;
             }
+
             if (gamepad1.x == true)
             {
-                droneLauncher.setPosition(1.0);
+                droneLauncher.setPosition(0);
             }
             if (gamepad1.y == true)
             {
-                droneLauncher.setPosition(0.0);
+                droneLauncher.setPosition(1);
             }
+
 
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
@@ -140,15 +144,13 @@ public class TeleOp2 extends LinearOpMode {
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
 
-
-
-
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.addData("LeftTrigger RightTrigger","%4.2f, %4.2f", gamepad1.left_trigger, gamepad1.right_trigger);
             telemetry.addData("lift power", liftPower);
+            //telemetry.addData("SERVO POWER", servoPower);
             telemetry.update();
         }
     }
