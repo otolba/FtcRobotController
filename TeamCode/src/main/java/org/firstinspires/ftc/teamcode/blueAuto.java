@@ -81,61 +81,12 @@ public class blueAuto extends RobotLinearOpMode
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
             telemetry.update();
 
-            encoderDrive(0.5, 3, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-
-            sleep(2000);
-
-            snapshotAnalysis = pipelineBlue.getAnalysis();
-            telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-            telemetry.update();
-
-            switch (snapshotAnalysis) {
-                case RIGHT: {
-                    blueCloseAutoRight();
-//                    webcam.closeCameraDevice();
-                    //blueCloseAutoRightPlacePixel();
-                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    sleep(10000);
-                }
+            if (close){
+                blueCloseAuto(parkCorner, parkMiddle);
             }
 
-            encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            sleep(2000);
-            snapshotAnalysis = pipelineBlue.getAnalysis();
-            telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-            telemetry.update();
-
-            switch (snapshotAnalysis) {
-                case LEFT: {
-                    /* Your autonomous code */
-                    blueCloseAutoLeft();
-                    webcam.closeCameraDevice();
-                    blueCloseAutoLeftPlacePixel();
-                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    sleep(25000);
-                }
-
-                case CENTER: {
-                    /* Your autonomous code*/
-                    blueCloseAutoCenter();
-                    webcam.closeCameraDevice();
-                    blueCloseAutoCenterPlacePixel();
-                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    sleep(25000);
-                }
-
-                case RIGHT: {
-                    blueCloseAutoCenter();
-                    webcam.closeCameraDevice();
-                    blueCloseAutoCenterPlacePixel();
-                    //                encoderDrive(0.5, 25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    //                encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    sleep(25000);
-                }
+            if (far){
+                blueFarAuto(parkCorner, parkMiddle);
             }
 
             /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
