@@ -416,57 +416,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 //        sleep(200);
     }
 
-//    public void blueCloseAutoRightPlacePixel(){
-//        initAprilTag();
-//        runtime.reset();
-//
-//        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-//            leftFrontDriveMotor.setPower(0.2);
-//            rightFrontDriveMotor.setPower(-0.2);
-//            leftBackDriveMotor.setPower(-0.2);
-//            rightBackDriveMotor.setPower(0.2);
-//            if (getAprilTags()[3] == true) {
-//                aTagSeen = true;
-//            }
-//        }
-//        sleep(1000);
-//        leftFrontDriveMotor.setPower(0);
-//        rightFrontDriveMotor.setPower(0);
-//        leftBackDriveMotor.setPower(0);
-//        rightBackDriveMotor.setPower(0);
-//        if (aTagSeen)
-//        {
-//            encoderDrive(0.5, 13.5, MOVEMENT_DIRECTION.FORWARD);
-//            encoderDrive(0.5, 5.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-//            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-//            sleep(200);
-//            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-//            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//        }
-//        else{
-//            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//            encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
-//            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-//            sleep(200);
-//            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-//            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-//        }
-//        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-//        int error = (10/0 + 20/0);
-//        System.out.println(error);
-//    }
-
     public void blueCloseAuto(boolean parkCorner, boolean parkMiddle){
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
@@ -492,6 +441,143 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 if (parkMiddle){
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
                     encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+        }
+
+        encoderDrive(1, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        sleep(500);
+        snapshotAnalysis = pipelineBlue.getAnalysis();
+        sleep(500);
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+
+        switch ( (snapshotAnalysis)){
+            case LEFT:
+                blueCloseAutoLeft();
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+
+            case CENTER:
+                blueCloseAutoCenter();
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 18, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+
+            case RIGHT:
+                blueCloseAutoCenter();
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 18, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+        }
+    }
+
+    public void blueFarAuto(boolean parkCorner, boolean parkMiddle){
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+        sleep(waitTime);
+
+        encoderDrive(1.0, 1.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+
+        sleep(500);
+        snapshotAnalysis = pipelineBlue.getAnalysis();
+        sleep(500);
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+
+        switch (snapshotAnalysis) {
+            case RIGHT: {
+                blueFarAutoRight();
+                if (parkCorner) {
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle) {
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+        }
+
+        encoderDrive(1, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        sleep(500);
+        snapshotAnalysis = pipelineBlue.getAnalysis();
+        sleep(500);
+        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+        telemetry.update();
+
+        switch (snapshotAnalysis) {
+            case LEFT: {
+                blueFarAutoLeft();
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+
+            case CENTER: {
+                blueFarAutoCenter();
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+
+            case RIGHT: {
+                blueFarAutoCenter();
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
                 }
                 sleep(20000);
@@ -577,270 +663,76 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueCloseAutoLeft(){
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1, 15, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
         placePurplePixel.setPosition(1.0);
-        sleep(1000);
+        sleep(200);
         placePurplePixel.setPosition(0);
         sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1, 20, MOVEMENT_DIRECTION.FORWARD);
+        //Input lifter code
     }
 
-    public void blueCloseAutoLeftPlacePixel(){
-        initAprilTag();
-        runtime.reset();
 
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(0.2);
-            rightFrontDriveMotor.setPower(-0.2);
-            leftBackDriveMotor.setPower(-0.2);
-            rightBackDriveMotor.setPower(0.2);
-            if (getAprilTags()[2] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 10, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.2, 4, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-//            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        else{
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 12, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-//            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
 
     public void blueFarAutoRight(){
-        encoderDrive(0.3, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-//        placePurplePixel.setPosition(1.0);
-//        sleep(1000);
-//        placePurplePixel.setPosition(0);
-//        sleep(1000);
-//        placePurplePixel.setPosition(0.5);
-//        sleep(200);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 40, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 8.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(1.0);
+        sleep(200);
+        placePurplePixel.setPosition(0);
+        sleep(1200);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(1, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 3, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-    }
-
-    public void blueFarAutoRightPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(0.2);
-            rightFrontDriveMotor.setPower(-0.2);
-            leftBackDriveMotor.setPower(-0.2);
-            rightBackDriveMotor.setPower(0.2);
-            if (getAprilTags()[3] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 4.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-//            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        else{
-            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-//            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
+        encoderDrive(1, 55, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.FORWARD);
+        sleep(500);
+        //Insert lifter code
     }
 
     public void blueFarAutoCenter(){
-        encoderDrive(0.5, 27, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(1, 22, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
         placePurplePixel.setPosition(1.0);
-        sleep(1000);
+        sleep(200);
         placePurplePixel.setPosition(0);
-        sleep(1000);
+        sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
-        encoderDrive(0.5,8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 53, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1,3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1, 50, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
+        //Insert lifter code
     }
 
-    public void blueFarAutoCenterPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(0.2);
-            rightFrontDriveMotor.setPower(-0.2);
-            leftBackDriveMotor.setPower(-0.2);
-            rightBackDriveMotor.setPower(0.2);
-            if (getAprilTags()[2] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1200);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        else{
-            encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
     public void blueFarAutoLeft(){
-        encoderDrive(0.5, 22, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1, 18, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
         placePurplePixel.setPosition(1.0);
-        sleep(1000);
+        sleep(200);
         placePurplePixel.setPosition(0);
-        sleep(1000);
+        sleep(1200);
         placePurplePixel.setPosition(0.5);
         sleep(200);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 45, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1, 4, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 15, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_LEFT);
-    }
-
-    public void blueFarAutoLeftPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(0.2);
-            rightFrontDriveMotor.setPower(-0.2);
-            leftBackDriveMotor.setPower(-0.2);
-            rightBackDriveMotor.setPower(0.2);
-            if (getAprilTags()[2] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.2, 4, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        else{
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 12, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
+        encoderDrive(1, 45, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 9, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
+        //Insert lifter code
     }
 
     public void redCloseAutoRight(){
@@ -1532,11 +1424,11 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             lBumperWasPressed=false;
         }
 
-        telemetry.addData("Wait Duration",waitTime);
-        telemetry.addData("Position close", close);
-        telemetry.addData("Position far", far);
-        telemetry.addData("Park corner", parkCorner);
-        telemetry.addData("Park middle", parkMiddle);
+        telemetry.addData("Wait Duration (A to increase, B to decrease)",waitTime);
+        telemetry.addData("Position close (\"X\")", close);
+        telemetry.addData("Position far (\"Y\")", far);
+        telemetry.addData("Park corner (R Bumper)", parkCorner);
+        telemetry.addData("Park middle (L Bumper)", parkMiddle);
     }
 
 
