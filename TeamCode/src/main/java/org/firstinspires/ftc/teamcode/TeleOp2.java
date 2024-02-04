@@ -106,9 +106,8 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.a == true)
             {
-                encoderLift(0.2, 3.5, LIFT_DIRECTION.UP);
-                sleep(200);
-                encoderLift(0.1, 1, LIFT_DIRECTION.DOWN);
+                encoderLift(0.2, 3.05, LIFT_DIRECTION.UP);
+                encoderLift(0.2, 1, LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (gamepad1.b == true)
@@ -120,12 +119,10 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.x == true)
             {
-                droneLauncher.setPosition(0);
+                droneLauncher.setPosition(servoPower);
+                servoPower -= 0.1;
             }
-            if (gamepad1.y == true)
-            {
-                droneLauncher.setPosition(1);
-            }
+
 
 
             leftFrontDrive.setPower(leftFrontPower);
@@ -150,7 +147,7 @@ public class TeleOp2 extends LinearOpMode {
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.addData("LeftTrigger RightTrigger","%4.2f, %4.2f", gamepad1.left_trigger, gamepad1.right_trigger);
             telemetry.addData("lift power", liftPower);
-            //telemetry.addData("SERVO POWER", servoPower);
+            telemetry.addData("SERVO POWER", servoPower);
             telemetry.update();
         }
     }

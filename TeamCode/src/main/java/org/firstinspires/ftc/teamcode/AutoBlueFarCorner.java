@@ -104,7 +104,7 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
             {
                 blueFarAutoLeft();
                 webcam.closeCameraDevice();
-                blueFarAutoLeftPlacePixel();
+                //blueFarAutoLeftPlacePixel();
                 sleep(25000);
             }
         }
@@ -122,7 +122,7 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
                 /* Your autonomous code*/
                 blueFarAutoCenter();
                 webcam.closeCameraDevice();
-                blueFarAutoCenterPlacePixel();
+                //blueFarAutoCenterPlacePixel();
                 sleep(25000);
             }
             case CENTER:
@@ -130,14 +130,14 @@ public class AutoBlueFarCorner extends RobotLinearOpMode
                 /* Your autonomous code*/
                 blueFarAutoCenter();
                 webcam.closeCameraDevice();
-                blueFarAutoCenterPlacePixel();
+                //blueFarAutoCenterPlacePixel();
                 sleep(25000);
             }
             case RIGHT:
             {
                 blueFarAutoRight();
                 webcam.closeCameraDevice();
-                blueFarAutoRightPlacePixel();
+                //blueFarAutoRightPlacePixel();
                 sleep(25000);
             }
         }
