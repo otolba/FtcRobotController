@@ -84,8 +84,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     long waitTime = 0;
 
     public void encoderDrive(double power, double inches, MOVEMENT_DIRECTION movement_direction) {
-
-
         //Specifications of hardware
         final double WHEEL_DIAMETER_INCHES = 3.77953;
         final double WHEEL_CIRCUMFERENCE_INCHES = (WHEEL_DIAMETER_INCHES * 3.141592653589793);
@@ -250,48 +248,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor.setPower(0);
     }
 
-    /*public void encoderLift(double power, double inches, LIFT_DIRECTION lift_direction) {
-
-        //Specifications of hardware
-        final double wheelDiameter = 1.5;
-        final double wheelCircumference = (wheelDiameter * 3.141592653589793);
-        final double ticksPerRotation = 28;
-        final double ticksPerInch = (ticksPerRotation / wheelCircumference);
-
-        int liftTarget;
-
-
-        leftLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        liftTarget = leftLifter.getCurrentPosition() + (int) (inches * ticksPerInch);
-
-
-        if (lift_direction == LIFT_DIRECTION.UP) {
-            leftLifter.setTargetPosition(liftTarget);
-            rightLifter.setTargetPosition(liftTarget);
-
-            leftLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            leftLifter.setPower(power);
-            rightLifter.setPower(power);
-
-
-            while (leftLifter.isBusy() && opModeIsActive()) {
-
-            }
-
-            //Kills the motors to prepare for next call of method
-            leftLifter.setPower(0);
-            rightLifter.setPower(0);
-
-        }
-    }*/
-
     public void encoderTurn(double power, double inches, TURN_DIRECTION turn_direction) {
-
-
         //Specifications of hardware
         final double WHEEL_DIAMETER_INCHES = 3.77953;
         final double WHEEL_CIRCUMFERENCE_INCHES = (WHEEL_DIAMETER_INCHES * 3.141592653589793);
@@ -391,30 +348,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftBackDriveMotor.setPower(0);
         rightBackDriveMotor.setPower(0);
     }
-    public void blueCloseAutoRight(){
-        encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1.0, 8.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(1.0, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(1.0, 5, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(1.0, 31, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1.0, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.FORWARD);
-        sleep(500);
-//        placeYellowServo.setPosition(1.0);
-//        sleep(1000);
-//        placeYellowServo.setPosition(0);
-//        sleep(1000);
-//        placeYellowServo.setPosition(0.5);
-//        sleep(200);
-    }
 
     public void blueCloseAuto(boolean parkCorner, boolean parkMiddle){
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
@@ -497,6 +430,59 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
                 sleep(20000);
         }
+    }
+
+    public void blueCloseAutoRight(){
+        encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 8.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        placePurplePixel.setPosition(1.0);
+        sleep(200);
+        placePurplePixel.setPosition(0);
+        sleep(1200);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(1.0, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1.0, 5, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(1.0, 31, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.FORWARD);
+        sleep(500);
+        //Insert lifter code
+    }
+
+    public void blueCloseAutoCenter(){
+        encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.REVERSE);
+        placePurplePixel.setPosition(1.0);
+        sleep(200);
+        placePurplePixel.setPosition(0);
+        sleep(1200);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(1,5, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(0.5, 31, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.FORWARD);
+        sleep(500);
+        //Insert Lifter Code
+    }
+
+    public void blueCloseAutoLeft(){
+        encoderDrive(1, 15, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        placePurplePixel.setPosition(1.0);
+        sleep(200);
+        placePurplePixel.setPosition(0);
+        sleep(1200);
+        placePurplePixel.setPosition(0.5);
+        sleep(200);
+        encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
+        encoderDrive(1, 20, MOVEMENT_DIRECTION.FORWARD);
+        //Input lifter code
     }
 
     public void blueFarAuto(boolean parkCorner, boolean parkMiddle){
@@ -585,100 +571,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         }
     }
 
-    public void blueCloseAutoCenter(){
-        encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.REVERSE);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(1,5, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(0.5, 31, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.3, 2, MOVEMENT_DIRECTION.FORWARD);
-        sleep(500);
-//        placeYellowServo.setPosition(1.0);
-//        sleep(1000);
-//        placeYellowServo.setPosition(0);
-//        sleep(1000);
-//        placeYellowServo.setPosition(0.5);
-//        sleep(200);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_LEFT);
-
-    }
-
-    public void blueCloseAutoCenterPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(0.2);
-            rightFrontDriveMotor.setPower(-0.2);
-            leftBackDriveMotor.setPower(-0.2);
-            rightBackDriveMotor.setPower(0.2);
-            if (getAprilTags()[2] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.2, 3.5, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1200);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        else{
-            encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
-
-    public void blueCloseAutoLeft(){
-        encoderDrive(1, 15, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
-        encoderDrive(1, 20, MOVEMENT_DIRECTION.FORWARD);
-        //Input lifter code
-    }
-
-
-
     public void blueFarAutoRight(){
         encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
@@ -752,57 +644,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
     }
-    public void redCloseAutoRightPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(-0.2);
-            rightFrontDriveMotor.setPower(0.2);
-            leftBackDriveMotor.setPower(0.2);
-            rightBackDriveMotor.setPower(-0.2);
-            if (getAprilTags()[6] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        else{
-            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
-
 
     public void redCloseAutoCenter(){
         encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT );
@@ -820,57 +661,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
     }
-    public void redCloseAutoCenterPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(-0.2);
-            rightFrontDriveMotor.setPower(0.2);
-            leftBackDriveMotor.setPower(0.2);
-            rightBackDriveMotor.setPower(-0.2);
-            if (getAprilTags()[5] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1200);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        else{
-            encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
-
 
     public void redCloseAutoLeft(){
         encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
@@ -886,56 +676,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
         encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-    }
-    public void redCloseAutoLeftPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(-0.2);
-            rightFrontDriveMotor.setPower(0.2);
-            leftBackDriveMotor.setPower(0.2);
-            rightBackDriveMotor.setPower(-0.2);
-            if (getAprilTags()[4] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.2, 4, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        else{
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.5, 12, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
     }
 
     public void redFarAutoRight(){
@@ -956,58 +696,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
     }
 
-    public void redFarAutoRightPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(-0.2);
-            rightFrontDriveMotor.setPower(0.2);
-            leftBackDriveMotor.setPower(0.2);
-            rightBackDriveMotor.setPower(-0.2);
-            if (getAprilTags()[6] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 4.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        else{
-            encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
-
-
     public void redFarAutoCenter(){
         encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
@@ -1024,57 +712,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
     }
 
-    public void redFarAutoCenterPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(-0.2);
-            rightFrontDriveMotor.setPower(0.2);
-            leftBackDriveMotor.setPower(0.2);
-            rightBackDriveMotor.setPower(-0.2);
-            if (getAprilTags()[2] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.2, 3, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1200);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        else{
-            encoderDrive(0.5, 6.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-            sleep(100);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 17, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
-
     public void redFarAutoLeft(){
         encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
@@ -1089,173 +726,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 45, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
         encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-    }
-
-    public void redFarAutoLeftPlacePixel(){
-        initAprilTag();
-        runtime.reset();
-
-        while(aTagSeen == false && runtime.seconds()<3 && opModeIsActive()){
-            leftFrontDriveMotor.setPower(-0.2);
-            rightFrontDriveMotor.setPower(0.2);
-            leftBackDriveMotor.setPower(0.2);
-            rightBackDriveMotor.setPower(-0.2);
-            if (getAprilTags()[2] == true) {
-                aTagSeen = true;
-            }
-        }
-        sleep(1000);
-        leftFrontDriveMotor.setPower(0);
-        rightFrontDriveMotor.setPower(0);
-        leftBackDriveMotor.setPower(0);
-        rightBackDriveMotor.setPower(0);
-        if (aTagSeen)
-        {
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.2, 4, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//            placeYellowServo.setPosition(1.0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0);
-//            sleep(1000);
-//            placeYellowServo.setPosition(0.5);
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        else{
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(0.5, 12, MOVEMENT_DIRECTION.FORWARD);
-            sleep(1000);
-//
-            sleep(200);
-            encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(0.5, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        }
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
-        int error = (10/0 + 20/0);
-        System.out.println(error);
-    }
-
-    public void placePixel(){
-        //multiply sensor value by gain
-        float gain = 10;
-
-        // Once per loop, we will update this hsvValues array. The first element (0) will contain the
-        // hue, the second element (1) will contain the saturation, and the third element (2) will
-        // contain the value.
-        final float[] hsvValues1 = new float[3];
-        final float[] hsvValues2 = new float[3];
-
-        colorSensor1 = hardwareMap.get(NormalizedColorSensor.class, "sensor_color1");
-        colorSensor2 = hardwareMap.get(NormalizedColorSensor.class, "sensor_color2");
-
-//        // If possible, turn the light on in the beginning (it might already be on anyway,
-//        // we just make sure it is if we can).
-//        if (colorSensor instanceof SwitchableLight) {
-//            ((SwitchableLight)colorSensor).enableLight(true);
-//        }
-
-        // Wait for the start button to be pressed.
-        waitForStart();
-
-        // Loop until we are asked to stop
-        while (opModeIsActive()) {
-            colorSensor1.setGain(gain);
-            colorSensor2.setGain(gain);
-
-            // Get the normalized colors from the sensor
-            NormalizedRGBA colors1 = colorSensor1.getNormalizedColors();
-            NormalizedRGBA colors2 = colorSensor2.getNormalizedColors();
-
-            // Update the hsvValues array by passing it to Color.colorToHSV()
-            Color.colorToHSV(colors1.toColor(), hsvValues1);
-            Color.colorToHSV(colors2.toColor(), hsvValues2);
-
-            if (colorSensor1 instanceof DistanceSensor) {
-                telemetry.addData("Distance (cm)", "%.3f", ((DistanceSensor) colorSensor1).getDistance(DistanceUnit.CM));
-            }
-            if (colorSensor2 instanceof DistanceSensor) {
-                telemetry.addData("Distance (cm)", "%.3f", ((DistanceSensor) colorSensor1).getDistance(DistanceUnit.CM));
-            }
-
-            telemetry.addLine()
-                    .addData("Red", "%.3f", colors1.red)
-                    .addData("Green", "%.3f", colors1.green)
-                    .addData("Blue", "%.3f", colors1.blue);
-            telemetry.addLine()
-                    .addData("Hue", "%.3f", hsvValues1[0])
-                    .addData("Saturation", "%.3f", hsvValues1[1])
-                    .addData("Value", "%.3f", hsvValues1[2]);
-            telemetry.addData("Alpha", "%.3f", colors1.alpha);
-
-            telemetry.addLine()
-                    .addData("Red 2", "%.3f", colors2.red)
-                    .addData("Green 2", "%.3f", colors2.green)
-                    .addData("Blue 2", "%.3f", colors2.blue);
-            telemetry.addLine()
-                    .addData("Hue 2", "%.3f", hsvValues2[0])
-                    .addData("Saturation 2", "%.3f", hsvValues2[1])
-                    .addData("Value 2", "%.3f", hsvValues2[2]);
-            telemetry.addData("Alpha 2", "%.3f", colors2.alpha);
-
-            //red
-            if (hsvValues1[2] > .07){
-                telemetry.addData("Color 1 ", "blue");
-            }
-            //blue
-            else if (hsvValues1[2] > .06) {
-                telemetry.addData("Color 1 ", "red");
-            }
-
-            if (hsvValues2[2] > .07){
-                telemetry.addData("Color 1 ", "blue");
-            }
-            //blue
-            else if (hsvValues2[2] > .06) {
-                telemetry.addData("Color 1 ", "red");
-            }
-
-            if (gamepad1.a){
-                placingPixel = true;
-            }
-
-            while (placingPixel){
-                searching = true;
-                leftFrontDriveMotor.setPower(0.2);
-                leftBackDriveMotor.setPower(0.2);
-                rightFrontDriveMotor.setPower(0.2);
-                rightBackDriveMotor.setPower(0.2);
-                while (searching) {
-                    if (gamepad1.b){
-                        searching = false;
-                        break;
-                    }
-                    if (hsvValues1[2] > 0.1) {
-                        leftFrontDriveMotor.setPower(0);
-                        leftBackDriveMotor.setPower(0);
-                    }
-                    if (hsvValues2[2] > 0.1) {
-                        rightFrontDriveMotor.setPower(0);
-                        rightBackDriveMotor.setPower(0);
-                    }
-                    if (hsvValues1[2] > .1 && hsvValues2[2] > .03) {
-                        searching = false;
-                    }
-                }
-                telemetry.addData("Status: ", "Done");
-                leftFrontDriveMotor.setPower(0);
-                leftBackDriveMotor.setPower(0);
-                rightFrontDriveMotor.setPower(0);
-                rightBackDriveMotor.setPower(0);
-                placingPixel = false;
-            }
-
-            telemetry.update();
-
-
-        }
     }
 
     public void declareCameraPropertiesBlue(){
@@ -1293,9 +763,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             }
         });
     }
+
     public void declareHardwareProperties() {
-
-
         rightFrontDriveMotor = hardwareMap.get(DcMotor.class, "frontright");
         leftFrontDriveMotor = hardwareMap.get(DcMotor.class, "frontleft");
         rightBackDriveMotor = hardwareMap.get(DcMotor.class, "backright");
@@ -1310,6 +779,59 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
     }
 
+    public void declareAutoVariables(){
+        if(gamepad1.a&&!aWasPressed) {
+            waitTime+=500;
+            aWasPressed=true;
+        } else if(!gamepad1.a&&aWasPressed) {
+            aWasPressed=false;
+        }
+
+        if(gamepad1.b&&!bWasPressed&&waitTime>=500) {
+            waitTime-=500;
+            bWasPressed=true;
+        } else if(!gamepad1.b&&bWasPressed) {
+            bWasPressed=false;
+        }
+
+        if(gamepad1.x&&!xWasPressed) {
+            close = true;
+            far = false;
+            xWasPressed=true;
+        } else if(!gamepad1.x&&xWasPressed) {
+            xWasPressed=false;
+        }
+
+        if(gamepad1.y&&!yWasPressed) {
+            far = true;
+            close = false;
+            yWasPressed=true;
+        } else if(!gamepad1.y&&yWasPressed) {
+            yWasPressed=false;
+        }
+
+        if(gamepad1.right_bumper&&!rBumperWasPressed) {
+            parkCorner = true;
+            parkMiddle = false;
+            rBumperWasPressed=true;
+        } else if(!gamepad1.right_bumper&&rBumperWasPressed) {
+            rBumperWasPressed=false;
+        }
+
+        if(gamepad1.left_bumper&&!lBumperWasPressed) {
+            parkCorner = false;
+            parkMiddle = true;
+            lBumperWasPressed=true;
+        } else if(!gamepad1.left_bumper&&lBumperWasPressed) {
+            lBumperWasPressed=false;
+        }
+
+        telemetry.addData("Wait Duration (A to increase, B to decrease)",waitTime);
+        telemetry.addData("Position close (\"X\")", close);
+        telemetry.addData("Position far (\"Y\")", far);
+        telemetry.addData("Park corner (R Bumper)", parkCorner);
+        telemetry.addData("Park middle (L Bumper)", parkMiddle);
+    }
 
     private void initAprilTag() {
 
@@ -1376,61 +898,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         }
 
     }
-
-    public void declareAutoVariables(){
-        if(gamepad1.a&&!aWasPressed) {
-            waitTime+=500;
-            aWasPressed=true;
-        } else if(!gamepad1.a&&aWasPressed) {
-            aWasPressed=false;
-        }
-
-        if(gamepad1.b&&!bWasPressed&&waitTime>=500) {
-            waitTime-=500;
-            bWasPressed=true;
-        } else if(!gamepad1.b&&bWasPressed) {
-            bWasPressed=false;
-        }
-
-        if(gamepad1.x&&!xWasPressed) {
-            close = true;
-            far = false;
-            xWasPressed=true;
-        } else if(!gamepad1.x&&xWasPressed) {
-            xWasPressed=false;
-        }
-
-        if(gamepad1.y&&!yWasPressed) {
-            far = true;
-            close = false;
-            yWasPressed=true;
-        } else if(!gamepad1.y&&yWasPressed) {
-            yWasPressed=false;
-        }
-
-        if(gamepad1.right_bumper&&!rBumperWasPressed) {
-            parkCorner = true;
-            parkMiddle = false;
-            rBumperWasPressed=true;
-        } else if(!gamepad1.right_bumper&&rBumperWasPressed) {
-            rBumperWasPressed=false;
-        }
-
-        if(gamepad1.left_bumper&&!lBumperWasPressed) {
-            parkCorner = false;
-            parkMiddle = true;
-            lBumperWasPressed=true;
-        } else if(!gamepad1.left_bumper&&lBumperWasPressed) {
-            lBumperWasPressed=false;
-        }
-
-        telemetry.addData("Wait Duration (A to increase, B to decrease)",waitTime);
-        telemetry.addData("Position close (\"X\")", close);
-        telemetry.addData("Position far (\"Y\")", far);
-        telemetry.addData("Park corner (R Bumper)", parkCorner);
-        telemetry.addData("Park middle (L Bumper)", parkMiddle);
-    }
-
 
     enum MOVEMENT_DIRECTION {
         STRAFE_LEFT,
