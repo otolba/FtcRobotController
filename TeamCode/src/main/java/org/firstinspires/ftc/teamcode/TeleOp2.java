@@ -45,7 +45,7 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.REVERSE);
-
+        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -106,15 +106,18 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.a == true)
             {
-                encoderLift(0.2, 3.05, LIFT_DIRECTION.UP);
-                encoderLift(0.2, 1, LIFT_DIRECTION.DOWN);
-                liftMotor.setDirection(DcMotor.Direction.REVERSE);
+                encoderLift(0.25, 3.3, LIFT_DIRECTION.UP);
+                liftMotor.setPower(0);
+                sleep(300);
+//                encoderLift(0.1, 2, LIFT_DIRECTION.UP);
+//
+//                encoderLift(0.2, 1, LIFT_DIRECTION.DOWN);
+//                liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (gamepad1.b == true)
             {
-                lifting = false;
-                liftPower = -0.5;
-                intakePower = -0.2;
+                liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                liftMotor.setPower(0);
             }
 
             if (gamepad1.x == true)

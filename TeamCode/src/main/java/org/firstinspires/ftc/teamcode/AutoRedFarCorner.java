@@ -102,7 +102,7 @@ public class AutoRedFarCorner extends RobotLinearOpMode
             {
                 redFarAutoRight();
                 webcam.closeCameraDevice();
-                redFarAutoRightPlacePixel();
+
                 sleep(25000);
             }
         }
@@ -132,7 +132,6 @@ public class AutoRedFarCorner extends RobotLinearOpMode
                 /* Your autonomous code */
                 redFarAutoLeft();
                 webcam.closeCameraDevice();
-                redFarAutoLeftPlacePixel();
                 sleep(25000);
             }
 
@@ -141,14 +140,13 @@ public class AutoRedFarCorner extends RobotLinearOpMode
                 /* Your autonomous code*/
                 redFarAutoCenter();
                 webcam.closeCameraDevice();
-                redFarAutoCenterPlacePixel();
                 sleep(25000);
             }
             case RIGHT:
             {
                 redFarAutoCenter();
                 webcam.closeCameraDevice();
-                redFarAutoCenterPlacePixel();
+
                 sleep(25000);
             }
         }

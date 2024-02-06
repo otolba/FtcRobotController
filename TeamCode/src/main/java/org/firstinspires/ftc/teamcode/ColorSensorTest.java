@@ -108,7 +108,6 @@ public class ColorSensorTest extends RobotLinearOpMode {
     }
 
     protected void runSample() {
-        placePixel();
     }
 }
 

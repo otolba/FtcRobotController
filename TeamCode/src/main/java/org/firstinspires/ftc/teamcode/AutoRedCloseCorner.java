@@ -101,7 +101,6 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
             case LEFT: {
                 redCloseAutoLeft();
                 webcam.closeCameraDevice();
-                redCloseAutoLeftPlacePixel();
                 sleep(10000);
             }
         }
@@ -117,7 +116,6 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
                 /* Your autonomous code */
                 redCloseAutoRight();
                 webcam.closeCameraDevice();
-                redCloseAutoRightPlacePixel();
                 sleep(25000);
             }
 
@@ -125,14 +123,12 @@ public class AutoRedCloseCorner extends RobotLinearOpMode
                 /* Your autonomous code*/
                 redCloseAutoCenter();
                 webcam.closeCameraDevice();
-                redCloseAutoCenterPlacePixel();
                 sleep(25000);
             }
 
             case LEFT: {
                 redCloseAutoCenter();
                 webcam.closeCameraDevice();
-                redCloseAutoCenterPlacePixel();
                 sleep(25000);
             }
         }
