@@ -349,11 +349,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor.setPower(0);
     }
 
-    public void blueCloseAuto(boolean parkCorner, boolean parkMiddle){
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
-        sleep(waitTime);
-
+    public void placePurplePixel(){
         encoderDrive(1.0, 1.5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
 
@@ -363,20 +359,17 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
-        switch (snapshotAnalysis) {
-            case RIGHT: {
-                blueCloseAutoRight();
-                if(parkCorner){
-                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
-                }
-                if (parkMiddle){
-                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
-                }
-                sleep(20000);
+        switch (snapshotAnalysis){
+            case RIGHT:{
+                encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(1.0, 8.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                placePurplePixel.setPosition(1.0);
+                sleep(200);
+                placePurplePixel.setPosition(0);
+                sleep(1200);
+                placePurplePixel.setPosition(0.5);
+                sleep(200);
             }
         }
 
@@ -387,9 +380,46 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
         telemetry.update();
 
-        switch ( (snapshotAnalysis)){
+        switch (snapshotAnalysis){
+            case LEFT:{
+                encoderDrive(1, 15, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                placePurplePixel.setPosition(1.0);
+                sleep(200);
+                placePurplePixel.setPosition(0);
+                sleep(1200);
+                placePurplePixel.setPosition(0.5);
+                sleep(200);
+            }
+            case CENTER:{
+                encoderDrive(1, 22, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+                placePurplePixel.setPosition(1.0);
+                sleep(200);
+                placePurplePixel.setPosition(0);
+                sleep(1200);
+                placePurplePixel.setPosition(0.5);
+                sleep(200);
+            }
+            case RIGHT:{
+                encoderDrive(1, 22, MOVEMENT_DIRECTION.FORWARD);
+                encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
+                placePurplePixel.setPosition(1.0);
+                sleep(200);
+                placePurplePixel.setPosition(0);
+                sleep(1200);
+                placePurplePixel.setPosition(0.5);
+                sleep(200);
+            }
+        }
+    }
+    public void blueCloseAuto(boolean parkCorner, boolean parkMiddle){
+        placePurplePixel();
+
+        switch (snapshotAnalysis){
             case LEFT:
                 blueCloseAutoLeft();
+                sleep(2000);
                 if(parkCorner){
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
                     encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
@@ -404,6 +434,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
             case CENTER:
                 blueCloseAutoCenter();
+                sleep(2000);
                 if(parkCorner){
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
                     encoderDrive(1, 18, MOVEMENT_DIRECTION.STRAFE_LEFT);
@@ -416,32 +447,25 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
                 sleep(20000);
 
-            case RIGHT:
-                blueCloseAutoCenter();
+            case RIGHT: {
+                blueCloseAutoRight();
+                sleep(2000);
                 if(parkCorner){
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 18, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
                 }
                 if (parkMiddle){
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
                 }
                 sleep(20000);
+            }
         }
     }
 
     public void blueCloseAutoRight(){
-        encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1.0, 8.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
         encoderDrive(1.0, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderDrive(1.0, 5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
@@ -453,14 +477,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueCloseAutoCenter(){
-        encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 4, MOVEMENT_DIRECTION.REVERSE);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
         encoderDrive(1,5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
         encoderDrive(0.5, 31, MOVEMENT_DIRECTION.FORWARD);
@@ -471,14 +487,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueCloseAutoLeft(){
-        encoderDrive(1, 15, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
         encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
         encoderDrive(1, 20, MOVEMENT_DIRECTION.FORWARD);
@@ -486,46 +494,12 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueFarAuto(boolean parkCorner, boolean parkMiddle){
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
-        sleep(waitTime);
-
-        encoderDrive(1.0, 1.5, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1.0, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-
-        sleep(500);
-        snapshotAnalysis = pipelineBlue.getAnalysis();
-        sleep(500);
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
-
-        switch (snapshotAnalysis) {
-            case RIGHT: {
-                blueFarAutoRight();
-                if (parkCorner) {
-                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
-                }
-                if (parkMiddle) {
-                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
-                }
-                sleep(20000);
-            }
-        }
-
-        encoderDrive(1, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        sleep(500);
-        snapshotAnalysis = pipelineBlue.getAnalysis();
-        sleep(500);
-        telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
-        telemetry.update();
+        placePurplePixel();
 
         switch (snapshotAnalysis) {
             case LEFT: {
                 blueFarAutoLeft();
+                sleep(2000);
                 if(parkCorner){
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
                     encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
@@ -541,6 +515,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
             case CENTER: {
                 blueFarAutoCenter();
+                sleep(2000);
                 if(parkCorner){
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
                     encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
@@ -555,15 +530,16 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             }
 
             case RIGHT: {
-                blueFarAutoCenter();
-                if(parkCorner){
+                blueFarAutoRight();
+                sleep(2000);
+                if (parkCorner) {
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
                 }
-                if (parkMiddle){
+                if (parkMiddle) {
                     encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
                 }
                 sleep(20000);
@@ -572,15 +548,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueFarAutoRight(){
-        encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1.0, 8.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
         encoderDrive(1, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderDrive(1, 3, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
@@ -592,14 +559,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueFarAutoCenter(){
-        encoderDrive(1, 22, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
         encoderDrive(1,3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
@@ -610,14 +569,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void blueFarAutoLeft(){
-        encoderDrive(1, 18, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(1, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        placePurplePixel.setPosition(1.0);
-        sleep(200);
-        placePurplePixel.setPosition(0);
-        sleep(1200);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
         encoderDrive(1, 4, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderDrive(1, 15, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
@@ -627,105 +578,162 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         //Insert lifter code
     }
 
-    public void redCloseAutoRight(){
-        encoderDrive(0.3, 3.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        placePurplePixel.setPosition(1.0);
-        sleep(1000);
-        placePurplePixel.setPosition(0);
-        sleep(1000);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 18,MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+    public void redCloseAuto(boolean parkCorner, boolean parkMiddle){
+        placePurplePixel();
 
+        switch (snapshotAnalysis) {
+            case LEFT: {
+                redCloseAutoLeft();
+                sleep(2000);
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+            case CENTER:{
+                redCloseAutoCenter();
+                sleep(2000);
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 18, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+            case RIGHT:{
+                redCloseAutoRight();
+                sleep(2000);
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+        }
+    }
+
+    public void redCloseAutoRight(){
+        encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+        encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
+        encoderDrive(1, 14,MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        //input lifter code
     }
 
     public void redCloseAutoCenter(){
-        encoderDrive(0.5, 2, MOVEMENT_DIRECTION.STRAFE_LEFT );
-        encoderDrive(0.5, 29.5, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.REVERSE);
-        placePurplePixel.setPosition(1.0);
-        sleep(1000);
-        placePurplePixel.setPosition(0);
-        sleep(1000);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(0.5,10, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(1,4, MOVEMENT_DIRECTION.REVERSE);
         encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 13, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 16, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        //input lifter code
     }
 
     public void redCloseAutoLeft(){
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        placePurplePixel.setPosition(1.0);
-        sleep(1000);
-        placePurplePixel.setPosition(0);
-        sleep(1000);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(0.5, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 16, MOVEMENT_DIRECTION.FORWARD);
+        //insert lifter code
+    }
+
+    public void redFarAuto(boolean parkCorner, boolean parkMiddle){
+        placePurplePixel();
+
+        switch (snapshotAnalysis) {
+            case LEFT: {
+                redFarAutoLeft();
+                sleep(2000);
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+            case CENTER:{
+                redFarAutoCenter();
+                sleep(2000);
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 18, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+            case RIGHT:{
+                redFarAutoRight();
+                sleep(2000);
+                if(parkCorner){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.FORWARD);
+                }
+                if (parkMiddle){
+                    encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+                    encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(1, 7, MOVEMENT_DIRECTION.FORWARD);
+                }
+                sleep(20000);
+            }
+        }
     }
 
     public void redFarAutoRight(){
-        encoderDrive(0.3, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        placePurplePixel.setPosition(1.0);
-        sleep(1000);
-        placePurplePixel.setPosition(0);
-        sleep(1000);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 45, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1, 18, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-
+        encoderDrive(1, 38, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
+        //insert lifter code
     }
 
     public void redFarAutoCenter(){
-        encoderDrive(0.5, 27.5, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 3, MOVEMENT_DIRECTION.REVERSE);
-        placePurplePixel.setPosition(1.0);
-        sleep(1000);
-        placePurplePixel.setPosition(0);
-        sleep(1000);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(0.5,8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 53, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1,5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(1, 18, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 38, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 12, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
+        //insert lifter code
     }
 
     public void redFarAutoLeft(){
-        encoderDrive(0.5, 21, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        placePurplePixel.setPosition(1.0);
-        sleep(1000);
-        placePurplePixel.setPosition(0);
-        sleep(1000);
-        placePurplePixel.setPosition(0.5);
-        sleep(200);
-        encoderDrive(0.5, 8, MOVEMENT_DIRECTION.STRAFE_LEFT);
-        encoderDrive(0.5, 25, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.5, 45, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(1, 18, MOVEMENT_DIRECTION.FORWARD);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(0.5, 18, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.5, 38, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.FORWARD);
+        //insert lifter code
     }
 
     public void declareCameraPropertiesBlue(){
