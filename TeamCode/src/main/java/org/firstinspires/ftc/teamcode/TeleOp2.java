@@ -76,7 +76,7 @@ public class TeleOp2 extends LinearOpMode {
 
 
             // Send calculated power to wheels
-            if (leftFrontPower <= -.05){
+            /*if (leftFrontPower <= -.05){
                 leftFrontPower += -.12;
             }
             if (leftBackPower >= .05){
@@ -87,7 +87,7 @@ public class TeleOp2 extends LinearOpMode {
             }
             if (rightBackPower >= .05){
                 rightBackPower += .12;
-            }
+            }*/
             liftPower += gamepad1.right_trigger*-1;
             liftPower += gamepad1.left_trigger;
 
@@ -125,8 +125,8 @@ public class TeleOp2 extends LinearOpMode {
 
 
 
-            leftFrontDrive.setPower(leftFrontPower);
-            rightFrontDrive.setPower(rightFrontPower);
+            leftFrontDrive.setPower(leftFrontPower*0.9);
+            rightFrontDrive.setPower(rightFrontPower*0.9);
             leftBackDrive.setPower(leftBackPower);
             rightBackDrive.setPower(rightBackPower);
             intakeMotor.setPower(intakePower);
