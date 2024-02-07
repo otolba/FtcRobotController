@@ -37,7 +37,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
  * and then snapshot that value for later use when the START
  * command is issued. The pipeline is re-used from SkystoneDeterminationExample
  */
-@Autonomous(name = "blueAuto", group = "linear autoMode")
+@Autonomous(name = "redAuto", group = "linear autoMode")
 public class redAuto extends RobotLinearOpMode
 {
     @Override

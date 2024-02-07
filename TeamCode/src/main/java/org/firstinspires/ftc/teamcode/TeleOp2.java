@@ -25,6 +25,8 @@ public class TeleOp2 extends LinearOpMode {
     boolean intakePower = false;
     double servoPower = 0;
     boolean lifting = false;
+    boolean bWasPressed = false;
+    boolean slowLifter = false;
     @Override
     public void runOpMode() {
 
@@ -62,15 +64,15 @@ public class TeleOp2 extends LinearOpMode {
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
+            double lateral =  -gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            double leftFrontPower  = axial + lateral + yaw;
-            double rightFrontPower = axial - lateral - yaw;
-            double leftBackPower   = axial - lateral + yaw;
-            double rightBackPower  = axial + lateral - yaw;
+            double leftFrontPower  = axial - lateral + yaw;
+            double rightFrontPower = axial + lateral - yaw;
+            double leftBackPower   = axial + lateral + yaw;
+            double rightBackPower  = axial - lateral - yaw;
             double liftPower = 0;
             double intakePower = 0;
 
@@ -93,11 +95,11 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.right_bumper == true)
             {
-                intakePower = 0.75;
+                intakePower = 1.0;
             }
             else if (gamepad1.left_bumper == true)
             {
-                intakePower = -1.0;
+                intakePower = -0.75;
             }
             else
             {
@@ -106,39 +108,42 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.a == true)
             {
-                encoderLift(0.25, 3.3, LIFT_DIRECTION.UP);
+                encoderDrive(0.2, 5, RobotLinearOpMode.MOVEMENT_DIRECTION.REVERSE);
+                encoderLift(0.2, 4, LIFT_DIRECTION.UP);
                 liftMotor.setPower(0);
                 sleep(300);
-//                encoderLift(0.1, 2, LIFT_DIRECTION.UP);
-//
-//                encoderLift(0.2, 1, LIFT_DIRECTION.DOWN);
-//                liftMotor.setDirection(DcMotor.Direction.REVERSE);
-            }
-            if (gamepad1.b == true)
-            {
-                liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                liftMotor.setPower(0);
+                encoderLift(0.05, 4, LIFT_DIRECTION.DOWN);
+                liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
 
             if (gamepad1.x == true)
             {
-                droneLauncher.setPosition(servoPower);
-                servoPower -= 0.1;
+                droneLauncher.setPosition(1.0);
+                sleep(200);
+                droneLauncher.setPosition(0.9);
+                sleep(500);
+//                droneLauncher.setPosition(0.5);
+//                sleep(200);
             }
 
+            if (gamepad1.b && !bWasPressed) {
+                bWasPressed = true;
+            }
+            else if (gamepad1.b&&bWasPressed)
+            {
+                bWasPressed = false;
+            }
 
-
-            leftFrontDrive.setPower(leftFrontPower*0.9);
-            rightFrontDrive.setPower(rightFrontPower*0.9);
+            if (bWasPressed){
+                intakePower = -0.5;
+            }
+            
+            leftFrontDrive.setPower(leftFrontPower);
+            rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
             rightBackDrive.setPower(rightBackPower);
             intakeMotor.setPower(intakePower);
-
             liftMotor.setPower(liftPower);
-
-
-
-
 
 
             // Don't burn CPU cycles busy-looping in this sample
@@ -179,7 +184,7 @@ public class TeleOp2 extends LinearOpMode {
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             liftMotor.setPower(power);
-            intakeMotor.setPower(-0.2);
+            intakeMotor.setPower(-0.3);
 
 
             while (liftMotor.isBusy() && opModeIsActive()) {
@@ -210,8 +215,181 @@ public class TeleOp2 extends LinearOpMode {
         }
     }
 
+    public void encoderDrive(double power, double inches, RobotLinearOpMode.MOVEMENT_DIRECTION movement_direction) {
+        //Specifications of hardware
+        final double WHEEL_DIAMETER_INCHES = 3.77953;
+        final double WHEEL_CIRCUMFERENCE_INCHES = (WHEEL_DIAMETER_INCHES * 3.141592653589793);
+        final double GEAR_RATIO = 19.2;
+        final double COUNTS_PER_ROTATION_AT_MOTOR = 28;
+        final double TICKS_PER_ROTATION = (GEAR_RATIO * COUNTS_PER_ROTATION_AT_MOTOR);
+        final double TICKS_PER_INCH = (TICKS_PER_ROTATION) / (WHEEL_CIRCUMFERENCE_INCHES);
+
+        //Target # of ticks for each motor
+        int leftFrontTarget;
+        int rightFrontTarget;
+        int leftBackTarget;
+        int rightBackTarget;
+
+        //Resets motor encoders to 0 ticks
+        leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Sets the target # of ticks by intaking the number of desired inches of movement and converting to ticks
+        leftFrontTarget = leftFrontDrive.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
+        rightFrontTarget = rightFrontDrive.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
+        leftBackTarget = leftBackDrive.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
+        rightBackTarget = rightBackDrive.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
+
+        if (movement_direction == RobotLinearOpMode.MOVEMENT_DIRECTION.FORWARD) {
+
+            //Sets the target # of ticks to the target position of the motors
+            leftFrontDrive.setTargetPosition(leftFrontTarget);
+            rightFrontDrive.setTargetPosition(rightFrontTarget);
+            leftBackDrive.setTargetPosition(leftBackTarget);
+            rightBackDrive.setTargetPosition(rightBackTarget);
+
+            //Tells the motors to drive until they reach the target position
+            leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            //Sets the motor powers to the power entered on use
+            leftFrontDrive.setPower(power);
+            rightFrontDrive.setPower(power);
+            leftBackDrive.setPower(power);
+            rightBackDrive.setPower(power);
+
+            while (leftFrontDrive.isBusy() && opModeIsActive()) {
+
+            }
+
+            //Kills the motors to prepare for next call of method
+            leftFrontDrive.setPower(0);
+            rightFrontDrive.setPower(0);
+            leftBackDrive.setPower(0);
+            rightBackDrive.setPower(0);
+
+
+        }
+
+        if (movement_direction == RobotLinearOpMode.MOVEMENT_DIRECTION.REVERSE) {
+
+            //Sets the target # of ticks to the target position of the motors
+            leftFrontDrive.setTargetPosition(-leftFrontTarget);
+            rightFrontDrive.setTargetPosition(-rightFrontTarget);
+            leftBackDrive.setTargetPosition(-leftBackTarget);
+            rightBackDrive.setTargetPosition(-rightBackTarget);
+
+            //Tells the motors to drive until they reach the target position
+            leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            //Sets the motor powers to the power entered on use
+            leftFrontDrive.setPower(power);
+            rightFrontDrive.setPower(power);
+            leftBackDrive.setPower(power);
+            rightBackDrive.setPower(power);
+
+            while (leftFrontDrive.isBusy() && opModeIsActive()) {
+
+            }
+            //Kills the motors to prepare for next call of method
+            leftFrontDrive.setPower(0);
+            rightFrontDrive.setPower(0);
+            leftBackDrive.setPower(0);
+            rightBackDrive.setPower(0);
+        }
+
+        if (movement_direction == RobotLinearOpMode.MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+
+            //Sets the target # of ticks to the target position of the motors
+            leftFrontDrive.setTargetPosition(leftFrontTarget * 2);
+            rightFrontDrive.setTargetPosition(-rightFrontTarget * 2);
+            leftBackDrive.setTargetPosition(-leftBackTarget * 2);
+            rightBackDrive.setTargetPosition(rightBackTarget * 2);
+
+
+            //Tells the motors to drive until they reach the target position
+            leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            //Sets the motor powers to the power entered on use
+            leftFrontDrive.setPower(power);
+            rightFrontDrive.setPower(power);
+            leftBackDrive.setPower(power);
+            rightBackDrive.setPower(.97*power);
+
+            while (leftFrontDrive.isBusy() && opModeIsActive()) {
+
+            }
+
+            //Kills the motors to prepare for next call of method
+            leftFrontDrive.setPower(0);
+            rightFrontDrive.setPower(0);
+            leftBackDrive.setPower(0);
+            rightBackDrive.setPower(0);
+        }
+
+        if (movement_direction == RobotLinearOpMode.MOVEMENT_DIRECTION.STRAFE_LEFT) {
+
+            //Sets the target # of ticks to the target position of the motors
+            leftFrontDrive.setTargetPosition(-leftFrontTarget * 2);
+            rightFrontDrive.setTargetPosition(rightFrontTarget * 2);
+            leftBackDrive.setTargetPosition(leftBackTarget * 2);
+            rightBackDrive.setTargetPosition(-rightBackTarget * 2);
+
+            //Tells the motors to drive until they reach the target position
+            leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            //Sets the motor powers to the power entered on use
+            leftFrontDrive.setPower(power);
+            rightFrontDrive.setPower(power);
+            leftBackDrive.setPower(.97 * power);
+            rightBackDrive.setPower(power);
+
+            while (leftFrontDrive.isBusy() && opModeIsActive()) {
+
+            }
+
+            //Kills the motors to prepare for next call of method
+            leftFrontDrive.setPower(0);
+            rightFrontDrive.setPower(0);
+            leftBackDrive.setPower(0);
+            rightBackDrive.setPower(0);
+        }
+
+        leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        //Kills the motors to prepare for next call of method
+        leftFrontDrive.setPower(0);
+        rightFrontDrive.setPower(0);
+        leftBackDrive.setPower(0);
+        rightBackDrive.setPower(0);
+    }
+
     enum LIFT_DIRECTION {
         DOWN,
         UP
     }
+
+    enum MOVEMENT_DIRECTION {
+        FORWARD,
+        REVERSE,
+        STRAFE_RIGHT,
+        STRAFE_LEFT
+    }
+
 }
