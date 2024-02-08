@@ -142,7 +142,8 @@ public class TeleOp2 extends LinearOpMode {
                 bWasPressed = false;
             }
 
-            if (slowLifter){
+            if (slowLifter)
+            {
                 intakePower = -0.5;
             }
 
