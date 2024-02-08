@@ -267,7 +267,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         liftTarget = liftMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
 
 
-        if (lift_direction == TeleOp2.LIFT_DIRECTION.UP) {
+        if (lift_direction == TeleOp2.LIFT_DIRECTION.DOWN) {
             liftMotor.setTargetPosition(liftTarget);
 
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -414,7 +414,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     public int placePurplePixel(){
         encoderDrive(1, 1.5, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(1, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-        intakeMotor.setPower(-0.4);
+        intakeMotor.setPower(0.4);
         sleep(500);
         snapshotAnalysis = pipelineBlue.getAnalysis();
         sleep(500);
@@ -546,6 +546,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
     public void blueCloseAutoCenter(){
         encoderDrive(1,5, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(1, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
         encoderDrive(0.5, 31, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(1.0, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
