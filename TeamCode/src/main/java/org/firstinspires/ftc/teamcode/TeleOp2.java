@@ -137,7 +137,7 @@ public class TeleOp2 extends LinearOpMode {
             if (bWasPressed){
                 intakePower = -0.5;
             }
-            
+
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
