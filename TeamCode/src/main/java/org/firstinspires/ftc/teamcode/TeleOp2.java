@@ -145,10 +145,14 @@ public class TeleOp2 extends LinearOpMode {
             if (slowLifter){
                 intakePower = -0.5;
             }
+<<<<<<< HEAD
             leftFrontPower *=0.8;
             rightFrontPower *= 0.75;
             leftBackPower *= 0.95;
             rightBackPower *= 1;
+=======
+
+>>>>>>> 6d74aefe9efece50827f9a7351bebb20af80c1a0
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
