@@ -128,16 +128,27 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.b && !bWasPressed) {
                 bWasPressed = true;
+                if (slowLifter == true)
+                {
+                    slowLifter = false;
+                }
+                else
+                {
+                    slowLifter = true;
+                }
             }
-            else if (gamepad1.b&&bWasPressed)
+            else if (!gamepad1.b && bWasPressed)
             {
                 bWasPressed = false;
             }
 
-            if (bWasPressed){
+            if (slowLifter){
                 intakePower = -0.5;
             }
-            
+            leftFrontPower *=0.8;
+            rightFrontPower *= 0.75;
+            leftBackPower *= 0.95;
+            rightBackPower *= 1;
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
