@@ -405,10 +405,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void placeYellowPixel(){
-        encoderDrive(0.3, 8, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.2, 2, MOVEMENT_DIRECTION.REVERSE);
-//        intakeMotor.setPower(0);
-//        encoderLift(0.3, 4, TeleOp2.LIFT_DIRECTION.UP);
+        encoderDrive(0.2, 9, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(0.2, 2.5, MOVEMENT_DIRECTION.REVERSE);
+        intakeMotor.setPower(0);
+        encoderLift(0.25, 4, TeleOp2.LIFT_DIRECTION.UP);
     }
     public int placePurplePixel(boolean blue){
         if (blue){
@@ -572,14 +572,14 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 16, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -592,7 +592,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 16, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
@@ -600,7 +600,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 11, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -614,7 +614,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 15.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
@@ -622,7 +622,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 8, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -664,14 +664,14 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 16, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 10.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -684,7 +684,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
@@ -692,7 +692,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 11, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -705,7 +705,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 16, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle) {
@@ -713,7 +713,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -752,7 +752,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         encoderDrive(0.5, 18, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 18.5, TURN_DIRECTION.TURN_LEFT);
         encoderDrive(0.5, 23, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+        encoderDrive(0.3, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
         placeYellowPixel();
     }
 
@@ -766,14 +766,14 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 16, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 9.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -787,7 +787,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
@@ -795,7 +795,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 11, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -807,7 +807,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
@@ -815,7 +815,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 18.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -831,9 +831,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void redCloseAutoCenter(){
+        encoderDrive(0.5, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         encoderDrive(1,8, MOVEMENT_DIRECTION.REVERSE);
         encoderTurn(0.5, 17.5, TURN_DIRECTION.TURN_RIGHT);
-        encoderDrive(1, 32.5, MOVEMENT_DIRECTION.FORWARD);
+        encoderDrive(1, 29, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.5, 4, MOVEMENT_DIRECTION.STRAFE_LEFT);
         placeYellowPixel();
     }
@@ -858,14 +859,14 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 16, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
                 encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(1, 9.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -878,7 +879,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
@@ -886,7 +887,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 11, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
@@ -899,7 +900,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             if (parkMiddle){
@@ -907,7 +908,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 encoderDrive(1, 18.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                 encoderDrive(1, 10, MOVEMENT_DIRECTION.FORWARD);
                 sleep(300);
-                //encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
+                encoderLift(0.05, 4, TeleOp2.LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
             sleep(20000);
