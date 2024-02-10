@@ -60,7 +60,7 @@ public class redAuto extends RobotLinearOpMode
 
             declareAutoVariables();
 
-            telemetry.addData("Realtime analysis", pipelineBlue.getAnalysis());
+            telemetry.addData("Realtime analysis", pipelineRed.getAnalysis());
             telemetry.update();
 
             // Don't burn CPU cycles busy-looping in this sample
