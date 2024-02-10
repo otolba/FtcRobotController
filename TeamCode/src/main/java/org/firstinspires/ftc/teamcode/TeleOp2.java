@@ -148,11 +148,11 @@ public class TeleOp2 extends LinearOpMode {
                 intakePower = -0.5;
             }
 
-            leftFrontPower *=0.8;
+            /*leftFrontPower *=0.8;
             rightFrontPower *= 0.75;
             leftBackPower *= 0.95;
             rightBackPower *= 1;
-
+            */
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
