@@ -117,11 +117,11 @@ public class RedPropDetector extends LinearOpMode
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(0,60);
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(107,60);
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(213,60);
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(0,150);
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(107,150);
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(213,150);
         static final int REGION_WIDTH = 106;
-        static final int REGION_HEIGHT = 100;
+        static final int REGION_HEIGHT = 89;
 
         /*
          * Points which actually define the sample region rectangles, derived from above values
@@ -165,6 +165,7 @@ public class RedPropDetector extends LinearOpMode
         Mat region1_Cb, region2_Cb, region3_Cb;
         Mat YCrCb = new Mat();
         Mat Cb = new Mat();
+        Mat Cr = new Mat();
         int avg1, avg2, avg3;
 
         // Volatile since accessed by OpMode thread w/o synchronization
@@ -177,7 +178,7 @@ public class RedPropDetector extends LinearOpMode
         void inputToCb(Mat input)
         {
             Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
-            Core.extractChannel(YCrCb, Cb, 2);
+            Core.extractChannel(YCrCb, Cr, 1);
         }
 
         @Override
@@ -199,9 +200,9 @@ public class RedPropDetector extends LinearOpMode
              * buffer. Any changes to the child affect the parent, and the
              * reverse also holds true.
              */
-            region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
-            region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointB));
-            region3_Cb = Cb.submat(new Rect(region3_pointA, region3_pointB));
+            region1_Cb = Cr.submat(new Rect(region1_pointA, region1_pointB));
+            region2_Cb = Cr.submat(new Rect(region2_pointA, region2_pointB));
+            region3_Cb = Cr.submat(new Rect(region3_pointA, region3_pointB));
         }
 
         @Override
@@ -295,14 +296,14 @@ public class RedPropDetector extends LinearOpMode
             /*
              * Find the max of the 3 averages
              */
-            int minOneTwo = Math.min(avg1, avg2);
-            int min = Math.min(minOneTwo, avg3);
+            int maxOneTwo = Math.max(avg1, avg2);
+            int max = Math.max(maxOneTwo, avg3);
 
             /*
              * Now that we found the max, we actually need to go and
              * figure out which sample region that value was from
              */
-            if(min == avg1) // Was it from region 1?
+            if(max == avg1) // Was it from region 1?
             {
                 position = SkystonePosition.LEFT; // Record our analysis
 
@@ -317,7 +318,7 @@ public class RedPropDetector extends LinearOpMode
                         GREEN, // The color the rectangle is drawn in
                         -1); // Negative thickness means solid fill
             }
-            else if(min == avg2) // Was it from region 2?
+            else if(max == avg2) // Was it from region 2?
             {
                 position = SkystonePosition.CENTER; // Record our analysis
 
@@ -332,7 +333,7 @@ public class RedPropDetector extends LinearOpMode
                         GREEN, // The color the rectangle is drawn in
                         -1); // Negative thickness means solid fill
             }
-            else if(min == avg3) // Was it from region 3?
+            else if(max == avg3) // Was it from region 3?
             {
                 position = SkystonePosition.RIGHT; // Record our analysis
 

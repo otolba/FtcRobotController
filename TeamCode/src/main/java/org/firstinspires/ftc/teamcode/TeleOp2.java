@@ -110,7 +110,7 @@ public class TeleOp2 extends LinearOpMode {
             {
                 encoderDrive(0.3, 8, RobotLinearOpMode.MOVEMENT_DIRECTION.REVERSE);
                 encoderDrive(0.2, 2, RobotLinearOpMode.MOVEMENT_DIRECTION.FORWARD);
-                encoderLift(0.35, 4, LIFT_DIRECTION.UP);
+                encoderLift(0.3, 4, LIFT_DIRECTION.UP);
                 liftMotor.setPower(0);
                 sleep(300);
                 encoderLift(0.05, 4, LIFT_DIRECTION.DOWN);
