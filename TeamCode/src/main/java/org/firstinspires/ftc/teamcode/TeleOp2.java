@@ -106,16 +106,7 @@ public class TeleOp2 extends LinearOpMode {
                 intakePower = 0;
             }
 
-            if (gamepad1.a == true)
-            {
-                encoderDrive(0.2, 9, RobotLinearOpMode.MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.2, 2.5, RobotLinearOpMode.MOVEMENT_DIRECTION.FORWARD);
-                encoderLift(0.27,5, 4, LIFT_DIRECTION.UP);
-                liftMotor.setPower(0);
-                sleep(300);
-                encoderLift(0.05, 4, LIFT_DIRECTION.DOWN);
-                liftMotor.setDirection(DcMotor.Direction.REVERSE);
-            }
+
 
             if (gamepad1.x == true)
             {
@@ -141,6 +132,18 @@ public class TeleOp2 extends LinearOpMode {
             else if (!gamepad1.b && bWasPressed)
             {
                 bWasPressed = false;
+            }
+            if (gamepad1.a == true)
+            {
+                slowLifter = false;
+                intakeMotor.setPower(0);
+                encoderDrive(0.2, 9, RobotLinearOpMode.MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.2, 2, RobotLinearOpMode.MOVEMENT_DIRECTION.FORWARD);
+                encoderLift(0.25,5, LIFT_DIRECTION.UP);
+                liftMotor.setPower(0);
+                sleep(300);
+                encoderLift(0.05, 4, LIFT_DIRECTION.DOWN);
+                liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
 
             if (slowLifter)
