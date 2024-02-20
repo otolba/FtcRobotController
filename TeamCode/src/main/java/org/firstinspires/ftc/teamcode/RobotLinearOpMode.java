@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.text.method.MovementMethod;
 import android.view.View;
 
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -62,9 +63,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     DcMotor leftBackDriveMotor;
     DcMotor liftMotor;
     DcMotor intakeMotor;
-    NormalizedColorSensor colorSensor1;
-    NormalizedColorSensor colorSensor2;
-    Servo placePurplePixel;
+    NormalizedColorSensor colorSensorLeft;
+    NormalizedColorSensor colorSensorRight;
+    Servo placePurplePixelLeft;
+    Servo placePurplePixelRight;
     AprilTagProcessor aprilTag;
     VisionPortal visionPortal;
     boolean USE_WEBCAM = false;  // true for webcam, false for phone camera
@@ -404,6 +406,396 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         rightBackDriveMotor.setPower(0);
     }
 
+    public double distanceSensor(SENSOR_DIRECTION sensor_direction) {
+        DistanceSensor sensorDistance = null;
+        double distance;
+
+        if (sensor_direction == SENSOR_DIRECTION.REAR) {
+            sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_distance_rear");
+
+            Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorDistance;
+
+
+        } else if (sensor_direction == SENSOR_DIRECTION.FRONT) {
+            sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_distance_front");
+
+            Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorDistance;
+
+
+        } else if (sensor_direction == SENSOR_DIRECTION.LEFT) {
+            sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_distance_left");
+
+            Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorDistance;
+
+
+        } else if (sensor_direction == SENSOR_DIRECTION.RIGHT) {
+            sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_distance_right");
+
+            Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorDistance;
+
+        }
+        // you can use this as a regular DistanceSensor.
+        return sensorDistance.getDistance(DistanceUnit.INCH);
+
+
+
+        // you can also cast this to a Rev2mDistanceSensor if you want to use added
+        // methods associated with the Rev2mDistanceSensor class.
+
+    }
+    public void distSensorDrive(double inputPower, double distanceFromObjectIN, MOVEMENT_DIRECTION movement_direction) {
+        if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+//            do {
+
+            distanceSensor(SENSOR_DIRECTION.REAR);
+//            double power = Math.log(distanceSensor(SENSOR_DIRECTION.REAR) - distanceFromObjectCM);
+//            if (power > inputPower) {
+//                power = inputPower;
+//            }
+
+            encoderDrive(inputPower, (distanceSensor(SENSOR_DIRECTION.REAR) - 5), MOVEMENT_DIRECTION.REVERSE);
+            encoderDrive(.1, 4, MOVEMENT_DIRECTION.REVERSE);
+
+
+//                    leftFrontDriveMotor.setPower(-power);
+//                    rightFrontDriveMotor.setPower(-power);
+//                    leftBackDriveMotor.setPower(-power);
+//                    rightBackDriveMotor.setPower(-power);
+//                    sleep(200);
+//                } while (distanceFromObjectCM > distanceSensor(SENSOR_DIRECTION.REAR));
+
+
+//            while (distanceFromObjectCM >= distanceSensor(SENSOR_DIRECTION.REAR)) {
+//
+//                double power = Math.log(distanceSensor(SENSOR_DIRECTION.REAR));
+//                if (power > inputPower) {
+//                    power = inputPower;
+//                }
+//                leftFrontDriveMotor.setPower(power);
+//                rightFrontDriveMotor.setPower(power);
+//                leftBackDriveMotor.setPower(power);
+//                rightBackDriveMotor.setPower(power);
+//                sleep(50);
+//            }
+//            if (distanceFromObjectCM <= distanceSensor(SENSOR_DIRECTION.REAR)) {
+//                motorKill();
+//            }
+        }
+
+    }
+
+    public void motorKill(){
+        leftFrontDriveMotor.setPower(0);
+        rightFrontDriveMotor.setPower(0);
+        leftBackDriveMotor.setPower(0);
+        rightBackDriveMotor.setPower(0);
+    }
+    public void colorSensorDrive(double power, MOVEMENT_DIRECTION movement_direction, TAPE_COLOR tape_color, COLOR_SENSOR color_sensor) {
+        if (tape_color == TAPE_COLOR.RED_TAPE) {
+            if (color_sensor == COLOR_SENSOR.LEFT) {
+                if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 2) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                        }
+
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 2) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 2) {
+                            motorKill();
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 2) {
+                            motorKill();
+                        }
+                    }
+                }
+            }
+            else{
+                if (movement_direction == MOVEMENT_DIRECTION.FORWARD){
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 2) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 2) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 2) {
+                            motorKill();
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 2) {
+                            motorKill();
+                        }
+                    }
+                }
+            }
+        }
+        else if (tape_color == TAPE_COLOR.BLUE_TAPE) {
+            if (color_sensor == COLOR_SENSOR.LEFT){
+                if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 1) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 1) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 1) {
+                            motorKill();
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.LEFT) == 1) {
+                            motorKill();
+                        }
+                    }
+                }
+            }
+            else{
+                if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 1) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 1) {
+                            motorKill();
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
+                        leftFrontDriveMotor.setPower(power);
+                        leftBackDriveMotor.setPower(-power);
+                        rightFrontDriveMotor.setPower(power);
+                        rightBackDriveMotor.setPower(-power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 1) {
+                            motorKill();
+                        }
+                    }
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                    while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
+                        leftFrontDriveMotor.setPower(-power);
+                        leftBackDriveMotor.setPower(power);
+                        rightFrontDriveMotor.setPower(-power);
+                        rightBackDriveMotor.setPower(power);
+
+                        if (colorSensor(COLOR_SENSOR.RIGHT) == 1) {
+                            motorKill();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public float colorSensor(COLOR_SENSOR color_sensor) {
+        int colorValue = 0;
+
+        View relativeLayout;
+
+        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+        relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+
+
+        // You can give the sensor a gain value, will be multiplied by the sensor's raw value before the
+        // normalized color values are calculated. Color sensors (especially the REV Color Sensor V3)
+        // can give very low values (depending on the lighting conditions), which only use a small part
+        // of the 0-1 range that is available for the red, green, and blue values. In brighter conditions,
+        // you should use a smaller gain than in dark conditions. If your gain is too high, all of the
+        // colors will report at or near 1, and you won't be able to determine what color you are
+        // actually looking at. For this reason, it's better to err on the side of a lower gain
+        // (but always greater than  or equal to 1).
+        float gain = 10;
+
+        // Once per loop, we will update this hsvValues array. The first element (0) will contain the
+        // hue, the second element (1) will contain the saturation, and the third element (2) will
+        // contain the value. See http://web.archive.org/web/20190311170843/https://infohost.nmt.edu/tcc/help/pubs/colortheory/web/hsv.html
+        // for an explanation of HSV color.
+        //final float[] hsvValues = new float[3];
+
+
+
+        // Get a reference to our sensor object. It's recommended to use NormalizedColorSensor over
+        // ColorSensor, because NormalizedColorSensor consistently gives values between 0 and 1, while
+        // the values you get from ColorSensor are dependent on the specific sensor you're using.
+
+
+        // If possible, turn the light on in the beginning (it might already be on anyway,
+        // we just make sure it is if we can).
+        if (colorSensorLeft instanceof SwitchableLight) {
+            ((SwitchableLight) colorSensorLeft).enableLight(true);
+        }
+
+        if (colorSensorRight instanceof SwitchableLight) {
+            ((SwitchableLight) colorSensorRight).enableLight(true);
+        }
+
+        // Loop until we are asked to stop
+
+        // Show the gain value via telemetry
+        //telemetry.addData("Gain", gain);
+
+        // Tell the sensor our desired gain value (normally you would do this during initialization,
+        // not during the loop)
+        colorSensorLeft.setGain(gain);
+        colorSensorRight.setGain(gain);
+
+
+        // Get the normalized colors from the sensor
+        NormalizedRGBA colorsLeft = colorSensorLeft.getNormalizedColors();
+        NormalizedRGBA colorsRight = colorSensorRight.getNormalizedColors();
+
+        /* Use telemetry to display feedback on the driver station. We show the red, green, and blue
+         * normalized values from the sensor (in the range of 0 to 1), as well as the equivalent
+         * HSV (hue, saturation and value) values. See http://web.archive.org/web/20190311170843/https://infohost.nmt.edu/tcc/help/pubs/colortheory/web/hsv.html
+         * for an explanation of HSV color. */
+
+        // Update the hsvValues array by passing it to Color.colorToHSV()
+//            Color.colorToHSV(colors.toColor(), hsvValues);
+//            telemetry.addLine()
+//                    .addData("Red", "%.3f", colors.red)
+//                    .addData("Green", "%.3f", colors.green)
+//                    .addData("Blue", "%.3f", colors.blue);
+//            telemetry.addLine()
+//                    .addData("Hue", "%.3f", hsvValues[0])
+//                    .addData("Saturation", "%.3f", hsvValues[1])
+//                    .addData("Value", "%.3f", hsvValues[2]);
+//            telemetry.addData("Alpha", "%.3f", colors.alpha);
+
+        /* If this color sensor also has a distance sensor, display the measured distance.
+         * Note that the reported distance is only useful at very close range, and is impacted by
+         * ambient light and surface reflectivity. */
+//            if (colorSensor instanceof DistanceSensor) {
+//                telemetry.addData("Distance (cm)", "%.3f", ((DistanceSensor) colorSensor).getDistance(DistanceUnit.CM));
+//            }
+
+        if (color_sensor == COLOR_SENSOR.LEFT){
+            if (colorsLeft.blue >= .080) {
+                colorValue = 1;
+            } else if (colorsLeft.red > .070) {
+                colorValue = 2;
+            }
+        }
+        else {
+            if (colorsRight.blue >= .080) {
+                colorValue = 1;
+            } else if (colorsRight.red > .070) {
+                colorValue = 2;
+            }
+        }
+
+
+        return(colorValue);
+    }
+
+
     public void placeYellowPixel(){
         encoderDrive(0.2, 9, MOVEMENT_DIRECTION.FORWARD);
         encoderDrive(0.2, 2, MOVEMENT_DIRECTION.REVERSE);
@@ -420,142 +812,89 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
             switch (snapshotAnalysis){
                 case LEFT:{
-                    encoderDrive(1, 1.5, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 4.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    intakeMotor.setPower(0.2);
-                    encoderDrive(1, 20.5, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 7.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(0.4, 1.5, MOVEMENT_DIRECTION.FORWARD);
-                    placePurplePixel.setPosition(1.0);
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    placePurplePixelLeft.setPosition(1.0);
                     sleep(200);
-                    placePurplePixel.setPosition(0);
+                    placePurplePixelLeft.setPosition(0);
                     sleep(1200);
-                    placePurplePixel.setPosition(0.5);
+                    placePurplePixelLeft.setPosition(0.5);
                     sleep(200);
+
                     return 2;
                 }
-            }
-
-            encoderDrive(1, 1.5, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(1, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            intakeMotor.setPower(0.2);
-            sleep(500);
-            snapshotAnalysis = pipelineBlue.getAnalysis();
-            sleep(500);
-            telemetry.addData("Snapshot post-START analysis", snapshotAnalysisRed);
-            telemetry.update();
-
-            switch (snapshotAnalysis){
-                case LEFT:{
-                    encoderDrive(1,2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 7, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(0.1, 0.3, MOVEMENT_DIRECTION.FORWARD);
-                    placePurplePixel.setPosition(1.0);
-                    sleep(200);
-                    placePurplePixel.setPosition(0);
-                    sleep(1400);
-                    placePurplePixel.setPosition(0.5);
-                    sleep(200);
-                    return 1;
-                }
                 case CENTER:{
-                    encoderDrive(1,2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 7, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(0.1, 0.3, MOVEMENT_DIRECTION.FORWARD);
-                    placePurplePixel.setPosition(1.0);
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    placePurplePixelRight.setPosition(1.0);
                     sleep(200);
-                    placePurplePixel.setPosition(0);
+                    placePurplePixelRight.setPosition(0);
                     sleep(1400);
-                    placePurplePixel.setPosition(0.5);
+                    placePurplePixelRight.setPosition(0.5);
                     sleep(200);
+
                     return 1;
                 }
                 case RIGHT:{
-                    encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1.0, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    placePurplePixel.setPosition(1.0);
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    placePurplePixelRight.setPosition(1.0);
                     sleep(200);
-                    placePurplePixel.setPosition(0);
-                    sleep(1200);
-                    placePurplePixel.setPosition(0.5);
+                    placePurplePixelRight.setPosition(0);
+                    sleep(1400);
+                    placePurplePixelRight.setPosition(0.5);
                     sleep(200);
+
                     return 0;
                 }
             }
         }
-        else{
+        else {
             sleep(500);
             snapshotAnalysisRed = pipelineRed.getAnalysis();
             sleep(500);
             telemetry.addData("Snapshot post-START analysis", snapshotAnalysisRed);
             telemetry.update();
 
-            switch (snapshotAnalysisRed){
-                case LEFT:{
-                    encoderDrive(1, 1.5, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 4.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    intakeMotor.setPower(0.2);
-                    encoderDrive(1, 19, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 8.25, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    placePurplePixel.setPosition(1.0);
+            switch (snapshotAnalysis) {
+                case LEFT: {
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    placePurplePixelLeft.setPosition(1.0);
                     sleep(200);
-                    placePurplePixel.setPosition(0);
+                    placePurplePixelLeft.setPosition(0);
                     sleep(1200);
-                    placePurplePixel.setPosition(0.5);
+                    placePurplePixelLeft.setPosition(0.5);
                     sleep(200);
+
                     return 2;
                 }
-            }
-
-            encoderDrive(1, 1.5, MOVEMENT_DIRECTION.FORWARD);
-            encoderDrive(1, 4.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            intakeMotor.setPower(0.2);
-            sleep(500);
-            snapshotAnalysisRed = pipelineRed.getAnalysis();
-            sleep(500);
-            telemetry.addData("Snapshot post-START analysis", snapshotAnalysisRed);
-            telemetry.update();
-
-            switch (snapshotAnalysisRed){
-                case LEFT:{
-                    encoderDrive(1,2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 7.25, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(0.1, 0.3, MOVEMENT_DIRECTION.FORWARD);
-                    placePurplePixel.setPosition(1.0);
+                case CENTER: {
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    placePurplePixelRight.setPosition(1.0);
                     sleep(200);
-                    placePurplePixel.setPosition(0);
+                    placePurplePixelRight.setPosition(0);
                     sleep(1400);
-                    placePurplePixel.setPosition(0.5);
+                    placePurplePixelRight.setPosition(0.5);
                     sleep(200);
+
                     return 1;
                 }
-                case CENTER:{
-                    encoderDrive(1,2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1, 27, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1, 7.25, MOVEMENT_DIRECTION.REVERSE);
-                    encoderDrive(0.1, 0.3, MOVEMENT_DIRECTION.FORWARD);
-                    placePurplePixel.setPosition(1.0);
+                case RIGHT: {
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    placePurplePixelRight.setPosition(1.0);
                     sleep(200);
-                    placePurplePixel.setPosition(0);
+                    placePurplePixelRight.setPosition(0);
                     sleep(1400);
-                    placePurplePixel.setPosition(0.5);
+                    placePurplePixelRight.setPosition(0.5);
                     sleep(200);
-                    return 1;
-                }
-                case RIGHT:{
-                    encoderDrive(1.0, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(1.0, 18, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(1.0, 7, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    placePurplePixel.setPosition(1.0);
-                    sleep(200);
-                    placePurplePixel.setPosition(0);
-                    sleep(1200);
-                    placePurplePixel.setPosition(0.5);
-                    sleep(200);
+
                     return 0;
                 }
             }
@@ -994,10 +1333,11 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftBackDriveMotor = hardwareMap.get(DcMotor.class, "backleft");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
-        placePurplePixel = hardwareMap.get(Servo.class, "purplePixel");
-        //placeYellowServo = hardwareMap.get(Servo.class, "placeYellowPixel");
+        placePurplePixelLeft = hardwareMap.get(Servo.class, "purplePixelLeft");
+        placePurplePixelRight = hardwareMap.get(Servo.class, "purplePixelRight");
 
-        placePurplePixel.setDirection(Servo.Direction.FORWARD);
+        placePurplePixelLeft.setDirection(Servo.Direction.FORWARD);
+        placePurplePixelRight.setDirection(Servo.Direction.FORWARD);
         leftFrontDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftBackDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightFrontDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
@@ -1140,6 +1480,24 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     enum LIFT_DIRECTION {
         DOWN,
         UP
+    }
+
+    enum SENSOR_DIRECTION {
+        FRONT,
+        REAR,
+        LEFT,
+        RIGHT
+
+    }
+
+    enum TAPE_COLOR {
+        RED_TAPE,
+        BLUE_TAPE
+    }
+
+    enum COLOR_SENSOR {
+        LEFT,
+        RIGHT
     }
 
 }
