@@ -1335,6 +1335,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
         placePurplePixelLeft = hardwareMap.get(Servo.class, "purplePixelLeft");
         placePurplePixelRight = hardwareMap.get(Servo.class, "purplePixelRight");
+        colorSensorLeft = hardwareMap.get(NormalizedColorSensor.class, "colorSensorLeft");;
+        colorSensorRight = hardwareMap.get(NormalizedColorSensor.class, "colorSensorRight");
 
         placePurplePixelLeft.setDirection(Servo.Direction.FORWARD);
         placePurplePixelRight.setDirection(Servo.Direction.FORWARD);
