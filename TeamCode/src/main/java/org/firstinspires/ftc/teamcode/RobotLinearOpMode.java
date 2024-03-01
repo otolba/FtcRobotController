@@ -114,7 +114,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         leftBackTarget = leftBackDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
         rightBackTarget = rightBackDriveMotor.getCurrentPosition() + (int) (inches * TICKS_PER_INCH);
 
-        if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
+        if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
 
             //Sets the target # of ticks to the target position of the motors
             leftFrontDriveMotor.setTargetPosition(leftFrontTarget);
@@ -147,7 +147,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
         }
 
-        if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+        if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
 
             //Sets the target # of ticks to the target position of the motors
             leftFrontDriveMotor.setTargetPosition(-leftFrontTarget);
@@ -177,7 +177,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             rightBackDriveMotor.setPower(0);
         }
 
-        if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+        if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
 
             //Sets the target # of ticks to the target position of the motors
             leftFrontDriveMotor.setTargetPosition(leftFrontTarget * 2);
@@ -209,7 +209,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             rightBackDriveMotor.setPower(0);
         }
 
-        if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+        if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
 
             //Sets the target # of ticks to the target position of the motors
             leftFrontDriveMotor.setTargetPosition(-leftFrontTarget * 2);
@@ -493,7 +493,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     public void colorSensorDrive(double power, MOVEMENT_DIRECTION movement_direction, TAPE_COLOR tape_color, COLOR_SENSOR color_sensor) {
         if (tape_color == TAPE_COLOR.RED_TAPE) {
             if (color_sensor == COLOR_SENSOR.LEFT) {
-                if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
+                if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(power);
@@ -502,11 +502,11 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.LEFT) == 2) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
                         }
 
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(-power);
@@ -515,10 +515,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.LEFT) == 2) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(-power);
@@ -529,7 +529,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                             motorKill();
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 2) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(power);
@@ -543,7 +543,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
             }
             else{
-                if (movement_direction == MOVEMENT_DIRECTION.FORWARD){
+                if (movement_direction == MOVEMENT_DIRECTION.REVERSE){
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(power);
@@ -552,10 +552,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.RIGHT) == 2) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(-power);
@@ -564,10 +564,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.RIGHT) == 2) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(-power);
@@ -578,7 +578,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                             motorKill();
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 2) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(power);
@@ -594,7 +594,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         }
         else if (tape_color == TAPE_COLOR.BLUE_TAPE) {
             if (color_sensor == COLOR_SENSOR.LEFT){
-                if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
+                if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(power);
@@ -603,10 +603,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.LEFT) == 1) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(-power);
@@ -615,10 +615,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.LEFT) == 1) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(-power);
@@ -629,7 +629,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                             motorKill();
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.LEFT) != 1) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(power);
@@ -643,7 +643,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
             }
             else{
-                if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
+                if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(power);
@@ -652,10 +652,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.RIGHT) == 1) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.REVERSE) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.FORWARD) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(-power);
@@ -664,10 +664,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
                         if (colorSensor(COLOR_SENSOR.RIGHT) == 1) {
                             motorKill();
-                            encoderDrive(power, .5, MOVEMENT_DIRECTION.FORWARD);
+                            encoderDrive(power, .5, MOVEMENT_DIRECTION.REVERSE);
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
                         leftFrontDriveMotor.setPower(power);
                         leftBackDriveMotor.setPower(-power);
@@ -678,7 +678,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                             motorKill();
                         }
                     }
-                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_RIGHT) {
+                } else if (movement_direction == MOVEMENT_DIRECTION.STRAFE_LEFT) {
                     while (opModeIsActive() && colorSensor(COLOR_SENSOR.RIGHT) != 1) {
                         leftFrontDriveMotor.setPower(-power);
                         leftBackDriveMotor.setPower(power);
@@ -712,13 +712,15 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         // colors will report at or near 1, and you won't be able to determine what color you are
         // actually looking at. For this reason, it's better to err on the side of a lower gain
         // (but always greater than  or equal to 1).
-        float gain = 10;
+        float gain = 15;
 
         // Once per loop, we will update this hsvValues array. The first element (0) will contain the
         // hue, the second element (1) will contain the saturation, and the third element (2) will
         // contain the value. See http://web.archive.org/web/20190311170843/https://infohost.nmt.edu/tcc/help/pubs/colortheory/web/hsv.html
         // for an explanation of HSV color.
-        //final float[] hsvValues = new float[3];
+        final float[] hsvValuesLeft = new float[3];
+
+        final float[] hsvValuesRight = new float[3];
 
 
 
@@ -758,16 +760,6 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
          * for an explanation of HSV color. */
 
         // Update the hsvValues array by passing it to Color.colorToHSV()
-//            Color.colorToHSV(colors.toColor(), hsvValues);
-//            telemetry.addLine()
-//                    .addData("Red", "%.3f", colors.red)
-//                    .addData("Green", "%.3f", colors.green)
-//                    .addData("Blue", "%.3f", colors.blue);
-//            telemetry.addLine()
-//                    .addData("Hue", "%.3f", hsvValues[0])
-//                    .addData("Saturation", "%.3f", hsvValues[1])
-//                    .addData("Value", "%.3f", hsvValues[2]);
-//            telemetry.addData("Alpha", "%.3f", colors.alpha);
 
         /* If this color sensor also has a distance sensor, display the measured distance.
          * Note that the reported distance is only useful at very close range, and is impacted by
@@ -812,22 +804,25 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
             switch (snapshotAnalysis){
                 case LEFT:{
-                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
                     colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
-                    placePurplePixelLeft.setPosition(1.0);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_LEFT, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.RIGHT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    placePurplePixelRight.setPosition(1.0);
                     sleep(200);
-                    placePurplePixelLeft.setPosition(0);
+                    placePurplePixelRight.setPosition(0);
                     sleep(1200);
-                    placePurplePixelLeft.setPosition(0.5);
+                    placePurplePixelRight.setPosition(0.5);
                     sleep(200);
 
                     return 2;
                 }
                 case CENTER:{
-                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
                     colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
                     encoderDrive(0.3, 5, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     placePurplePixelRight.setPosition(1.0);
                     sleep(200);
                     placePurplePixelRight.setPosition(0);
@@ -838,8 +833,11 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                     return 1;
                 }
                 case RIGHT:{
-                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
                     colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_RIGHT, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.RIGHT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     placePurplePixelRight.setPosition(1.0);
                     sleep(200);
                     placePurplePixelRight.setPosition(0);
@@ -860,8 +858,11 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
             switch (snapshotAnalysis) {
                 case LEFT: {
-                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_LEFT, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     placePurplePixelLeft.setPosition(1.0);
                     sleep(200);
                     placePurplePixelLeft.setPosition(0);
@@ -872,27 +873,30 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                     return 2;
                 }
                 case CENTER: {
-                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.LEFT);
                     encoderDrive(0.3, 5, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    placePurplePixelRight.setPosition(1.0);
+                    encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    placePurplePixelLeft.setPosition(1.0);
                     sleep(200);
-                    placePurplePixelRight.setPosition(0);
+                    placePurplePixelLeft.setPosition(0);
                     sleep(1400);
-                    placePurplePixelRight.setPosition(0.5);
+                    placePurplePixelLeft.setPosition(0.5);
                     sleep(200);
 
                     return 1;
                 }
                 case RIGHT: {
-                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
-                    placePurplePixelRight.setPosition(1.0);
+                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.RIGHT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
+                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_RIGHT, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.LEFT);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    placePurplePixelLeft.setPosition(1.0);
                     sleep(200);
-                    placePurplePixelRight.setPosition(0);
+                    placePurplePixelLeft.setPosition(0);
                     sleep(1400);
-                    placePurplePixelRight.setPosition(0.5);
+                    placePurplePixelLeft.setPosition(0.5);
                     sleep(200);
 
                     return 0;
@@ -1299,7 +1303,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
             }
 
             @Override
@@ -1317,7 +1321,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
             }
 
             @Override
