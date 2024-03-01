@@ -106,7 +106,20 @@ public class TeleOp2 extends LinearOpMode {
                 intakePower = 0;
             }
 
+<<<<<<< HEAD
+            if (gamepad1.a == true)
+            {
+                encoderDrive(0.2, 9, RobotLinearOpMode.MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(0.2, 2.5, RobotLinearOpMode.MOVEMENT_DIRECTION.FORWARD);
+                encoderLift(0.27,5, LIFT_DIRECTION.UP);
+                liftMotor.setPower(0);
+                sleep(300);
+                encoderLift(0.05, 4, LIFT_DIRECTION.DOWN);
+                liftMotor.setDirection(DcMotor.Direction.REVERSE);
+            }
+=======
 
+>>>>>>> 40082e825d8cfa0c33b506bf5f8c63c688e7eb2d
 
             if (gamepad1.x == true)
             {
