@@ -406,7 +406,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
     public void placeYellowPixel(){
         encoderDrive(0.2, 9, MOVEMENT_DIRECTION.FORWARD);
-        encoderDrive(0.2, 2.5, MOVEMENT_DIRECTION.REVERSE);
+        encoderDrive(0.2, 2, MOVEMENT_DIRECTION.REVERSE);
         intakeMotor.setPower(0);
         encoderLift(0.25, 4, TeleOp2.LIFT_DIRECTION.UP);
     }
