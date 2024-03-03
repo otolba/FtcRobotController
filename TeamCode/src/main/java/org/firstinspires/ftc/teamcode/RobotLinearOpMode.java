@@ -67,6 +67,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     NormalizedColorSensor colorSensorRight;
     Servo placePurplePixelLeft;
     Servo placePurplePixelRight;
+    Servo placeYellowPixelLeft;
+    Servo PlaceYellowPixelRight;
     AprilTagProcessor aprilTag;
     VisionPortal visionPortal;
     boolean USE_WEBCAM = false;  // true for webcam, false for phone camera
@@ -1339,6 +1341,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
         placePurplePixelLeft = hardwareMap.get(Servo.class, "purplePixelLeft");
         placePurplePixelRight = hardwareMap.get(Servo.class, "purplePixelRight");
+        placeYellowPixelLeft = hardwareMap.get(Servo.class, "yellowPixelRight");
         colorSensorLeft = hardwareMap.get(NormalizedColorSensor.class, "colorSensorLeft");;
         colorSensorRight = hardwareMap.get(NormalizedColorSensor.class, "colorSensorRight");
 

@@ -50,6 +50,7 @@ public class TeleOp2 extends LinearOpMode {
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        droneLauncher.setDirection(Servo.Direction.FORWARD);
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -112,8 +113,8 @@ public class TeleOp2 extends LinearOpMode {
             if (gamepad1.a == true)
             {
                 encoderDrive(0.2, 9, RobotLinearOpMode.MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(0.2, 2.5, RobotLinearOpMode.MOVEMENT_DIRECTION.FORWARD);
-                encoderLift(0.27,5, LIFT_DIRECTION.UP);
+                encoderLift(0.27,3, LIFT_DIRECTION.UP);
+                encoderLift(0.1,2, LIFT_DIRECTION.UP);
                 liftMotor.setPower(0);
                 sleep(300);
                 encoderLift(0.05, 4, LIFT_DIRECTION.DOWN);
@@ -124,11 +125,10 @@ public class TeleOp2 extends LinearOpMode {
             if (gamepad1.x == true)
             {
                 droneLauncher.setPosition(1.0);
-                sleep(200);
-                droneLauncher.setPosition(0.9);
-                sleep(500);
-//                droneLauncher.setPosition(0.5);
-//                sleep(200);
+            }
+            else
+            {
+                droneLauncher.setPosition(0);
             }
 
             if (gamepad1.b && !bWasPressed) {
@@ -215,7 +215,7 @@ public class TeleOp2 extends LinearOpMode {
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             liftMotor.setPower(power);
-            intakeMotor.setPower(-0.5);
+            intakeMotor.setPower(-0.7);
 
 
             while (liftMotor.isBusy() && opModeIsActive()) {
