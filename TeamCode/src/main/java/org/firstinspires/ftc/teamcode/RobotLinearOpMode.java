@@ -807,10 +807,8 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
             switch (snapshotAnalysis){
                 case LEFT:{
                     encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
-                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_LEFT, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.RIGHT);
-                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+
+                    encoderDrive(0.3, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     placePurplePixelRight.setPosition(0.1);
                     sleep(200);
                     placePurplePixelRight.setPosition(0.75);
@@ -818,7 +816,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
                 case CENTER:{
                     encoderDrive(.7, 39, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(0.3, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     placePurplePixelRight.setPosition(0.1);
                     sleep(1200);
                     placePurplePixelRight.setPosition(0.75);
@@ -827,13 +825,11 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
                 case RIGHT:{
                     encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
-                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_RIGHT, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.RIGHT);
-                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     placePurplePixelRight.setPosition(0.1);
                     sleep(200);
                     placePurplePixelRight.setPosition(0.75);
+                    
 
                     return 0;
                 }
