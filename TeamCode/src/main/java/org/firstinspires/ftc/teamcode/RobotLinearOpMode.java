@@ -771,16 +771,16 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 //            }
 
         if (color_sensor == COLOR_SENSOR.LEFT){
-            if (colorsLeft.blue >= .080) {
+            if (colorsLeft.blue >= .035) {
                 colorValue = 1;
-            } else if (colorsLeft.red > .070) {
+            } else if (colorsLeft.red > .017) {
                 colorValue = 2;
             }
         }
         else {
-            if (colorsRight.blue >= .080) {
+            if (colorsRight.blue >= .035) {
                 colorValue = 1;
-            } else if (colorsRight.red > .070) {
+            } else if (colorsRight.red > .017) {
                 colorValue = 2;
             }
         }
@@ -811,26 +811,17 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
                     colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_LEFT, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.RIGHT);
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    placePurplePixelRight.setPosition(1.0);
+                    placePurplePixelRight.setPosition(0.1);
                     sleep(200);
-                    placePurplePixelRight.setPosition(0);
-                    sleep(1200);
-                    placePurplePixelRight.setPosition(0.5);
-                    sleep(200);
-
+                    placePurplePixelRight.setPosition(0.75);
                     return 2;
                 }
                 case CENTER:{
-                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.LEFT);
-                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(.7, 39, MOVEMENT_DIRECTION.FORWARD);
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    placePurplePixelRight.setPosition(1.0);
-                    sleep(200);
-                    placePurplePixelRight.setPosition(0);
-                    sleep(1400);
-                    placePurplePixelRight.setPosition(0.5);
-                    sleep(200);
+                    placePurplePixelRight.setPosition(0.1);
+                    sleep(1200);
+                    placePurplePixelRight.setPosition(0.75);
 
                     return 1;
                 }
@@ -840,12 +831,9 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
                     colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_RIGHT, TAPE_COLOR.BLUE_TAPE, COLOR_SENSOR.RIGHT);
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    placePurplePixelRight.setPosition(1.0);
+                    placePurplePixelRight.setPosition(0.1);
                     sleep(200);
-                    placePurplePixelRight.setPosition(0);
-                    sleep(1400);
-                    placePurplePixelRight.setPosition(0.5);
-                    sleep(200);
+                    placePurplePixelRight.setPosition(0.75);
 
                     return 0;
                 }
@@ -865,26 +853,18 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
                     colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_LEFT, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.LEFT);
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    placePurplePixelLeft.setPosition(1.0);
+                    placePurplePixelLeft.setPosition(0.1);
                     sleep(200);
-                    placePurplePixelLeft.setPosition(0);
-                    sleep(1200);
-                    placePurplePixelLeft.setPosition(0.5);
-                    sleep(200);
+                    placePurplePixelLeft.setPosition(0.75);
 
                     return 2;
                 }
                 case CENTER: {
-                    encoderDrive(.7, 27, MOVEMENT_DIRECTION.FORWARD);
-                    colorSensorDrive(0.3, MOVEMENT_DIRECTION.FORWARD, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.LEFT);
-                    encoderDrive(0.3, 5, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
                     encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    placePurplePixelLeft.setPosition(1.0);
+                    placePurplePixelLeft.setPosition(0.1);
                     sleep(200);
-                    placePurplePixelLeft.setPosition(0);
-                    sleep(1400);
-                    placePurplePixelLeft.setPosition(0.5);
-                    sleep(200);
+                    placePurplePixelLeft.setPosition(0.75);
 
                     return 1;
                 }
@@ -894,12 +874,9 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.REVERSE);
                     colorSensorDrive(0.3, MOVEMENT_DIRECTION.STRAFE_RIGHT, TAPE_COLOR.RED_TAPE, COLOR_SENSOR.LEFT);
                     encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                    placePurplePixelLeft.setPosition(1.0);
+                    placePurplePixelLeft.setPosition(0.1);
                     sleep(200);
-                    placePurplePixelLeft.setPosition(0);
-                    sleep(1400);
-                    placePurplePixelLeft.setPosition(0.5);
-                    sleep(200);
+                    placePurplePixelLeft.setPosition(0.75);
 
                     return 0;
                 }
