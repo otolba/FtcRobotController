@@ -36,7 +36,9 @@ public class ParkBlue extends RobotLinearOpMode{
                     }
                     else{
                         encoderDrive(0.7, 3, MOVEMENT_DIRECTION.FORWARD);
-                        encoderDrive();
+                        encoderDrive(0.7, 50, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                        encoderDrive(0.7, 40, MOVEMENT_DIRECTION.FORWARD);
+                        encoderDrive(0.7, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     }
                 }
                 else{
@@ -52,9 +54,7 @@ public class ParkBlue extends RobotLinearOpMode{
                         encoderDrive(0.7, 3, MOVEMENT_DIRECTION.FORWARD);
                         encoderDrive(0.7, 15, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                         encoderDrive(0.7, 40, MOVEMENT_DIRECTION.FORWARD);
-                        encoderDrive(0.7, 40, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                        encoderDrive(0.7, 40, MOVEMENT_DIRECTION.REVERSE);
-                        encoderDrive(0.7, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                        encoderDrive(0.7, 60, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     }
                 }
             }
