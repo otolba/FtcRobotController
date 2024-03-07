@@ -818,7 +818,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
                 case CENTER:{
                     encoderDrive(.7, 39, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     placePurplePixelRight.setPosition(0.1);
                     sleep(1200);
                     placePurplePixelRight.setPosition(0.75);
