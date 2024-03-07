@@ -20,6 +20,7 @@ public class TeleOp2 extends LinearOpMode {
     private DcMotor liftMotor = null;
     private DcMotor intakeMotor = null;
     private DcMotor rightHangMotor = null;
+    private DcMotor leftHangMotor = null;
     private Servo droneLauncher = null;
 
     private int liftState = 0;
@@ -40,7 +41,10 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
         liftMotor = hardwareMap.get(DcMotor.class,"liftMotor");
         intakeMotor = hardwareMap.get(DcMotor.class,"intakeMotor");
+        leftHangMotor = hardwareMap.get(DcMotor.class, "leftHang");
+        rightHangMotor = hardwareMap.get(DcMotor.class, "rightHang");
         droneLauncher = hardwareMap.get(Servo.class, "droneLauncher");
+
 
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -49,8 +53,14 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+        leftHangMotor.setDirection(DcMotor.Direction.FORWARD);
+        rightHangMotor.setDirection(DcMotor.Direction.REVERSE);
+
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         droneLauncher.setDirection(Servo.Direction.FORWARD);
+
+
+
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -78,6 +88,8 @@ public class TeleOp2 extends LinearOpMode {
             double rightBackPower  = axial - lateral - yaw;
             double liftPower = 0;
             double intakePower = 0;
+            double leftHangingPower = 0;
+            double rightHangingPower = 0;
 
 
             // Send calculated power to wheels
@@ -146,7 +158,7 @@ public class TeleOp2 extends LinearOpMode {
             {
                 bWasPressed = false;
             }
-            if (gamepad1.a == true)
+            if (gamepad1.a)
             {
                 slowLifter = false;
                 intakeMotor.setPower(0);
@@ -158,6 +170,26 @@ public class TeleOp2 extends LinearOpMode {
                 encoderLift(0.05, 4, LIFT_DIRECTION.DOWN);
                 liftMotor.setDirection(DcMotor.Direction.REVERSE);
             }
+
+            if (gamepad2.dpad_up)
+            {
+                leftHangingPower = 0.6;
+
+            }
+            if (gamepad2.dpad_down)
+            {
+                leftHangingPower = -0.8;
+            }
+
+            if (gamepad2.y)
+            {
+                rightHangingPower = 0.6;
+            }
+            if (gamepad2.a)
+            {
+                rightHangingPower = -0.8;
+            }
+
 
             if (slowLifter)
             {
@@ -175,6 +207,8 @@ public class TeleOp2 extends LinearOpMode {
             rightBackDrive.setPower(rightBackPower);
             intakeMotor.setPower(intakePower);
             liftMotor.setPower(liftPower);
+            leftHangMotor.setPower(leftHangingPower);
+            rightHangMotor.setPower(rightHangingPower);
 
 
             // Don't burn CPU cycles busy-looping in this sample
