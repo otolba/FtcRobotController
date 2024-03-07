@@ -67,7 +67,7 @@ public class Testing extends LinearOpMode {
         double yellowLeftPosition = 0;
         double yellowRightPosition = 0;
         double incrementAmount = 0.001;
-        float gain = 15;
+        float gain = 25;
         boolean useServos = false;
         while (opModeIsActive()) {
             double leftFrontPower  = 0;
