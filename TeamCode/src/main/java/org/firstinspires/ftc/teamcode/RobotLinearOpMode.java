@@ -829,7 +829,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                     placePurplePixelRight.setPosition(0.1);
                     sleep(200);
                     placePurplePixelRight.setPosition(0.75);
-                    
+
 
                     return 0;
                 }
