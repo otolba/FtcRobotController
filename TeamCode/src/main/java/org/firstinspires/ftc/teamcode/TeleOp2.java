@@ -178,7 +178,7 @@ public class TeleOp2 extends LinearOpMode {
             }
             if (gamepad2.dpad_down)
             {
-                leftHangingPower = -0.8;
+                leftHangingPower = -0.7;
             }
 
             if (gamepad2.y)
@@ -187,7 +187,7 @@ public class TeleOp2 extends LinearOpMode {
             }
             if (gamepad2.a)
             {
-                rightHangingPower = -0.8;
+                rightHangingPower = -0.7;
             }
 
 
