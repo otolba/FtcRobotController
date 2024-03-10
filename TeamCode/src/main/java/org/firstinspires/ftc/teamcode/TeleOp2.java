@@ -29,6 +29,7 @@ public class TeleOp2 extends LinearOpMode {
     boolean lifting = false;
     boolean bWasPressed = false;
     boolean slowLifter = false;
+    boolean droneLaunched = false;
 
     @Override
     public void runOpMode() {
@@ -136,12 +137,14 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad1.x == true)
             {
-                droneLauncher.setPosition(1.0);
+                droneLauncher.setPosition(0.1);
+                droneLaunched = true;
             }
-            else
+            else if(droneLaunched)
             {
-                droneLauncher.setPosition(0);
+                droneLauncher.setPosition(0.8);
             }
+
 
             if (gamepad1.b && !bWasPressed) {
                 bWasPressed = true;

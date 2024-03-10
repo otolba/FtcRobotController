@@ -25,8 +25,7 @@ public class Testing extends LinearOpMode {
     private Servo droneLauncher = null;
     private Servo placePurplePixelLeft = null;
     private Servo placePurplePixelRight = null;
-    private Servo placeYellowPixelLeft = null;
-    private Servo placeYellowPixelRight = null;
+
     private NormalizedColorSensor colorSensorLeft;
     private NormalizedColorSensor colorSensorRight;
     public void runOpMode() {
@@ -44,13 +43,11 @@ public class Testing extends LinearOpMode {
         droneLauncher = hardwareMap.get(Servo.class, "droneLauncher");
         colorSensorLeft = hardwareMap.get(NormalizedColorSensor.class, "colorSensorLeft");;
         colorSensorRight = hardwareMap.get(NormalizedColorSensor.class, "colorSensorRight");
-        placeYellowPixelLeft = hardwareMap.get(Servo.class, "yellowPixelLeft");
-        placeYellowPixelRight = hardwareMap.get(Servo.class, "yellowPixelRight");
+
 
         placePurplePixelLeft.setDirection(Servo.Direction.FORWARD);
         placePurplePixelRight.setDirection(Servo.Direction.FORWARD);
-        placeYellowPixelRight.setDirection(Servo.Direction.FORWARD);
-        placeYellowPixelLeft.setDirection(Servo.Direction.FORWARD);
+
         droneLauncher.setDirection(Servo.Direction.FORWARD);
         leftFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
         leftBackDrive.setDirection(DcMotorEx.Direction.FORWARD);
@@ -66,7 +63,7 @@ public class Testing extends LinearOpMode {
         double dronePosition = 0;
         double yellowLeftPosition = 0;
         double yellowRightPosition = 0;
-        double incrementAmount = 0.001;
+        double incrementAmount = 0.01;
         float gain = 25;
         boolean useServos = false;
         while (opModeIsActive()) {
@@ -180,11 +177,10 @@ public class Testing extends LinearOpMode {
             intakeMotor.setPower(intakePower);
             if (useServos)
             {
-                placePurplePixelLeft.setPosition(purpleLeftPosition);
-                placePurplePixelRight.setPosition(purpleRightPosition);
-                placeYellowPixelLeft.setPosition(yellowLeftPosition);
-                placeYellowPixelRight.setPosition(yellowRightPosition);
-                droneLauncher.setPosition(dronePosition);
+
+                placePurplePixelRight.setPosition(purpleLeftPosition);
+
+
             }
 
             colorSensorLeft.setGain(gain);
