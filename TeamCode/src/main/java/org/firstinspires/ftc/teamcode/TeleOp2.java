@@ -31,6 +31,7 @@ public class TeleOp2 extends LinearOpMode {
     boolean slowLifter = false;
     boolean droneLaunched = false;
 
+
     @Override
     public void runOpMode() {
 
@@ -54,7 +55,7 @@ public class TeleOp2 extends LinearOpMode {
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
-        leftHangMotor.setDirection(DcMotor.Direction.FORWARD);
+        leftHangMotor.setDirection(DcMotor.Direction.REVERSE);
         rightHangMotor.setDirection(DcMotor.Direction.REVERSE);
 
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -71,6 +72,7 @@ public class TeleOp2 extends LinearOpMode {
 //        sleep(500);
         waitForStart();
         runtime.reset();
+        droneLauncher.setPosition(0.9);
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -140,9 +142,9 @@ public class TeleOp2 extends LinearOpMode {
                 droneLauncher.setPosition(0.1);
                 droneLaunched = true;
             }
-            else if(droneLaunched)
+            else
             {
-                droneLauncher.setPosition(0.8);
+                droneLauncher.setPosition(0.9);
             }
 
 
@@ -176,21 +178,26 @@ public class TeleOp2 extends LinearOpMode {
 
             if (gamepad2.dpad_up)
             {
-                leftHangingPower = 0.6;
+                leftHangingPower = 0.8;
 
             }
             if (gamepad2.dpad_down)
             {
-                leftHangingPower = -0.7;
+                leftHangingPower = -0.8;
             }
 
             if (gamepad2.y)
             {
-                rightHangingPower = 0.6;
+                rightHangingPower = 0.8;
             }
             if (gamepad2.a)
             {
-                rightHangingPower = -0.7;
+                rightHangingPower = -0.8;
+            }
+            if (gamepad2.right_bumper)
+            {
+                leftHangingPower = leftBackPower * 0.75;
+                rightHangingPower = rightHangingPower * 0.75;
             }
 
 

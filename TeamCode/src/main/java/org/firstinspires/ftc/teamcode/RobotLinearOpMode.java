@@ -67,6 +67,7 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     NormalizedColorSensor colorSensorRight;
     Servo placePurplePixelLeft;
     Servo placePurplePixelRight;
+    Servo droneLauncher;
 
     AprilTagProcessor aprilTag;
     VisionPortal visionPortal;
@@ -805,29 +806,32 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
             switch (snapshotAnalysis) {
                 case LEFT: {
-                    encoderDrive(.7, 33, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 12, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    placePurplePixelRight.setPosition(0.44);
-                    sleep(1200);
-                    placePurplePixelRight.setPosition(0.82);
+                    encoderDrive(.7, 32, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(0.3, 6, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                    encoderDrive(0.3, 4.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    placePurplePixelLeft.setPosition(0.5);
+                    sleep(1300);
+                    placePurplePixelLeft.setPosition(0.1);
                     return 2;
                 }
                 case CENTER: {
                     encoderDrive(.7, 39, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 7, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    placePurplePixelRight.setPosition(0.44);
-                    sleep(1200);
-                    placePurplePixelRight.setPosition(0.82);
+                    encoderDrive(0.3, 2, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    placePurplePixelLeft.setPosition(0.5);
+                    sleep(1300);
+                    placePurplePixelLeft.setPosition(0.1);
 
                     return 1;
                 }
                 case RIGHT: {
-                    encoderDrive(.7, 32, MOVEMENT_DIRECTION.FORWARD);
-                    placePurplePixelRight.setPosition(0.44);
+                    encoderDrive(.7, 21, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(.7, 12.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(0.5, 5, MOVEMENT_DIRECTION.FORWARD);
+                    placePurplePixelLeft.setPosition(0.5);
+                    sleep(1300);
+                    placePurplePixelLeft.setPosition(0.1);
                     sleep(1200);
-                    placePurplePixelRight.setPosition(0.82);
-
-
+                    encoderDrive(0.5, 1, MOVEMENT_DIRECTION.REVERSE);
                     return 0;
                 }
             }
@@ -842,11 +846,10 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
 
             switch (snapshotAnalysisRed) {
                 case LEFT: {
-                    encoderDrive(.7, 28, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                    encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(.7, 28.5, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(0.3, 1.5, MOVEMENT_DIRECTION.STRAFE_LEFT);
                     placePurplePixelLeft.setPosition(0.5);
-                    sleep(1200);
+                    sleep(1300);
                     placePurplePixelLeft.setPosition(0.1);
                     sleep(200);
 
@@ -854,19 +857,19 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
                 }
                 case CENTER: {
                     encoderDrive(.7, 35, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(0.3, 6, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     placePurplePixelLeft.setPosition(0.5);
-                    sleep(200);
+                    sleep(1300);
                     placePurplePixelLeft.setPosition(0.1);
                     sleep(200);
 
                     return 1;
                 }
                 case RIGHT: {
-                    encoderDrive(.7, 33, MOVEMENT_DIRECTION.FORWARD);
-                    encoderDrive(0.3, 14, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+                    encoderDrive(.7, 30, MOVEMENT_DIRECTION.FORWARD);
+                    encoderDrive(0.3, 12.5, MOVEMENT_DIRECTION.STRAFE_RIGHT);
                     placePurplePixelLeft.setPosition(0.5);
-                    sleep(1200);
+                    sleep(1300);
                     placePurplePixelLeft.setPosition(0.1);
                     sleep(200);
                     return 0;
@@ -962,11 +965,14 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     public void blueCloseAuto(boolean parkCorner, boolean parkMiddle){
         int position = placePurplePixel(true);
             if(parkCorner){
-                encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_LEFT);
-                encoderDrive(1, 1, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-                encoderDrive(1, 25, MOVEMENT_DIRECTION.REVERSE);
-                encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                encoderDrive(1, 27, MOVEMENT_DIRECTION.REVERSE);
+                encoderDrive(1, 15, MOVEMENT_DIRECTION.STRAFE_LEFT);
+                intakeMotor.setPower(1);
+                sleep(500);
+                sleep(500);
+                intakeMotor.setPower(0);
+                sleep(20000);
 
             }
             if (parkMiddle){
@@ -1058,13 +1064,19 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
     }
 
     public void redCloseAuto(boolean parkCorner, boolean parkMiddle){
+        droneLauncher.setPosition(0.9);
         int position = placePurplePixel(false);
         if(parkCorner){
-            encoderDrive(1, 3, MOVEMENT_DIRECTION.REVERSE);
+            encoderDrive(1, 3, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+            encoderDrive(1, 29, MOVEMENT_DIRECTION.REVERSE);
             encoderDrive(1, 20, MOVEMENT_DIRECTION.STRAFE_RIGHT);
-            encoderDrive(1, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
-            encoderDrive(1, 25, MOVEMENT_DIRECTION.REVERSE);
-            encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
+            intakeMotor.setPower(1);
+            sleep(500);
+            intakeMotor.setPower(0);
+            sleep(20000);
+//            encoderDrive(1, 1, MOVEMENT_DIRECTION.STRAFE_LEFT);
+//            encoderDrive(1, 25, MOVEMENT_DIRECTION.REVERSE);
+//            encoderDrive(1, 10, MOVEMENT_DIRECTION.STRAFE_RIGHT);
         }
         if (parkMiddle){
             encoderDrive(1, 5, MOVEMENT_DIRECTION.REVERSE);
@@ -1197,15 +1209,20 @@ public abstract class RobotLinearOpMode extends LinearOpMode {
         placePurplePixelLeft = hardwareMap.get(Servo.class, "purplePixelLeft");
         placePurplePixelRight = hardwareMap.get(Servo.class, "purplePixelRight");
 
+
         colorSensorLeft = hardwareMap.get(NormalizedColorSensor.class, "colorSensorLeft");;
         colorSensorRight = hardwareMap.get(NormalizedColorSensor.class, "colorSensorRight");
+        droneLauncher = hardwareMap.get(Servo.class, "droneLauncher");
+
 
         placePurplePixelLeft.setDirection(Servo.Direction.FORWARD);
         placePurplePixelRight.setDirection(Servo.Direction.FORWARD);
+        droneLauncher.setDirection(Servo.Direction.FORWARD);
         leftFrontDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftBackDriveMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightFrontDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
         rightBackDriveMotor.setDirection(DcMotorEx.Direction.REVERSE);
+        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
     }
 
     public void declareAutoVariables(){

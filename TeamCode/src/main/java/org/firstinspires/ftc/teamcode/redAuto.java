@@ -62,6 +62,7 @@ public class redAuto extends RobotLinearOpMode
 
             telemetry.addData("Realtime analysis", pipelineRed.getAnalysis());
             telemetry.update();
+            droneLauncher.setPosition(0.9);
 
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);

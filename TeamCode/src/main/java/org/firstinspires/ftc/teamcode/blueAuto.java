@@ -62,10 +62,12 @@ public class blueAuto extends RobotLinearOpMode
 
             telemetry.addData("Realtime analysis", pipelineBlue.getAnalysis());
             telemetry.update();
+            droneLauncher.setPosition(0.9);
 
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
         }
+
 
         /*
          * The START command just came in: snapshot the current analysis now
